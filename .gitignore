@@ -1,0 +1,39 @@
+# Compiled source files
+*.o
+*.obj
+*.so
+*.dll
+*.exe
+*.out
+
+# IDE settings
+/.vscode/
+/.idea/
+
+# Logs
+*.log
+
+#results
+*.txt
+
+# Compdb
+/compile_commands.json
+
+# R
+*.Rproj.user
+*.Rhistory
+*.RData
+*.Ruserdata
+*.Rproj
+*.nb.html
+
+# Latex compiler
+*.aux
+*.bbl
+*.blg
+*.synctex.gz
+*.toc
+#*.pdf
+*.nav
+*.snm
+.Rproj.user
