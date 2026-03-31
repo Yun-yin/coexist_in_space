@@ -37,3 +37,6 @@
 *.nav
 *.snm
 .Rproj.user
+
+# python
+*.pkl

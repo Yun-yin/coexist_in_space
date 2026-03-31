@@ -1,0 +1,90 @@
+\documentclass[12pt, a4paper]{article}
+\usepackage{fullpage}
+\usepackage{amsmath, amssymb}
+\usepackage{graphicx}
+\usepackage{bm}
+\usepackage[authoryear]{natbib}
+
+\title{Sepcies Interaction and Coexistence in Continuous Space}
+\author{Chang Longxiao}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+\tableofcontents
+
+In this program, we attempt to study the species interaction dynamics in a continuous space. We will explore how uniform space could help the coexistence of species. Also, by taking space into consideration, we could also discuss the relationship between species interaction dynamics and biodiversity in different scale.
+
+The fundamental model is generalized Lotka-Volterra model:
+\begin{equation*}
+    \frac{\mathrm{d}N_i}{\mathrm{d}t}
+    = N_i \left( r_i - N_i - \sum_{j\neq i} A_{i,j} N_j \right)
+\end{equation*}
+A general form to write it is:
+\begin{equation}
+    \frac{\mathrm{d}N_i}{\mathrm{d}t}
+= N_i \left( r_i - \sum_{j} A_{i,j} N_j \right)
+\end{equation}
+
+As well as in matrix form
+\begin{equation*}
+    \frac{\mathrm{d}\bm{N}}{\mathrm{d}t}
+= \bm{N} \left( \bm{r} - A \bm{N} \right)
+\end{equation*}
+
+The stability of the system depends on the property of interaction matrix $A$. And the feasible condition of a stable quilibrium deppends on both $r$ and $A$.
+
+Genrally, a large random $A$ always lead to a instable community, where not all of the species could have a positive equilibrium. However, there are always some equilibrium consist of only part of the species. That is, if we randomly put some random generated species together, there will always some species remains. Sometimes (depends on the matrix), there might be multiple such partial equilibrium, each contains different species combination, depends on the initial state.
+
+As a mean feild model, we could view GLV as a model describing the local dynamics. Island biogeography and meta-community theory are trying to discuss the dynamics of community in a large scale. In a island or patch, GLV could fully describe the local dynamic. And dispersal/ immigration happens between island and patches. The neutral theory of ecology gave us a version where all species have the same ecological trait. Soem other reseach on metacommunity also studied differnet species combination in patches.
+
+However, the discrete space is not always the real case in the nature. Different natural community could also have continuous border, where dispersal is not limited. Normally, researchers argue that this kind of change of community type as well as species combination si because of the heterogenity of environment. This could be a important reason, but we will show that even in a uniform environmenet, this change of species combination could also happens, which will lead to the species coexistence in larger scale. Based on that, we could also discuss the biodiversity in different scale ($\alpha$, $\beta$, $\gamma$) taht caused only by dispersal in unifrom space. This model could also be a null model for the discussion on global biodiversity $\gamma$ and species turnover $\beta$.
+
+The basic idea is to introduce a diffusion term $\nabla^2_{x}N = \frac{\partial^2 N(x,t)}{\partial x^2}$. For the simple case of a single species, GLV is just a logistic model:
+\begin{equation*}
+    \frac{\mathrm{d} N}{\mathrm{d}t} = N(r-N)
+\end{equation*}
+
+where we renormalize the environment capacity $K = 1$.
+If we add a diffusion term:
+\begin{equation}
+    \frac{\partial N}{\partial t} = D\frac{\partial^2 N}{\partial x^2} +  N(r-N)
+\end{equation}
+
+Then we got the famous Fischer-KPP equation. The solution of this function could be a solitary, or a traveling wave.
+
+Once we couple the diffusion into a 2 or more species GLV, this will lead to more complex dynamics. With two species, this model actually becomes a reaction-diffusion model. Reaction-Diffusion system could generate very complex and different dynamics, but we will not focus on the pattern and normal dynamics. What we are interested is what kind of species combination could coexist in such a space with dispersal, as well as the property of local biodicersity. Basically, we are going to study the condition that given $\bm{r}$, $\bm{A}$ and (probably first set to the same) $D$, what is the constraint that they could coexist in a continuous space. Furthermore, if they coexist, how is local biodiversity related to the interaction matrix $\bm{A}$.
+
+We are interested in the dynamics of the following equation (system):
+\begin{equation}
+    \frac{\mathrm{d}N_i}{\mathrm{d}t}
+    = D_{i}\frac{\partial^2 N}{\partial x^2} +
+    N_i \left( r_i - \sum_{j} A_{i,j} N_j \right)
+\end{equation}
+
+\begin{equation*}
+    \partial_t N = D_i \nabla^2_x N + N (r - AN)
+\end{equation*}
+
+The picture: In the one dimension space, we could imagine the following condition: The left part is a stable community, the right part is another stable community. And we could also assume the combined community which include all species in the above two community does not have a stable equilibrium. However, under some special condition, where the boundary of two communities could maintain because both of them cannot invade the other, then these species would coexist in the middle.
+
+A much simplified example to show this idea is a island biogeographic model. Considering 3 island, community 1 is in island 1, community 2 is in island 3, both of them are stable. Island 2 is in the middle, and species could only arrive island 2 from the other 2 island but can not escape. Then in any condition, these species would coexist in island 2 (if immigration rate is high enough). We want to understand this process in a continuous space.
+
+Before discussing multi secies community, we first consider the condition of 2 competing species.
+\begin{equation}
+    \begin{cases}
+        \frac{\mathrm{d}N_1}{\mathrm{d}t}
+    = D_{1}\frac{\partial^2 N_1}{\partial x^2} +
+    N_1 \left( r_1 - A_{1,1} N_1 - A_{1,2} N_2 \right)\\
+    \frac{\mathrm{d}N_2}{\mathrm{d}t}
+    = D_{2}\frac{\partial^2 N_2}{\partial x^2} +
+    N_2 \left( r_2 - A_{2,2} N_2 - A_{2,1} N_1 \right)
+    \end{cases}
+\end{equation}
+where these 2 species are competing. 
+
+    %\bibliographystyle{apalike} 
+    %\bibliography{ref_stability_assembly}
+
+\end{document}
