@@ -2,7 +2,8 @@
 
 This is a program focus on the species coexistence in a continuous space. We use multi-species reaction-diffusion model to discuss the relation between species coexistence and dispersal in space. To view this model as a null model of heterogeny environment, we could also reconstruct the understanding of biodiversity.
 
-## Program structure
+## Program Structure
+
     COEXIST_IN_SPACE
     |
     | _ README.md
@@ -21,5 +22,10 @@ This is a program focus on the species coexistence in a continuous space. We use
 ## Simulations
 
 ## Language
+
 python
+
 R
+
+Basic question:
+
