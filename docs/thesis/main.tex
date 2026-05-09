@@ -1,0 +1,180 @@
+\documentclass[12pt]{article}
+
+\usepackage{times,url,hyperref,graphicx,color}
+\usepackage{amsmath,amssymb}
+\usepackage{bm}
+\usepackage{booktabs}
+\usepackage{pdfpages}
+\usepackage{indentfirst}
+\usepackage{subcaption}
+\usepackage{tikz}
+\usepackage[a4paper, width = 160mm, top = 35mm, bottom = 30mm, bindingoffset = 0mm]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage{ragged2e}
+\usepackage{xcolor}
+\usepackage[round, comma]{natbib}
+\setlength{\bibsep}{0pt}
+\usepackage{fancyhdr}
+
+\newcommand{\changefont}{%
+    \fontsize{8}{11}\selectfont
+}
+
+\pagestyle{fancy}
+\fancyhead{}
+\renewcommand{\sectionmark}[1]{%
+  \markright{#1}
+}
+\fancyhead[R]{\nouppercase{\rightmark}}
+\fancyfoot{}
+\fancyfoot[R]{\thepage}
+\setlength{\headheight}{14.5pt}
+%\setlength{\parindent}{0pt}
+\interfootnotelinepenalty = 10000
+
+\usepackage{caption}
+
+\captionsetup{
+    font=small
+}
+
+\graphicspath{{../../figure/}}
+
+\iffalse
+\pagestyle{fancy}
+\fancyhead{}
+\fancyfoot{}
+\fancyfoot[R]{\thepage}
+\fancyhead[LE]{\changefont{On the Boundaries of Communities}}
+\fancyhead[RO]{\changefont{\rightmark}}
+\setlength{\headheight}{14.5pt}
+\setlength{\parindent}{0pt}
+\interfootnotelinepenalty = 10000
+\fi
+
+\begin{document}
+
+%\maketitle
+
+% FRONT PAGE -------------------------------------------------------------------
+\begin{titlepage}
+    \begin{center}
+        \LARGE
+        Master's Thesis
+        
+        \vspace{0.5cm}
+        
+        \rule{\textwidth}{1.5pt}
+        \LARGE
+        \textbf{
+            {On the Boundaries of Communities:}\\
+            {Dispersal-Mediated Coexistence and Diversity Measures in Spatial Communities}
+        }
+        \rule{\textwidth}{1.5pt}
+        
+        \vspace{0.5cm}
+        
+        \normalsize
+        Master's program in \textbf{E}volution, \textbf{E}cology and \textbf{S}ystematics\\
+        Faculty of Biology \\
+        Ludwig-Maximilians-Universität München 
+
+        \vfill
+        
+        \Large
+        \textbf{
+            Chang, Longxiao
+        }
+
+        Matrikelnummer 12657845
+
+        \vfill
+
+        \large
+        Supervised by Dr. Maria Stockenreiter\\
+        
+        Munich, Month Day\textsuperscript{th}, 2026
+      
+        \vfill
+
+        \includegraphics[width = 0.4\textwidth]{sigillum.png}
+
+        \vfill
+
+        \normalsize
+        Submitted in partial fulfillment of the requirements for the degree of M. Sc.
+    \end{center}
+\end{titlepage}
+
+\begin{abstract}
+
+\end{abstract}
+\thispagestyle{empty}
+
+\newpage
+\tableofcontents
+\thispagestyle{empty}
+
+\newpage
+\setcounter{page}{1}
+%Introduction
+\input{sections/Introduction.tex}
+
+\newpage
+%Models and Methods
+\input{sections/Models.tex}
+
+\newpage
+%Results
+\input{sections/Results.tex}
+
+\newpage
+%Discussion
+\input{sections/Discussion.tex}
+
+
+
+\newpage
+\iffalse
+\clearpage
+\phantomsection
+\addcontentsline{toc}{section}{References}
+%\small
+\bibliographystyle{apalike} 
+\bibliography{gene_network.bib}
+\fi
+%\newpage
+
+\iffalse
+\section*{Statement on the Use of Artificial Intelligence Tools}
+\phantomsection
+\addcontentsline{toc}{section}{Statement on the Use of Artificial Intelligence Tools}
+
+    During the preparation of this manuscript, artificial intelligence (AI) tools were used exclusively for language-related assistance, including the optimization, translation, and correction of spelling and grammar in text originally written by the author. AI tools were also utilized to assist in organizing, formatting, and annotating algorithms and code developed by the author.
+
+    No AI tools were employed in the generation of research ideas, study design, data collection, data analysis, interpretation of results, or the formulation of conclusions. The author assumes full responsibility for the accuracy, integrity, and originality of the content presented in this work.
+
+\section*{Supplement Information}\label{supple_info}
+\phantomsection
+\addcontentsline{toc}{section}{Supplement Information}
+
+    Supplementary figures are contained by supplement document \texttt{IRT2\_report\_suppl}.
+
+    The code used in this research could be found in repository \texttt{network\_noise\_irt/Project}. All the \texttt{C++} documents are in file \texttt{./src}.
+\fi
+
+\appendix
+\addcontentsline{toc}{section}{Appendices}
+
+%\input{sections/GLV.tex}
+
+%\input{sections/FisherKPP.tex}
+
+%\input{sections/Allen_Cahn.tex}
+
+\clearpage
+\phantomsection
+\addcontentsline{toc}{section}{Statement of originality}
+\includepdf{last-page-ma-affidavit.pdf}
+
+\end{document}
