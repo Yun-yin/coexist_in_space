@@ -1,0 +1,222 @@
+\section{Generalized Lotka-Volterra Model}
+
+    Population size $N$ is the core quantity that we are interested when focusing on the dynamics of population and community. The state of community is then defined on that. $N=0$ represent the extinction of certain species, and the stable state of community is the condition where $N=N^*$ do not change along time. To model the dynamics of population size $N$, one may apply a difference equation or differential equation. These model normally take two part of biological process into consideration, namely birth ($b(N)$) and death ($d(N)$). The difference equation model assume that both of the process of a population is discrete, for example, happened in certain season, while the differential equation model assume these biological process are continuous. Also, the later one could be viewed as a limit of the forth one when time interval approaching to $0$.
+
+    \subsection{One Species: Exponential, Logistic, and Varieties}
+
+    In the simplest case, where both birth and death rate is a constant, the difference equation is written as,
+    \begin{equation*}
+        N(t+1) - N(t) = bN(t) - dN(t),
+    \end{equation*}
+    which could be simplified as,
+    \begin{equation}\label{A:eqn:discrete_exponential}
+        N(t+1) - N(t) = rN(t),
+    \end{equation}
+    where $r = b-d$, the so called intrinsic rate. Then the solution of $N(t)$ would be 
+    \begin{equation*}
+        N(t) = N(0) \cdot (1+r)^{t}
+    \end{equation*}
+
+    Also, for continuous model, it would be,
+    \begin{equation}\label{A:eqn:continuous_exponential}
+        \frac{\mathrm{d} N}{\mathrm{d}t} = bN-dN = rN,
+    \end{equation}
+    which has a solution after integral,
+    \begin{equation*}
+        N(t) = N(0) e^{rt}.
+    \end{equation*}
+    Both of the models show that if $b>d$, the population size will get to infinity with an exponential increase. Also, notice here in both model we use $b$, $d$, and $r$, they have the same meaning but different measure in these two models.
+
+    These dynamics will get more interesting when we take environment capacity $K$ into consideration. Since the individuals of the same species are competing for same resource, there must be a capacity which is the maximal population size the habitat could stand. This competition can be modeled by the term $(1-\frac{N}{K})$, indicate that it is increasing when population get close to the capacity. Now the difference model is,
+    \begin{equation}
+        N(t+1) - N(t) = rN(t)(1-\frac{N(t)}{K}).
+    \end{equation}
+    When this system get to an equilibrium $N^*$, that calls $N(t+1) = N(t)$, we have that $N^* = 0$ and $N^* = K$. $N^* = 0$ is instable and $N^*=K$ is stable. However, in discrete model, there might also be periotic or chaotic oscillations around the capacity because of the discrete step.
+
+    The continuous model,
+    \begin{equation}
+        \frac{\mathrm{d} N}{\mathrm{d}t} = rN(1-\frac{N}{K}),
+    \end{equation}
+    is known as the Logistic model. There are also two fixed point $N^* = 0, K$ that makes $\frac{\mathrm{d} N}{\mathrm{d}t}=0$. Let $f(N) = rN(1-\frac{N}{K})$, then $f'(n) = r-\frac{2r}{K}N$. Thus, at the fixed points, $f'(0) = r >0$, $f'(K) = -r <0$, which means that $N=0$ is instable and $N = K$ is stable. This fact could also be shown in the phase graph. 
+    
+    Given a initial state $N(0)=N_{0}$, the dynamics could be fully solved.
+    \begin{align*}
+        \frac{\mathrm{d} N}{\mathrm{d}t} &= rN(1-\frac{N}{K})\\
+        \int \frac{K}{N(K-N)} \mathrm{d}N &= \int r \mathrm{d}t\\
+        \int \left( \frac{1}{N} - \frac{1}{N-K} \right) \mathrm{d}N &= \int r \mathrm{d}t\\
+        \ln \frac{N}{N-K} &= rt + C\\
+        \frac{N}{N-K} &= e^{rt+C}
+    \end{align*}
+    Then
+    \begin{equation*}
+        \begin{aligned}
+            N(t) &= \frac{K}{1 - e^{-rt-C}}\\
+            N(0) &= \frac{K}{1-e^{-C}}
+        \end{aligned}
+        \Rightarrow
+        e^{-C} = 1-\frac{K}{N_0}
+    \end{equation*}
+
+    \begin{equation*}
+        N(t) = \frac{K}{1 + (\frac{K}{N_0}-1) e^{-rt}}
+    \end{equation*}
+    
+    Different to the discrete model, the dynamic is simple. Since $\frac{\mathrm{d} N}{\mathrm{d}t}>0$ when $0<N<K$, and $\frac{\mathrm{d} N}{\mathrm{d}t}<0$ when $N>K$, the population size always converge to capacity $K$ singularly.
+
+    There are amount of varieties of logistic model, by adding different effect to change the intrinsic rate, for example, different Holling response functions. One of the cases that related to this project is Allee effect, which modeled the benefit of population density.
+    \begin{equation}
+        \frac{\mathrm{d} N}{\mathrm{d}t} = r N (1-\frac{N}{K}) (\frac{N}{A} - 1).
+    \end{equation}
+    New parameter $A$ is the critical point of population density. Survival rate is negative when $N<A$ and increased when $N>A$, because of some effect of high population density, for example, collaboration or mating probability. In this case, there are three fixed point $N^* = 0, k, A$. Similarly to the logistic model, we could find that $N^* = 0, K$ are stable and $N^*=A$ is instable. If initial population $N_0>A$, the population size will converge to $K$ as logistic model, with a lower speed; if $N_0<A$, the population will die out.
+
+    \subsection{Two Species: Lotka-Volterra, Competing, and Generality}
+
+    When there are more than one species, the interaction between species must be considered. In the simplest case, two species, the system is written as,
+    \begin{equation}
+        \begin{aligned}
+            \frac{\mathrm{d} N_{1}}{\mathrm{d}t} = f(N_{1},N_{2})\\
+            \frac{\mathrm{d} N_{2}}{\mathrm{d}t} = g(N_{2},N_{1})
+        \end{aligned}.
+    \end{equation}
+
+    The Lotka-Volterra model, also known as the predator-prey model, describes the dynamic of such a system where one species is feed on the other one.
+    \begin{equation}
+        \begin{aligned}
+            \frac{\mathrm{d} P}{\mathrm{d}t} &= \alpha P - \beta P A\\
+            \frac{\mathrm{d} A}{\mathrm{d}t} &= -\gamma A + \delta A P
+        \end{aligned}.
+    \end{equation}
+    In this model, prey, or plant $P$, growth with a intrinsic birth rate $\alpha$, and decline proportional to the meeting probability $P\cdot A$ with a rate $\beta$. The predator, or animal $A$, decreasing with a rate $\gamma$ and survive by capture $P$ with a rate $\delta$. The dynamic could be illustrated in the $P$--$A$ plane. 
+    On the fixed point, $\frac{\mathrm{d} P}{\mathrm{d} t} = 0$ and $\frac{\mathrm{d} A}{\mathrm{d}t} = 0$, the first calls $P = 0, \alpha = \beta A$, the later calls $A = 0, \gamma = \delta P$. Thus there are two fixed point $(P^*, A^*) = (0,0), (\frac{\gamma}{\delta},\frac{\alpha}{\beta})$. To analyse the stability of each point, we calculate the Jacobian matrix. Let $f=\alpha P - \beta P A$ and $g = -\gamma A + \delta A P$, then
+    \begin{equation*}
+        \bm{J} = \begin{pmatrix}
+            \frac{\partial f}{\partial P} & \frac{\partial f}{\partial A}\\
+            \frac{\partial g}{\partial P} & \frac{\partial g}{\partial A}
+        \end{pmatrix},
+    \end{equation*}
+    which represent the dynamics around the fixed point. Around the fixed point, the dynamics of small disturb $(\Delta P, \Delta A)$ could be linearized as
+    \begin{equation*}
+        \frac{\mathrm{d}}{\mathrm{d} t}\begin{pmatrix}
+        \Delta P\\ \Delta A
+        \end{pmatrix}
+        \approx \bm{J} \begin{pmatrix}
+        \Delta P\\ \Delta A
+        \end{pmatrix}
+    \end{equation*}
+    Let $\bm{x} = \begin{pmatrix}
+        \Delta P\\ \Delta A
+        \end{pmatrix}$, $\bm{x}(t) = e^{Jt} \bm{x}(0)$, which converge to $\bm{0}$ only when the eigenvalues of $\bm{J}<0$.
+    For this case,
+    \begin{equation*}
+        \bm{J} = \begin{pmatrix}
+            \alpha - \beta A & -\beta P\\
+            \delta A & -\gamma + \delta P
+        \end{pmatrix},
+    \end{equation*}
+    at the fixed points,
+    \begin{equation*}
+        \bm{J}\left|_{(0,0)}\right. = \begin{pmatrix}
+            \alpha & 0\\
+            0 & -\gamma
+        \end{pmatrix},
+        \bm{J}\left|_{(\frac{\gamma}{\delta},\frac{\alpha}{\beta})}\right. = \begin{pmatrix}
+            0 & -\frac{\beta \gamma}{\delta}\\
+            \frac{\delta \alpha}{\beta} & 0
+        \end{pmatrix},
+    \end{equation*}
+    Thus, at $(0,0)$, $\lambda_1 = \alpha > 0$, $\lambda_2 = -\gamma <0$ is instable. at $(\frac{\gamma}{\delta},\frac{\alpha}{\beta})$, $\lambda_{1,2} = \pm \sqrt{\alpha \gamma} i$ are pure imagine numbers, this is a stable center, with orbit around it. As a result, in Lotka-Volterra model, both predator and prey are in periodic oscillation.
+
+    \iffalse
+    the eigenvalues $\lambda$ fulfills
+    \begin{equation*}
+        \lambda^2 - (\alpha - \beta A)(-\gamma + \delta P)\lambda + (\alpha - \beta A)(-\gamma + \delta P) - (-\beta P)(\delta A)=0.
+    \end{equation*}
+    \fi
+
+    \iffalse
+    Another special case is two competing species $N_1$ and $N_2$. Considering the condition where there are two species competing for same resource. Set the total resource as $1$, and environment capacity for both species are $K_1$, $K_2$, the limitation is in the form
+    \begin{equation*}
+        \frac{N_1}{K_1} + \frac{N_2}{K_2} \leq 1
+    \end{equation*}
+
+    The dynamics is modeled by
+    \begin{equation*}
+        \begin{aligned}
+            \frac{\mathrm{d} N_1}{\mathrm{d}t} = r_1N_1(1-\frac{N_1}{K_1}-\frac{N_2}{K_2})\\
+            \frac{\mathrm{d} N_2}{\mathrm{d}t} = r_2N_2(1-\frac{N_2}{K_2}-\frac{N_1}{K_1})
+        \end{aligned}
+    \end{equation*}
+    \fi
+
+    Another special case is two competing species $N_1$ and $N_2$. Competing will decrease the growth rate proportional to the competing species,
+    \begin{equation}
+        \begin{aligned}
+            \frac{\mathrm{d} N_1}{\mathrm{d}t} &= r_1N_1(1-\frac{N_1 + \alpha_{1,2}N_2}{K_1})\\
+            \frac{\mathrm{d} N_2}{\mathrm{d}t} &= r_2N_2(1-\frac{N_2 + \alpha_{2,1}N_1}{K_2})
+        \end{aligned},
+    \end{equation}
+    where $r_1>0$, $\alpha_{i,j}$ is the competing coefficient of species $j$ to species $i$, compared to intra-specific competition. There are four fixed point, which are the nodes of nullclines $N_1 = 0, N_2 = 0, N_1 - \alpha_{1,2}N_2 = K_1, N_2 - \alpha_{2,1}N_1 = K_2$. The origin point $(0,0)$ is always an instable node. The coexist node is $N_1^* = \frac{K_1 - \alpha_{1,2} K_2}{1-\alpha_{1,2}\alpha_{2,1}}, N_2^* = \frac{K_2 - \alpha_{2,1} K_1}{1-\alpha_{1,2}\alpha_{2,1}}$. There are also two boundary points $(K_1, 0)$, $(0,K_2)$. With different parameter combinations, there might be the following three conditions: two species coexist, only one species can take over, one species take over depending on the initial state.
+
+    More generally, a two species system can be modeled as,
+    \begin{equation}
+        \begin{aligned}
+            \frac{\mathrm{d} N_1}{\mathrm{d}t} = r_1 N_1 ( 1 + \alpha_{1,1} N_1 + \alpha_{1,2} N_2 )\\
+            \frac{\mathrm{d} N_2}{\mathrm{d}t} = r_2 N_2 ( 1 + \alpha_{2,2} N_2 + \alpha_{2,1} N_1)
+        \end{aligned},
+    \end{equation}
+    which include both inter- and intra- specific competition.
+
+    \subsection{Generalized Lotka-Volterra Model, and the Instability}
+
+    Furthermore, following the same modelling approach above, if there are $S$ different species in the community, $S$ related differential equations are needed to model the dynamics. The generalized Lotka-Volterra model is:
+    \begin{equation*}
+        \frac{\mathrm{d}N_i}{\mathrm{d}t}
+        = r_i N_i \left( 1 + \sum_{j} \alpha_{i,j} N_j \right),
+    \end{equation*}
+    or, more clear for the later analysis,
+    \begin{equation}\label{A:eqn:L-V_equation}
+        \frac{\mathrm{d} N_i}{\mathrm{d} t} = N_i \left( r_i + \sum_{j=1}^{S} A_{ij} N_j \right),
+    \end{equation}
+    where $A_{ij} = r_i \cdot \alpha_{ij}$. Population increase rate is now $\left( r_i + \sum_{j=1}^{S} \alpha_{ij} N_j \right)$, include the intrinsic rate as well as effect of inter-specific interactions. Since the increase rate is a linear function of population size, GLV could be write in the matrix form,
+    \begin{equation}\label{eqn:L-V_equation_matrix}
+        \frac{\mathrm{d} \boldsymbol{N}}{\mathrm{d} t} = \boldsymbol{D}(\boldsymbol{N}) \left( \boldsymbol{r} + \boldsymbol{A} \cdot \boldsymbol{N} \right),
+    \end{equation}
+    where $\boldsymbol{A}$ si the interaction matrix. This matrix is normally be visualized as interaction network in empirical studies. The structure and pattern of the network might affect the dynamics of the system.
+
+    Such a system has $2^S$ equilibrium, which is the solution of either
+    \begin{equation*}
+        \boldsymbol{D}(\boldsymbol{N}) = 0,
+    \end{equation*}
+    or
+    \begin{equation*}
+        \left( \boldsymbol{r} + \boldsymbol{A} \cdot \boldsymbol{N} \right) = 0.
+    \end{equation*}
+    This system is called stable only when there is a positive equilibrium and is asymptotic stable. That is, all species exist and will not die out because of small disturb. Firstly, the existence of the equilibrium where all population size are positive is determined by the feasible condition, 
+    \begin{equation}
+        \boldsymbol{N}^* = -\boldsymbol{A}^{-1}\boldsymbol{r} > 0,
+    \end{equation}
+    which means that the inner equilibrium that no species die out is positive for every species.
+
+    Then, if such a equilibrium exist, the stability can be analysed by disturb analysis. If a small disturb $\boldsymbol{x}$ happened when system is at the equilibrium $\boldsymbol{N}^*$, the state would be $\boldsymbol{N} = \boldsymbol{N}^* + \boldsymbol{x}$. Let $\boldsymbol{f} = \boldsymbol{D}(\boldsymbol{N}) \left( \boldsymbol{r} + \boldsymbol{A} \cdot \boldsymbol{N} \right)$,
+    \begin{align*}
+        \frac{\mathrm{d} \boldsymbol{x}}{\mathrm{d} t} = \frac{\mathrm{d} (\boldsymbol{N} - \boldsymbol{N}^*)}{\mathrm{d} t} 
+        &= \boldsymbol{D}(\boldsymbol{N}) \left( \boldsymbol{r} + \boldsymbol{A} \cdot \boldsymbol{N} \right)\\
+        &= \boldsymbol{D}(\boldsymbol{N}^* + \boldsymbol{x}) \left( \boldsymbol{r} + \boldsymbol{A} \cdot (\boldsymbol{N}^* + \boldsymbol{x}) \right)\\
+        &= \boldsymbol{D}(\boldsymbol{N}^* + \boldsymbol{x}) \cdot \boldsymbol{A} \cdot \boldsymbol{x} \\
+        &= \boldsymbol{D} (\boldsymbol{N}^*) \cdot \boldsymbol{A} \cdot \boldsymbol{x} + \boldsymbol{D}(\boldsymbol{x}) \cdot \boldsymbol{A} \cdot \boldsymbol{x}
+    \end{align*}
+
+    The first order approximation is
+    \begin{equation*}
+        \frac{\mathrm{d} \boldsymbol{x}}{\mathrm{d} t} \approx \boldsymbol{M} \cdot \boldsymbol{x} + \mathcal{O}(\boldsymbol{x}),
+    \end{equation*}
+    where $\boldsymbol{M} = \boldsymbol{D} (\boldsymbol{N}^*) \cdot \boldsymbol{A}$
+    thus,
+    \begin{equation*}
+        \boldsymbol{x} \approx \boldsymbol{x}_{0} \cdot e^{\boldsymbol{M}t}.
+    \end{equation*}
+    The small disturb around equilibrium $\boldsymbol{N}^*$ converge to $0$ only if the real part of all the eigenvalues of matrix $\boldsymbol{M}$ are smaller than $0$, that is the stable condition,
+    \begin{equation*}
+        \max_i \operatorname{Re} \left[ \lambda_i(\boldsymbol{M}) \right] < 0,
+    \end{equation*}
+    where $\lambda_i(\boldsymbol{M})$ is the eigenvalue of $\boldsymbol{M}$. The same stable condition can also be deductive from Jacobian matrix $\boldsymbol{J}(\boldsymbol{N})$, by defining $\boldsymbol{M} = \boldsymbol{J}(\boldsymbol{N}^*)$.

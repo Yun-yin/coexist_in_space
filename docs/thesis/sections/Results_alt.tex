@@ -1,0 +1,211 @@
+\section{Results}
+
+\subsection{Equilibria Distribution of Two Symmetric Species}
+
+    We consider the condition when two species are exactly symmetric. That is, in the two species system, $D = 1$, $r = 1$, $a_{1,2} = a_{2,1} = a$. The system could be simplified (as well as rescaled) as
+    \begin{equation*}
+        \begin{cases}
+            \partial N_{1} = \nabla^2 N_1 + N_1(1 - N_1 - a N_2)\\
+            \partial N_{2} = \nabla^2 N_2 + N_2(1 - N_2 - a N_1).
+        \end{cases}
+    \end{equation*}
+    We let $a > 1$, thus the local dynamic would be bistable, which means two species can not coexist in local community. However, we could suppose that these two species could coexist in global community, since both side has the same reaction. Especially, this system is similar to the Alle-Cahn model in the sense of distribution of stable points. We now try to show this similarity and give approximate solution for such a two-species transition front. We assume the space is occupied by species $1$ in the left and $2$ in the right.
+
+    We first make a very strong assumption, that is the total population size is nearly kept the same everywhere. The idea behind is that this two species has the same environment capacity, and competing always decrease the growth when population size close to the capacity. Thus, let $u = N_1+N_2$, $v=N_1-N_2$, the system is rewritten as,
+    \begin{equation*}
+        \begin{cases}
+            \partial u = \nabla^2 u + u - (N_1^2 + N_2^2) - 2 a N_1 N_2\\
+            \partial v = \nabla^2 v + v - (N_1^2 - N_2^2)\\
+        \end{cases}.
+    \end{equation*}
+    For the second-ordered term of $N_{i}$, note that $u^2 + v^2 = 2(N_1^2 + N_2^2)$,$u^2- v^2 = 4 N_1N_2$, $uv = N_1^2 - N_2^2$. This approach is actually a linear transform of $N_{i}$. Then we got a reaction-diffusion system on $u$ and $v$.
+    \begin{equation*}
+        \begin{cases}
+            \partial_t u &= \nabla^2_x u + u - \frac{1}{2} (u^2 + v^2) - \frac{1}{2} a (u^2-v^2)\\
+            \partial_t v &= \nabla^2_x v + v - u v \\
+            &= \nabla^2_x v + v ( 1 - u)
+        \end{cases}
+    \end{equation*}
+
+    We take the dynamic of $u$, and write it as terms of $u$ and terms of $v$.
+    \begin{equation*}
+        \partial_t u = \nabla^2_x u + u - \frac{1+a}{2} u^2 - \frac{1-a}{2} v^2
+    \end{equation*}
+    Since we assumed that the total population size is a constant, then in the system there is nearly holds, $\partial_t u = 0$ and $\nabla^2_x u=0$, then,
+    \begin{equation*}
+            \frac{1+a}{2}u^2 - u + \frac{1-a}{2}v^2 = 0.
+    \end{equation*}
+    We can solve $u$ as a function of $v$,
+    $u = \frac{1\pm\sqrt{1+(a^2-1)v^2}}{1+a}$. Because of the fact that $u = N_1 + N_2 \geq 0$, the only solution is $u = \frac{1 + \sqrt{1+(a^2-1)v^2}}{1+a}$. Then put this form back to the dynamics of $v$,
+    \begin{equation*}
+        \partial v = \nabla^2 v + v (1 - \frac{1\pm\sqrt{1+(a^2-1)v^2}}{1+a}).
+    \end{equation*}
+
+    This reaction term $f(v) = v (1 - \frac{1\pm\sqrt{1+(a^2-1)v^2}}{1+a})$ has $3$ root $0,1,-1$, and is central symmetric by the original point. The curve of this term is similar to the allen-Cahn reaction term $rv(1-v)(1+v)$. To find a proper $r$ that make the Allen-Cahn model a good approximation, we write the Taylor expansion of $f(v)/v = (1 - \frac{1+\sqrt{1+(a^2-1)v^2}}{1+a})$,
+    \begin{align*}
+        f(v)/v &= (1 - \frac{1+\sqrt{1+(a^2-1)v^2}}{1+a})\\
+                &= \frac{a}{1+a} - \frac{1}{1+a} (1+(a^2-1)v^2)^{\frac{1}{2}}\\
+                &= \frac{a}{1+a} - \frac{1}{1+a} (1+\frac{(a^2-1)v^2}{2} + \mathcal{O}(v^4))\\
+                &\approx \frac{a-1}{a+1}-\frac{a-1}{2}v^2
+    \end{align*}
+    Thus we could write $k\approx \frac{a-1}{a+1}$. This is also approved by the central slope around $v=0$: calculate the derivative of $f(v)$,
+    \begin{align*}
+        f'(v) = v(1-a)v (1+(a^2-1)v^2)^{-\frac{1}{2}}+(1 - \frac{1+\sqrt{1+(a^2-1)v^2}}{1+a})\\
+        =v(1-a)\sqrt{\frac{1}{\frac{1}{v^2}+(a^2-1)}}+(1 - \frac{1+\sqrt{1+(a^2-1)v^2}}{1+a}),
+    \end{align*}
+    At $v = 0$,
+    \begin{equation*}
+        f'(0) = \frac{a-1}{a+1}.
+    \end{equation*}
+    Also, for proposed function $g(v) = rv(1-v^2)$,
+    \begin{align*}
+        g'(v) = r(1-3v^2)\\
+        g'(0) = r
+    \end{align*}
+    Thus we could approximately set $f(v)\approx rv(1-v^2)$, where $r = \frac{a-1}{a+1}$. Thus, the shape of the interaction zone is
+    \begin{equation*}
+        u = \frac{1}{1+e^{\sqrt{\frac{k}{2}}z}},r = \frac{a-1}{a+1}.
+    \end{equation*}
+
+    We then simulated the symmetric system with $a = 1.5$. Started from the initial condition where $x \in (-1,0)$ is fully occupied by species $1$ and $x \in (0,1)$ is occupied by species $2$, a transition region between two species is formed in the middle and finally get stable. Both of the species distribution shows in a form of logistic function, and these two distribution kept symmetric by $x = 0$. The maxima loss between simulation step declines very fast in a exponential decrease rate and keep decreasing, indicate that such a transition between two species is maintained. The final distribution of $N_1-N_2$ (maxima loss smaller than $1 \times 10^{-6}$) is fit to a logistic function which is centered at $x_0 = 0$, and limited by $K_1 = 1$, $K_2 = -1$. The logistic model fit the distribution very well. The central slope is fitted as $k = 0.676$ (after scaling), which close to our assumption $k = \sqrt{2r} = 0.632$.
+
+    \begin{figure}[!htbp]
+        \centering
+        \includegraphics[scale = 1]{symmetric_simu.pdf}
+        \caption{A. Simulation of two symmetric species spatial dynamics (at time step 0, 11150, 22300, 33500, 44650, 55850). The transition region s formed from the initial hard boundary and maintained. B. Error, or the loss of distribution value between steps during the simulation. Simulation stopped when error $<10^{-6}$. C. Logistic regression of $N_1-N_2$ at the end of he simulation, where $k = 6.7657$ and $R^2>1 - 10^{-4}$.}
+        \label{symmetric_simu}
+    \end{figure}
+
+    Furthermore, we calculated the linear transform of population size, the sum $u$ and difference $v$. $u$ is assumed to be $1$ in the derivative above. This is proved to be concrete in the simulation, the total population size is nearly kept to $1$. It is smaller than $1$ in the middle, and decreasing with the simulation approach. In both sides of the space, where single species occupied, $u$ is nearly $1$. This actually shows that competition in the dispersal system decreased the total population size, which is kept in local. For $v$, it is evolved from the initial squared stage to a smooth sigmoid like distribution, which we assume is similar to a logistic function. 
+    
+    \begin{figure}[!htbp]
+        \centering
+        \includegraphics[scale = 1]{symmetric_simu_sum_diff.pdf}
+        \caption{Distribution of $v = N_1-N_2$ and $u = N_1 + N_2$ during the simulation. Each curve represent the distribution ar step 0, 100, 200, 500, 1000, 2000, 5000, 10000. Further results are hard to show because they converge to the certain curve.}
+        \label{fig:symmetric_u-v}
+    \end{figure}
+
+    To better illustrate how well our approximation is, we simulated the dynamics of symmetric system with different $q = a-1$, where $a$ is the interaction strength. With the increase of $q$, central slope $k$ increases. This result indicate that high competing strength will lead to a narrow transition region, thus hard to observe the coexist. Besides, the approximated Allen-Cahn model fit well only with a small $a$. For small $q$, for example, $q = 0$, $r = \frac{a-1}{a+1} = \frac{q}{q+2} = 0$, thus $\hat{k} = \sqrt{2r} = 0$. But when $a \rightarrow \infty$, $k$ should also to be $\infty$ since the transition interval vanished, but our approximation could only give $\hat{k} = \sqrt{2}$.
+
+    \begin{figure}[!htbp]
+        \centering
+        \includegraphics[scale = 0.8]{kq.png}
+        \caption{Relationship between simulated central slope $k$ and estimated $\hat{k}$ with $q = a-1$. the estimation fit well then $q$ is in the middle value. when $q$ is small, the estimation always give a much lower value.}
+    \end{figure}
+
+\subsection{Balance Between Dispersal and Reproduce, Competing}
+
+    A more general species system not always get a stable transition. We first simulated the condition where diffusion rate $D$ is in interval $(0,2)$ and intrinsic rate $r$ also in $(0,2)$. Simulation is conducted $100000$ steps with interval $1\time 10^{-6}$ and showing the position of $N_1 = N_2$. The balance condition is where $x^* = 0$ for $N_1(x^*) = N_2(x^*)$. The diffusion rate and intrinsic rate shows a positive relation for the balance conditions, indicate that in such a bistable community, species that diffuse faster should also reproduce faster to keep the coexistence. This result is different to the condition where two species coexist in local.
+
+    \begin{figure}[!htbp]
+        \centering
+        \includegraphics[scale = 1]{scan_param.pdf}
+        \caption{Moving speed of transition and balance condition of varying parameters combination. A. $r$-$D$ phase with linear scale. Blue represent species $1$ dominant, red represent species $2$. The lighter the color is, the slower the transition region move. The black line in the middle represent parameter combinations where the transition kept. B. $r$-$D$ phase in logarithm scale. C. $a$-$D$ phase in linear scale. D. $a$-$D$ scale in logarithm scale.}
+        \label{fig:D-r_balance}
+    \end{figure}
+
+    To show the relation of $D$ and $r$ as balance condition, we also simulated in a logarithmic scale. The balance condition is nearly a straight line in the $\log D - \log r$ plane with a slope approximately $1/2$. Thus the balance is assumed to be a second ordered relation $D \sim r^2$. 
+    
+    For the region nearby the balance region, it seems that two species still coexist but the $N_1 = N_2$ position is not in the middle. However, simulation shows that it is because of the time of simulation. We simulated the condition where $D = 1.25$, $r = 0.75$, which is near to the balance line on the map. Species $2$ finally died out in a long run, species $1$ take over, since it is above the balance line. Also, the maxima loss shows a different pattern with symmetric condition. At the beginning, the loss decrease very fast, as the same to the symmetric condition. However, it is then kept in a stage for a very long time, and then going trough a short peak, finally decrease again. This can be explained by the simulation dynamics. The transition region is firstly formed, thus the loss decrease as what shown in symmetric condition. After that, the transition region move to the left side, as in a imbalance Allen-Cahn model. Since the shape of the transition front kept the same, loss is kept only because of the moving. When the transition region finally reached the boundary, population size change rapidly because of the hard boundary, then loss increase. Finally, when one species died out, the loss decrease fast again to reach the state where only one species exist.
+
+    \begin{figure}[!htbp]
+        \centering
+        \includegraphics[scale = 1]{insymme.pdf}
+        \caption{Simulation of insymmetric two species, where $D=1.25$, $r = 0.75$. A. The simulation result. Transition region first formed, then moved to the left, until species $2$ died out. B. The loss during simulation. It decrease fast at the beginning, similar to which in the symmetric condition. Then it kept in a stage around $10^{-6}$. After that, it went up to a hill then finally went down. C. The records of $N_1-N_2$. Similar the symmetric condition, but the formed logistic-like cline moved to the left finally. D. The records of $N_1+N_2$.}
+        \label{fig:insymme_simu}
+    \end{figure}
+
+    Similar simulation also be done on diffusion rate $D$ and competing strength $a_{1,2}$. In a local competing community, The species with a competing rate smaller than $1$ is always be excluded by competition. But the result shows that with a smaller diffusion rate, such a species could coexist with species that has larger competing rate $1.5$. Also, the relation between $D$ and $a_{1,2}$ is positive. The logarithm figure shows that the relation is around $3$ to $4$ order. 
+
+\subsection{A Special Case of Multi-species Competing Community}
+
+    For multiple species, the dynamics would be much more complex, and simulation need mode parameters. To get a brief glance of the transition region of multiple species, we considering some special cases, which simplifies the system with some not realistic assumptions but make sure the existence of a transition front. Firstly, we consider the community with only competing interactions, since competing avoid complex dynamics around the stable state, and limited the total biomass. Secondly, we might also assume all species are identical in dispersal as well as reproduce, that means $D_i = 1$, $r_i = 1$. Based on these assumptions, we first considering a toy model.
+
+    To make the global community bistable, a simplest case is two divide communities as two local community, where each local community could stably exist and cannot coexist. As a result, in the toy model, we set intra-community competing as $a = 1$, as well as inter-community competing as $b > 1$. The interaction matrix is
+    \begin{equation*}
+        \begin{pmatrix}
+            1       &\dots&\textcolor{blue}{a}      &\textcolor{red}{b}   &\textcolor{red}{\dots}  &\textcolor{red}{b}  \\
+            \dots   &\dots&\dots                    &\textcolor{red}{\dots}  &\textcolor{red}{\dots}  &\textcolor{red}{\dots}  \\
+            \textcolor{blue}{a}&\dots&1             &\textcolor{red}{b}   &\textcolor{red}{\dots}  &\textcolor{red}{b}  \\
+            \textcolor{red}{b}&\textcolor{red}{\dots} &\textcolor{red}{b}  &1    &\dots&\textcolor{blue}{a}  \\
+            \textcolor{red}{\dots}  &\textcolor{red}{\dots}  &\textcolor{red}{\dots}                   &\dots   &\dots &\dots  \\
+            \textcolor{red}{b}&\textcolor{red}{\dots} &\textcolor{red}{b}  &\textcolor{blue}{a}   &\dots&1  \\
+        \end{pmatrix}.
+    \end{equation*}
+    In each local community, the dynamic in the form of GLV is modeled
+    \begin{equation}
+        \frac{\mathrm{d} N_i}{\mathrm{d} t} = N_i \left( 1 - \sum_{j=1}^{S} N_j \right).
+    \end{equation}
+    The sum of equilibrium population size is $1$ $\sum_{j=1}^{S} N^*_j = 1$, and the equilibrium population size for each species only depends on the initial state. This result could be understand by viewing all species is actually the same species, but a different part. If we write $N_{1,i}$ as species in community $1$, and $N_{2,i}$ as in community $2$, the diffusion reaction model is
+    \begin{equation*}
+        \begin{aligned}
+            \frac{\partial N_{1,i}}{\partial t}
+            & = \nabla^2 N_{1,i} 
+            + N_{1,i} 
+            \left( 
+                1 
+                - \sum_{k} N_{1,k} 
+                - \sum_{\ell} b N_{2,\ell} 
+            \right),\\
+            \frac{\partial N_{2,j}}{\partial t}
+            &= \nabla^2 N_{2,j} 
+            + N_{2,j} 
+            \left( 
+                1 
+                - \sum_{\ell} N_{2,\ell} 
+                - \sum_{k} b N_{1,k} 
+            \right),
+        \end{aligned}
+    \end{equation*}
+    where the interaction term is the same for all species in the same community. Let the total population size of each community is $C_{n} = \sum N_{n,i}$, the above equation is simplified as,
+    \begin{equation*}
+        \begin{aligned}
+            \frac{\partial C_{1}}{\partial t}
+            & = \nabla^2 C_{1} 
+            + C_{1} 
+            \left( 
+                1 
+                - C_{1} 
+                - b C_{2} 
+            \right),\\
+            \frac{\partial C_{2}}{\partial t}
+            &= \nabla^2 C_{2} 
+            + C_{2} 
+            \left( 
+                1 
+                - C_{2} 
+                - b C_{1} 
+            \right),
+        \end{aligned}
+    \end{equation*}  
+    which is the same equation of two symmetric species, but with community total population size. Thus the distribution of the difference of communities size is also approximately a logistic function.
+    \begin{equation*}
+        C_1(x) - C_2(x) \approx \frac{1}{1+e^{\sqrt{\frac{1}{2}\frac{b-1}{b+1}}x}} 
+    \end{equation*}
+    Since the population size of each species only depend on the initial state and would be proportional to the total population size, the distribution of single species would also be approximately logistic function.
+
+    \begin{figure}[!htbp]
+        \centering
+        \includegraphics[scale = 1]{multi_symme.pdf}
+        \caption{The simulation of multiple species dynamics. A. $6$ species community where intra-community interaction $a = 1$, inter-community interaction $b = 1.5$, diffusion rate and intrinsic rate are identical in all species. The transition could be kept in the simulation, and the final distribution only depends on the initial population size. B, C. $C_1-C_2$ and $C_1+C_2$ distribution during the simulation, same to the symmetric two species condition. D. $16$ species community simulation. two communities are symmetric, intra- and inter- community interaction is same to A. dispersal rate is set different. Species $1-8$ and $9-16$ are assigned $r = 1, 1.05, 1.1, 1.15, 1.2, 1.25, 1.3, 1.35$. The final state depends on dispersal rate. E,F. $C_1-C_2$ and $C_1+C_2$ distribution during the simulation in D.}
+        \label{fig:multiple_simu}
+    \end{figure}
+
+\subsection{Logistic Equilibrium under Strong Inter-Community Competition}
+
+    Based on the very simplified toy model above, we now simulate some conditions that close to it but with some variation. We first simulated a system where two local communities are still symmetric, but intra-community competing strength is changed a little bit. There are totally $6$ species, and inter-community competing is $b = 1.5$, intra-community competing is set to $0.95$. The transition is still kept in the middle since two local communities are symmetric. Total population size is larger than the condition $a = 1$. Besides, Logistic regression shows that all of the $6$ distribution are approximately logistic function.
+
+    The second simulation is on communities where dispersal rate is changed. Relative Diffusion rate $D_i$ is set to $1, 1.05, 1.1$. Similarly, the transition region holds. Species that dispersal slower has a lower capacity. Logistic regression also fit well.
+
+\subsection{Measure of $\beta$-diversity with Logistic Distribution}
+
+    The above simulation provide a chance to measure biodiversity on continuous distribution data, instead of discrete samples. Especially, under the condition of coexist bistable community, $beta$ diversity is important to illustrate the species turnover. We directly extend the measure of biodiversity into continuous distribution, that is, average $\alpha$ diversity is the integral of $\alpha(x)$ over $x$ and $\gamma$ diversity is based on the average population size of each species over the space. Take the example of the above simulation, we first calculate $\alpha(x)$,
+    \begin{figure}[!htbp]
+        \centering
+        \includegraphics[scale = 0.8]{alpha.png}
+        \caption{Distribution of $\alpha$-diversity in the transition region.}
+    \end{figure}
+
+    The result shows that $\alpha$ diversity is highest at the center, this match our knowledge that biodiversity is high at the boundary of two communities, considering the transition of communities as a soft boundary. Then the average local diversity $\bar{\alpha} = 1.181$. Then, integral the population size over space, average population size $\bar{N_{i}}$ is used to calculate $\gamma$ diversity ($\gamma = 1.635$). And thus $\beta$ diversity is given by $\beta = \frac{\gamma}{\bar{\alpha}} = 1.384$.
+
+    Based on the approach above, we propose a new measure of $\beta$ diversity. With a set of sample data, first fit it to a logistic function on the space, then calculate the $\beta$ diversity of the continuous distribution.

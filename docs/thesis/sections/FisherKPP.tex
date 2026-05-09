@@ -1,0 +1,159 @@
+\section{Fisher-KPP Equation}
+
+\begin{equation*}
+        \frac{\partial u}{\partial t} = D \frac{\partial ^2 u} {\partial x^2} + r u (1-au)
+    \end{equation*}
+
+    let $u' = au$, $\tau=r a t$, $z = a \sqrt{\frac{r}{D}}x$,
+
+    \begin{equation*}
+        \frac{\partial u'}{\partial \tau} = \frac{\partial ^2 u'} {\partial z^2} +  u' (1-u')
+    \end{equation*}
+
+Now we focus on
+
+\begin{equation*}
+\frac{\partial u}{\partial t} = \frac{\partial ^2 u} {\partial x^2} +  u (1-u)
+\end{equation*}
+
+Assume a traveling wave solution, where the shape of $u(x,t)$ do not
+change. let $z = x-ct$,
+
+\begin{equation*}
+\frac{\mathrm{d}^2 u}{\mathrm{d} z^2} + c \frac{\mathrm{d} u}{\mathrm{d} z} + u(1-u) = 0
+\end{equation*}
+
+$u = 0,1$ are two equilibrium of $f(u) = u (1-u)$.The solution will
+connect this two state. When $u \rightarrow 0$, assume the
+approximated solution around here is $u \approx e^{\lambda z}$, thus,
+
+\begin{equation*}
+\lambda ^2 + c \lambda + 1 =0
+\end{equation*}
+
+$\lambda = \frac{- c \pm \sqrt{c^2 - 4}}{2}$. $u \rightarrow 0$
+needs $\lambda <0$, which calls $c \geq 2$.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\textbf{Fisher\textquotesingle s method}
+
+let $p = \frac{\mathrm{d} u}{\mathrm{d} z}$,
+
+\begin{equation*}
+\frac{\mathrm{d}p} {\mathrm{d}u} = -c - \frac{u(1-u)}{p}
+\end{equation*}
+
+assume
+
+\begin{equation*}
+\frac{p}{u}|_{u\rightarrow0} = m
+\end{equation*}
+
+then
+
+\begin{equation*}
+m = \frac{\mathrm{d}p} {\mathrm{d}u} = -c - \frac{u(1-u)}{p} \approx -c - \frac{1}{m}\\
+m^2+cm+1 = 0
+\end{equation*}
+
+has real roots only if $c^2\geq4$, thus $c \geq 2$.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+Then we show the dynamics of $p\sim u$ on the phase plane,
+
+$$
+\begin{cases}
+\dot{u} = p\\
+\dot{p} = -cp - u(1-u)
+\end{cases}
+$$
+
+equilibrium are $(p^*,u^*) = (0,0), (0,1)$.
+
+\begin{equation*}
+\mathbf{J} = \begin{pmatrix}
+-c & 2u-1\\
+1 & 0
+\end{pmatrix}
+\end{equation*}
+
+\begin{equation*}
+\mathbf{J}|_{(0,0)} = \begin{pmatrix}
+-c & -1\\
+1 & 0
+\end{pmatrix}, 
+\mathbf{J}|_{(0,1)} = \begin{pmatrix}
+-c & 1\\
+1 & 0
+\end{pmatrix}
+\end{equation*}
+
+For $(0,0)$
+
+\begin{equation*}
+\lambda ^ 2 -(-c) \lambda + 1 = 0
+\end{equation*}
+
+$\Delta = c^2 - 4 \geq 0$,
+$\lambda = \frac{-c \pm \sqrt{c^2 - 4}}{2} > 0$ , is a stable node
+
+For $(0,1)$
+
+\begin{equation*}
+\lambda ^ 2 - (-c) \lambda - 1 = 0
+\end{equation*}
+
+$\Delta = c^2 + 4 \geq 0$,
+$\lambda = \frac{-c \pm \sqrt{c^2 + 4}}{2}$ , is a saddle.
+
+There is a trajectory connecting these two equilibrium, from (0,0) to
+(0,1). Let this curve be $p = \varphi (u)$, then
+$\frac{\mathrm{d} u}{\mathrm{d} z}= \varphi (u)$, or
+$\frac{\mathrm{d} u}{\mathrm{d} x} = \varphi(u)$. Thus,
+
+\begin{equation*}
+x - x_{0} = \int_{u_{0}}^{u} \frac{1}{\varphi(u)} \mathrm{d}u
+\end{equation*}
+
+and we will finally get $u(z)$.
+
+As a result, the travelling wave solution for the PDE is the solution of
+the ODE with boundary condition
+
+\begin{equation*}
+\lim_{z \rightarrow +\infty} u(z) = 0, \lim_{z \rightarrow -\infty} u(z) = 1
+\end{equation*}
+
+To explore the shape, we may use small perturbation method. Assume
+$c \rightarrow \infty$, and let $\xi = z/c$,
+
+\begin{equation*}
+\frac{1}{c^2} \frac{\mathrm{d}^2 u}{\mathrm{d} \xi^2} + \frac{\mathrm{d} u}{\mathrm{d} \xi} + u(1-u) = 0
+\end{equation*}
+
+We may assume the solution is in a form of series,
+
+\begin{equation*}
+u(\xi) = u_{0}(\xi) + \frac{1}{c^2}u_{1}(\xi) + \mathcal{O}(\frac{1}{c^4})
+\end{equation*}
+
+then by the power of $c$,
+
+\begin{equation*}
+\frac{\mathrm{d} u_{0}}{\mathrm{d} \xi} + u_{0}(1-u_{0}) = 0\\
+\frac{\mathrm{d}^2 u_{0}}{\mathrm{d} \xi^2} + \frac{\mathrm{d} u_{1}}{\mathrm{d} \xi} + u_{1}( 1 - 2 u_{0} ) = 0
+\end{equation*}
+
+If we assume $u(0) = 1/2$, then we also have $u_{0} = 1/2$,
+$u_{1} = 0$. Then we could solve them,
+
+\begin{equation*}
+u_{0} = \frac{1}{1 + e^{z/c}}\\
+u_{1} = \frac{e^{z/c}}{\left( 1+ e^{z/c} \right)^2}\ln\left( \frac{4 e^{z/c}}{\left( 1+ e^{z/c} \right)^2} \right)
+\end{equation*}
+
+$u \approx u_{0} + c^{-2} u_{1}$
+
+This approximation fits well even $c = 2$.

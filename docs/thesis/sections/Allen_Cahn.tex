@@ -1,0 +1,245 @@
+\section{Allen-Cahn Equation}
+
+\begin{equation*}
+\frac{\partial u}{\partial t} = \frac{\partial ^2 u} {\partial x^2} +  u (1-u) (u-a)
+\end{equation*}
+
+\begin{equation*}
+\frac{\mathrm{d}^2 u}{\mathrm{d} z^2} + c \frac{\mathrm{d} u}{\mathrm{d} z} + u(1-u)(u-a) = 0
+\end{equation*}
+
+$$
+\begin{cases}
+\dot{u} = p\\
+\dot{p} = -cp - u(1-u)(u-a)
+\end{cases}
+$$
+
+\begin{equation*}
+\mathbf{J} = \begin{pmatrix}
+-c & 3u^2 - 2(1+a)u +a \\
+1 & 0 
+\end{pmatrix}
+\end{equation*}
+
+\begin{equation*}
+\mathbf{J}|_{(0,0)} = \begin{pmatrix}
+-c & a\\
+1 & 0 
+\end{pmatrix}, 
+\mathbf{J}|_{(0,1)} = \begin{pmatrix}
+-c & 1-a\\
+1 & 0 
+\end{pmatrix}
+\mathbf{J}|_{(0,a)} = \begin{pmatrix}
+-c & a(a - 1) \\
+1 & 0 
+\end{pmatrix}
+\end{equation*}
+
+At $(0,0)$, $\mathrm{tr}(\mathbf{J})=-c<0$,
+$\det(\mathbf{J}) = -a<0$ , this node is a saddle.
+$\Delta = c^2 + 4a >0$
+
+At $(1,0)$, $\mathrm{tr}(\mathbf{J})=-c<0$,
+$\det(\mathbf{J}) = -(1-a)<0$ , this node is a saddle.
+$\Delta = c^2 + 4(1-a)>0$
+
+At $(a,0)$, $\mathrm{tr}(\mathbf{J})=-c<0$,
+$\det(\mathbf{J}) = -a(a-1) = a(1-a)>0$ , this node is stable.
+$\Delta = c^2 - 4a(1-a)$,
+$\lambda = \frac{-c \pm \sqrt{c^2 - 4a(1-a)}}{2}$, could be stable
+node or spiral sink, depends on the value of $\Delta$.
+
+As a result, the travelling wave solution only exist when a certain
+speed $c$ makes a trajectory connecting $(0,0)$ and $(1,0)$.
+
+Considering the symmetry of $(0,0)$ and $(0,1)$ , we take the
+condition where $a= 1/2$. In order to have a trajectory connecting two
+states, $c=0$.
+
+Then we solve the equation
+
+\begin{align*}
+    \frac{\mathrm{d}^2 u}{\mathrm{d} z^2} = u(1-u)(a-u)\\
+    \frac{\mathrm{d}^2 u}{\mathrm{d} z^2} = u^3 -(1+a)u^2 + au\\
+    \frac{1}{2}\left(\frac{\mathrm{d} u}{\mathrm{d} z}\right)^2 
+    = \frac{1}{4}u^4 - \frac{1+a}{3}u^3 + \frac{a}{2}u^2\\
+    2\left(\frac{\mathrm{d} u}{\mathrm{d} z}\right)^2 
+    = u^2(1-u)^2
+\end{align*}
+
+\begin{align*}
+    \frac{\mathrm{d} u}{\mathrm{d} z} = \frac{\sqrt{2}}{2} u(1-u) \\
+    \frac{1}{u(1-u)}\mathrm{d} u = \frac{\sqrt{2}}{2}\mathrm{d} z\\
+    \left(\frac{1}{u} + \frac{1}{1-u}\right)\mathrm{d} u = \frac{\sqrt{2}}{2}\mathrm{d} z\\
+    \ln{u} - \ln(1-u) = \frac{z}{\sqrt{2}}+C\\
+    \frac{u}{1-u} = e^{\frac{z}{\sqrt{2}}+C}\\
+    u = \frac{1}{1+e^{\frac{z}{\sqrt{2}}+C}}\\
+    u_{0} = 1/2 \Rightarrow C = 0\\
+    u = \frac{1}{1+e^{\frac{z}{\sqrt{2}}}}
+\end{align*}
+
+\begin{equation*}
+\frac{\mathrm{d}p} {\mathrm{d}u} = -c - \frac{u(1-u)(u-a)}{p}\\
+\end{equation*}
+
+A general way to considering this kind of equation is considering the
+potential energy.
+
+We start from the ODE
+
+\begin{equation*}
+\frac{\mathrm{d}^2 u}{\mathrm{d} z^2} + c \frac{\mathrm{d} u}{\mathrm{d} z} + u(1-u)(u-a) = 0
+\end{equation*}
+
+We hope to define such a function $E(u)$ as the energy of certain
+density $u$, such that
+
+\begin{equation*}
+\frac{\mathrm{d}E(u)}{\mathrm{d}t} \leq 0
+\end{equation*}
+
+That is, $E(u)$ always decline to a lower value. Note here $t$ is
+just a assumed time for the evolution of $E$, not the time in the
+former PDE. Here, for example, we could assume $z$ in the equation is
+$t$. As a result, we try to find a
+$\frac{\mathrm{d}E}{\mathrm{d}z}$.
+
+Note the following relation holds:
+
+\begin{equation*}
+\frac{\mathrm{d}^2 u}{\mathrm{d} z^2} \cdot \frac{\mathrm{d} u}{\mathrm{d} z} = \frac{1}{2}\cdot\frac{\mathrm{d}\left( \frac{\mathrm{d} u}{\mathrm{d} z} \right)^2}{\mathrm{d}z}
+\end{equation*}
+
+Thus, we multiply the derivative to the ODE:
+
+\begin{align*}
+    \left( \frac{\mathrm{d}^2 u}{\mathrm{d} z^2} + c \frac{\mathrm{d} u}{\mathrm{d} z} + u(1-u)(u-a) \right) \cdot \frac{\mathrm{d} u}{\mathrm{d} z}= 0\\
+    \frac{1}{2}\frac{\mathrm{d}}{\mathrm{d}z}\left( \frac{\mathrm{d} u}{\mathrm{d} z} \right)^2 + c \left( \frac{\mathrm{d} u}{\mathrm{d} z} \right)^2 + u(1-u)(u-a) \cdot \frac{\mathrm{d} u}{\mathrm{d} z} = 0
+\end{align*}
+
+let
+
+\begin{equation*}
+f(u) = u(1-u)(u-a) = \frac{\mathrm{d}W}{\mathrm{d}u}
+\end{equation*}
+
+\begin{equation*}
+W(u) = \int u(1-u)(u-a) \mathrm{u} = - \frac{1}{4}u^4 + \frac{1+a}{3} u^3 - \frac{a}{2}u^2
+\end{equation*}
+
+where $W(0) = 0$. $W(1) = \frac{1}{12} - \frac{a}{6}$
+
+then
+
+\begin{align*}
+    \frac{1}{2}\frac{\mathrm{d}}{\mathrm{d}z}\left( \frac{\mathrm{d} u}{\mathrm{d} z} \right)^2 + c \left( \frac{\mathrm{d} u}{\mathrm{d} z} \right)^2 + u(1-u)(u-a) \frac{\mathrm{d} u}{\mathrm{d} z} = 0\\
+    \frac{1}{2}\frac{\mathrm{d}}{\mathrm{d}z}\left( \frac{\mathrm{d} u}{\mathrm{d} z} \right)^2 + c \left( \frac{\mathrm{d} u}{\mathrm{d} z} \right)^2 + \frac{\mathrm{d}W}{\mathrm{d}u} \cdot \frac{\mathrm{d} u}{\mathrm{d} z} = 0\\
+    \frac{1}{2}\frac{\mathrm{d}}{\mathrm{d}z}\left( \frac{\mathrm{d} u}{\mathrm{d} z} \right)^2 + c \left( \frac{\mathrm{d} u}{\mathrm{d} z} \right)^2 + \frac{\mathrm{d}W}{\mathrm{d} z} = 0
+\end{align*}
+
+\begin{equation*}
+\frac{\mathrm{d}}{\mathrm{d}z} \left( \frac{1}{2}\left( \frac{\mathrm{d} u}{\mathrm{d} z} \right)^2  + W \right) = - c \left( \frac{\mathrm{d} u}{\mathrm{d} z} \right)^2 \leq 0
+\end{equation*}
+
+We define
+
+\begin{equation*}
+E(u) = \frac{1}{2}\left( \frac{\mathrm{d} u}{\mathrm{d} z} \right)^2  + W(u)
+\end{equation*}
+
+integral both side of the former equation
+
+\begin{equation*}
+\int_{-\infty}^{+\infty} \frac{\mathrm{d}}{\mathrm{d}z} \left( \frac{1}{2}\left( \frac{\mathrm{d} u}{\mathrm{d} z} \right)^2  + W \right) \mathrm{d}z = 
+\int_{-\infty}^{+\infty} - c \left( \frac{\mathrm{d} u}{\mathrm{d} z} \right)^2 \mathrm{d}z
+\end{equation*}
+\begin{equation*}
+  \left.\left( \frac{1}{2}\left( \frac{\mathrm{d} u}{\mathrm{d} z} \right)^2  + W \right)\right|_{-\infty}^{+\infty} = 
+- c \int_{-\infty}^{+\infty} \left( \frac{\mathrm{d} u}{\mathrm{d} z} \right)^2 \mathrm{d}z
+\end{equation*}
+
+the boundary condition is
+$\lim_{z \rightarrow +\infty} u(z) = 0$, $\lim_{z \rightarrow -\infty} u(z) = 1$
+, we also assume
+$\lim_{z \rightarrow +\infty} u'(z) = 0$, $\lim_{z \rightarrow -\infty} u'(z) = 0$
+
+\begin{align*}
+W(u(+\infty))-W(u(-\infty)) =- c \int_{-\infty}^{+\infty} \left( \frac{\mathrm{d} u}{\mathrm{d} z} \right)^2 \mathrm{d}z\\
+W(1)-W(0) =- c \int_{-\infty}^{+\infty} \left( \frac{\mathrm{d} u}{\mathrm{d} z} \right)^2 \mathrm{d}z\\
+\end{align*}
+
+\begin{equation*}
+c = \frac{W(0)-W(1)}{\int_{-\infty}^{+\infty} \left( \frac{\mathrm{d} u}{\mathrm{d} z} \right)^2 \mathrm{d}z}
+\end{equation*}
+
+When $a = \frac{1}{2}$, $W(0)=W(1)$, thus $c=0$. As a result,
+
+\begin{equation*}
+\frac{\mathrm{d}^2 u}{\mathrm{d} z^2} = u(1-u)(0.5-u)
+\end{equation*}
+
+\begin{equation*}
+u = \frac{1}{1+e^{\frac{z}{\sqrt{2}}}}
+\end{equation*}
+
+Also,
+
+\begin{equation*}
+\frac{\mathrm{d}}{\mathrm{d}z} \left( \frac{1}{2}\left( \frac{\mathrm{d} u}{\mathrm{d} z} \right)^2  + W \right) = 0
+\end{equation*}
+
+And
+
+\begin{equation*}
+\frac{1}{2}\left( \frac{\mathrm{d} u}{\mathrm{d} z} \right)^2  + W = 0\\
+\frac{\mathrm{d} u}{\mathrm{d} z} = \sqrt{2W(u)} = \frac{\sqrt{2}}{2}u(1-u)
+\end{equation*}
+
+Now for other $a\neq1/2$, we assume the shape of $u(z)$ might be the
+same. thus
+$\frac{\mathrm{d} u}{\mathrm{d} z} = \frac{\sqrt{2}}{2}u(1-u)$. put
+back to $c$,
+
+\begin{equation*}
+c = \frac{W(0)-W(1)}{\int_{-\infty}^{+\infty} \left( \frac{\mathrm{d} u}{\mathrm{d} z} \right)^2 \mathrm{d}z} 
+=\frac{W(0)-W(1)}{\int_{1}^{0} \left( \frac{\mathrm{d} u}{\mathrm{d} z} \right) \mathrm{d}u} 
+=(\frac{a}{6} - \frac{1}{12})\sqrt{2} \frac{1}{\int_{1}^{0} u(1-u) \mathrm{d}z} = \sqrt{2}(\frac{1}{2} - a)
+\end{equation*}
+
+Assume:
+
+\begin{align*}
+\dot{u} = ku(1-u)\\
+\ddot{u} = k(1-2u)\cdot \dot{u} = k^2u(1-u)(1-2u)
+\end{align*}
+
+\begin{equation*}
+\ddot{u} + c \dot{u} + u(1-u)(u-a) = 0
+\end{equation*}
+
+\begin{align*}
+k^2u(1-u)(1-2u) + c ku(1-u) + u(1-u)(u-a) = 0\\
+k^2 (u-3u^2+2u^3) + ck (u-u^2) -au + (1+a)u^2 -u^3 = 0\\
+(2k^2-1)u^3 + (1+a-3k^2-ck)u^2 + (k^2+ck-a)u = 0
+\end{align*}
+
+we have
+
+\begin{align*}
+2k^2+1 = 0\\
+1+a-3k^2-ck =0\\
+k^2+ck-a = 0
+\end{align*}
+
+thus $k = \frac{\sqrt{2}}{2}$, nothing to do with $a$.
+
+Then
+
+\begin{equation*}
+a-\frac{1}{2}-\frac{\sqrt{2}}{2}c = 0\\
+\Rightarrow c = \sqrt{2}(a - \frac{1}{2})
+\end{equation*}
+
+holds for any $a$.
