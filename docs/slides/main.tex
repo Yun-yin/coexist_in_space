@@ -3,7 +3,8 @@
 \usepackage{amsmath, amssymb}
 \usepackage{bm}
 \usepackage{graphicx}
-
+\usepackage{tikz}
+\graphicspath{{../../figure/}}
 
 \usepackage{appendixnumberbeamer}
 
@@ -20,8 +21,10 @@
 
 \title{\Large Coexistence on the Boundary of Communities}
 \subtitle{\small Dispersal in Continuum Could Lead to the Coexistence of Unstable Species Combination}
-\date{\today}
-\author{Chang Longxiao, longxiao.chang@campus.lmu.de}
+%\date{\today}
+\date{April 17, 2026}
+\author{Chang Longxiao, longxiao.chang@campus.lmu.de\\
+Supervisor: Dr. Maria Stockenreiter}
 \institute{EES, Ludwig-Maximilian Universit\"{a}t M\"{u}nchen}
 
 \begin{document}
@@ -34,6 +37,31 @@
 
     \section{Introduction}
 
+    \iffalse
+    \begin{frame}
+        \begin{tikzpicture}[remember picture, overlay]
+            \node at ([yshift = 1 cm] current page.center) {
+            \includegraphics[width=1.1\paperwidth,keepaspectratio]{MC/natural.jpg}
+            };
+        \end{tikzpicture}
+    \end{frame}
+    \begin{frame}
+        \begin{columns}
+            \column{0.5\textwidth}
+            \begin{figure}
+                \centering
+                \includegraphics[scale = 0.4]{MC/phylo2.png}
+            \end{figure}
+            \column{0.5\textwidth}
+            \begin{figure}
+                \centering
+                \includegraphics[scale = 0.4]{MC/inter.png}
+            \end{figure}
+        \end{columns}
+    \end{frame}
+    \fi
+
+    \iffalse
     \begin{frame}
         The fundamental model is generalized Lotka-Volterra model:
         \begin{equation*}
@@ -56,12 +84,49 @@
     \begin{frame}
         \begin{figure}
             \centering
-            \includegraphics[scale = 0.4]{../../figure/competing_bistable.png}
+            \includegraphics[scale = 0.4]{competing_bistable.png}
+        \end{figure}
+    \end{frame}
+    \fi
+
+    \begin{frame}
+        \begin{columns}
+            \column{0.6\textwidth}
+            Generalized Lotka-Volterra model:
+            \begin{equation}
+                \frac{\mathrm{d}N_i}{\mathrm{d}t}
+                = N_i \left( r_i - \sum_{j} A_{i,j} N_j \right)
+            \end{equation}
+
+            \column{0.4\textwidth}
+            \begin{figure}
+                \centering
+                \includegraphics[scale = 0.4]{competing_2fig.png}
+            \end{figure}
+        \end{columns}
+    \end{frame}
+
+    \begin{frame}
+        \begin{columns}
+            \column{0.5\textwidth}
+            \begin{figure}
+                \centering
+                \includegraphics[scale = 0.8]{MC/birch.png}
+            \end{figure}
+
+            \column{0.5\textwidth}
+            \begin{figure}
+                \centering
+                \includegraphics[scale = 0.8]{MC/oak.png}
+            \end{figure}
+        \end{columns}
+        \begin{figure}
+            \centering
+            \includegraphics[scale = 0.8]{MC/background_narrow.png}
         \end{figure}
     \end{frame}
 
-    \section{Basic Idea}
-
+    \iffalse
     \begin{frame}
         \begin{columns}
             \column{0.55 \textwidth}
@@ -76,142 +141,570 @@
                 \includegraphics[scale = 0.6]{../../figure/strong_comp.png}
             \end{figure}
         \end{columns}
-        
     \end{frame}
-
+    
     \begin{frame}
         As a result, we would also guess that not only two species, but more species could coexist even the total community is not stable. That is, considering the community could be divided into two sub-communities that are stable, if both of them cannot invade the other, all the species will coexist in the region where the two communities meet.
     \end{frame}
+    \fi
 
-    \section{Model}
+    %\section{Model}
 
-    \begin{frame}
-        The basic framework is a \textbf{Diffusion-Reaction Model}, where diffusion term is a second ordered partial differentiation, while reaction term is just GLV.
-        \begin{equation}
-            \frac{\mathrm{d}N_i}{\mathrm{d}t}
-            = D_{i}\frac{\partial^2 N}{\partial x^2} +
-            N_i \left( r_i - \sum_{j} A_{i,j} N_j \right)
-        \end{equation}
+    \begin{frame}{Model}
+        The framework is a \textbf{diffusion-reaction model}, where the diffusion term is represented by a second-order spatial derivative, and the reaction term follows the GLV dynamics.
+        \begin{block}{Diffusion-Reaction Model}
+            \begin{equation}
+                \begin{aligned}
+                    \frac{\partial N_i}{\partial t}
+                    = \underbrace{ D_{i}\frac{\partial^2 N_i}{\partial x^2}}_{\text{Dispersal}} + 
+                    \underbrace{f(N_j) }_{\text{Interaction}}&\\
+                    f(N_j) = & N_i \left( r_i - \sum_{j} A_{i,j} N_j \right)
+                \end{aligned}
+            \end{equation}
+        \end{block}
+        
         In short:
         \begin{equation*}
-            \partial_t N = D_i \nabla^2_x N + N (r - AN)
+            \partial \mathbf{N} = \mathbf{D} \nabla^2 \mathbf{N} + \mathbf{N} (\mathbf{r} - \mathbf{A}\mathbf{N})
         \end{equation*}
     \end{frame}
 
-    \section{The simplest case}
+    \iffalse
+    \section{One Species: Invading Process}
+    \fi
 
-    \subsection{One species}
-
-    \begin{frame}{Fischer-KPP Equation}
+    \iffalse
+    \begin{frame}
+        This section considers the single-species case, namely the invasion dynamics of a single species. The material in this section consists of several basic known results, which we re-derive in order to gain a fundamental understanding of the properties of this class of equations.
         \begin{equation}
-            \frac{\partial N}{\partial t} = D\frac{\partial^2 N}{\partial x^2} +  N(r-N)
+            \frac{\partial N}{\partial t} = D\frac{\partial^2 N}{\partial x^2} +  f(N)
         \end{equation}
-        By rescaling:
+    \end{frame}
+    \fi
+
+    \begin{frame}{One species: invading process}
+        \begin{figure}
+            \centering
+            \includegraphics[scale = 0.8]{MC/invade.png}
+        \end{figure}
+    \end{frame}
+
+    \iffalse
+    \begin{frame}{Fischer-KPP Equation}
+        In Fisher-KPP equation, the reaction term is a classic logistic increase model.
         \begin{equation*}
-            \partial_t N = \nabla^2_x N +  rN(1-N)
+            \frac{\partial u}{\partial t} = D \frac{\partial ^2 u} {\partial x^2} + r u (1-au)
         \end{equation*}
+        let $u' = au$, $\tau=r a t$, $z = a \sqrt{\frac{r}{D}}x$,
+        \begin{equation*}
+            \frac{\partial u'}{\partial \tau} = \frac{\partial ^2 u'} {\partial z^2} +  u' (1-u')
+        \end{equation*}
+        Now we focus on 
+        \begin{equation}
+            \frac{\partial u}{\partial t} = \frac{\partial ^2 u} {\partial x^2} +  u (1-u)
+        \end{equation}
+    \end{frame}
+    \fi
+    \begin{frame}{Fischer-KPP Equation}
+        In Fisher-KPP equation, the reaction term is a classic logistic increase model. 
+        \begin{equation}
+            \frac{\partial u}{\partial t} = \frac{\partial ^2 u} {\partial x^2} +  u (1-u)
+        \end{equation}
+        Assume a traveling wave solution, where the shape of $u(x,t)$ do not change. let $z = x-ct$,
+        \begin{equation*}
+            \frac{\mathrm{d}^2 u}{\mathrm{d} z^2} + c \frac{\mathrm{d} u}{\mathrm{d} z} + u(1-u) = 0
+        \end{equation*}
+    \end{frame}
+
+    \begin{frame}
+        \begin{columns}
+            \column{0.5\textwidth}
+            $u = 0,1$ are two equilibrium of $f(u) = u (1-u)$.
+
+            When $u \rightarrow 0$, assume the approximated solution around here is $u \approx e^{\lambda z}$, thus,
+            $$
+                \lambda ^2 + c \lambda + 1 =0
+            $$
+            $\lambda = \frac{- c \pm \sqrt{c^2 - 4}}{2}$.  $u \rightarrow 0$ needs $\lambda <0$, which calls $c \geq 2$.
+
+            \column{0.5\textwidth}
+            \begin{figure}
+                \centering
+                \includegraphics[scale= 0.3]{fisher_pu_plane.png}
+            \end{figure}
+        \end{columns}
+    \end{frame}
+
+    \iffalse
+    \begin{frame}
+        \begin{columns}
+            \column{0.3\textwidth}
+            Now the second ordered differential equation could be written as a first ordered differential equations set:
+        $$
+        \begin{cases}
+            \dot{u} = p\\
+            \dot{p} = -cp - u(1-u)
+        \end{cases}
+		$$
+            \column{0.6\textwidth}
+            \begin{figure}
+            \centering
+            \includegraphics[scale= 0.5]{phase_fisherkpp.png}
+        \end{figure}	
+        \end{columns} 		
+    \end{frame}
+    \fi
+
+    \begin{frame}
+        Approximate solution could be found by small perturbation method.
+
+        The second order solution:
+        \begin{align*}
+            u_{0} &= \frac{1}{1 + e^{z/c}}\\
+            u_{1} &= \frac{e^{z/c}}{\left( 1+ e^{z/c} \right)^2}\ln\left( \frac{4 e^{z/c}}{\left( 1+ e^{z/c} \right)^2} \right)\\
+            u &\approx u_{0} + c^{-2} u_{1}
+        \end{align*}
+
+        \begin{figure}
+            \centering
+            \includegraphics[scale = 0.4]{fisher_simu.png}
+        \end{figure}
     \end{frame}
 
     \begin{frame}{Allen-Cahn equation}
+        Allen-Cahn equation has reaction term which contains Allee effect.
         \begin{equation}
-            \partial_t N = \nabla^2_x N +  rN - aN^3
+            \frac{\partial u}{\partial t} = \frac{\partial ^2 u} {\partial x^2} +  u (1-u) (u-a)
+        \end{equation}
+
+        The reaction term $f(u) = u(1-u)(u-a)$ ($0<a<1$) has three roots.
+
+        \begin{figure}
+            \centering
+            \includegraphics[scale= 0.35]{allen_pu_plane.png}
+        \end{figure}
+    \end{frame}
+
+    \iffalse
+    \begin{frame}
+        \begin{columns}
+            \column{0.4\textwidth}
+            Consider the condition $a = 0.5$, we write the ODE set
+        \begin{equation*}
+            \begin{cases}
+                \dot{u} = p\\
+                \dot{p} = -cp - u(1-u)(u-a)
+            \end{cases}
+        \end{equation*}
+            \column{0.6\textwidth}
+            \begin{figure}
+            \centering
+            \includegraphics[scale= 0.5]{phase_allencahn.png}
+        \end{figure}	
+        \end{columns} 
+    \end{frame}
+    \fi
+
+    \begin{frame}
+        When $c = 0$, the ODE could be solved.
+
+        \begin{equation*}
+            \frac{\mathrm{d}^2 u}{\mathrm{d} z^2} = u(1-u)(a-u)
+        \end{equation*}
+        \begin{equation*}
+            u = \frac{1}{1+e^{\frac{z}{\sqrt{2}}}}
+        \end{equation*}
+        \begin{figure}
+            \centering
+            \includegraphics[scale = 0.4]{logistic.png}
+        \end{figure}
+    \end{frame}
+
+    \iffalse
+    \begin{frame}
+        More generally, we consider the potential energy of certian population size $W(u)$:
+        \begin{equation*}
+            f(u) = u(1-u)(u-a) = \frac{\mathrm{d}W}{\mathrm{d}u}
+        \end{equation*}
+        and total energy:
+        \begin{equation*}
+            E(u) = \frac{1}{2}\left( \frac{\mathrm{d} u}{\mathrm{d} z} \right)^2  + W(u)
+        \end{equation*}
+        The speed of travelling wave depends on the energy difference on both side, which can e solved as
+        \begin{equation}
+            c = \frac{W(0)-W(1)}{\int_{-\infty}^{+\infty} \left( \frac{\mathrm{d} u}{\mathrm{d} z} \right)^2 \mathrm{d}z}
         \end{equation}
 
         \begin{equation*}
-            N(x,t) = \tanh\left( \frac{x-x_0}{\sqrt{2}} \right)
+            c = \frac{W(0)-W(1)}{\int_{-\infty}^{+\infty} \left( \frac{\mathrm{d} u}{\mathrm{d} z} \right)^2 \mathrm{d}z} 
+            =\frac{W(0)-W(1)}{\int_{1}^{0} \left( \frac{\mathrm{d} u}{\mathrm{d} z} \right) \mathrm{d}u} 
+            =(\frac{a}{6} - \frac{1}{12})\sqrt{2} \frac{1}{\int_{1}^{0} u(1-u) \mathrm{d}z} = \sqrt{2}(\frac{1}{2} - a)
         \end{equation*}
-    \end{frame}
-
-    \subsection{Two speices}
-
-    \begin{frame}{Two Species Model}
-        \begin{equation}
-            \begin{cases}
-                \frac{\partial N_1}{\partial t}
-                = D_{1}\frac{\partial^2 N_1}{\partial x^2} +
-                N_1 \left( r_1 - A_{1,1} N_1 - A_{1,2} N_2 \right)\\
-                \frac{\partial N_2}{\partial t}
-                = D_{2}\frac{\partial^2 N_2}{\partial x^2} +
-                N_2 \left( r_2 - A_{2,2} N_2 - A_{2,1} N_1 \right)
-            \end{cases}
-        \end{equation}
-        \begin{equation*}
-            \begin{cases}
-                \partial_t N_1
-                = \nabla^2_x N_1 +
-                N_1 \left( 1 - N_1 - k N_2 \right)\\
-                \partial_t N_2
-                = d \nabla^2 N_2 +
-                r N_2 \left( 1 - N_2 - h N_1 \right)
-            \end{cases}
-        \end{equation*}
-    \end{frame}
-
-    \begin{frame}{Symmetrical Condition}
-        \begin{equation*}
-            \begin{cases}
-                \partial_t N_1
-                = d \nabla^2_x N_1 +
-                r N_1 \left( 1 - a N_1 - b N_2 \right)\\
-                \partial_t N_2
-                = d \nabla^2 N_2 +
-                r N_2 \left( 1 - a N_2 - b N_1 \right)
-            \end{cases}
-        \end{equation*}
-         Could be approximated to Allen-Cahn equation
     \end{frame}
 
     \begin{frame}
-        
+        \begin{figure}
+            \centering
+            \includegraphics[scale = 0.5]{allen_W.png}
+        \end{figure}
+    \end{frame}
+    \fi
+
+    \section{The Simplest Interaction: Two Species}
+
+    \iffalse
+    \begin{frame}{Two Species Model}
+        In this section, we consider the two-species case, which is the simplest example of the more general problem of multispecies coexistence. Initially, each species occupies half of the spatial domain. We derive the symmetric two-species case, which is likewise a known result, and then carry out simulations for more general cases.
+        \begin{equation}
+            \begin{cases}
+                \frac{\partial N_1}{\mathrm{d}t} = D_{1}\frac{\partial^2 N_1}{\partial x^2} + N_1 \left( r_1 - A_{1,1} N_1 - A_{1,2} N_2 \right)\\ 
+                \frac{\partial N_2}{\mathrm{d}t} = D_{2}\frac{\partial^2 N_2}{\partial x^2} + N_2 \left( r_2 - A_{2,2} N_2 - A_{2,1} N_1 \right)
+            \end{cases}
+        \end{equation}
+    \end{frame}
+    \fi
+
+    \begin{frame}{Two Species Model}
+        The two-species case is the simplest example of the more general problem of multispecies coexistence. 
+        \begin{equation}
+            \begin{cases}
+                \frac{\partial N_1}{\mathrm{d}t} = D_{1}\frac{\partial^2 N_1}{\partial x^2} + N_1 \left( r_1 - A_{1,1} N_1 - A_{1,2} N_2 \right)\\ 
+                \frac{\partial N_2}{\mathrm{d}t} = D_{2}\frac{\partial^2 N_2}{\partial x^2} + N_2 \left( r_2 - A_{2,2} N_2 - A_{2,1} N_1 \right)
+            \end{cases}
+        \end{equation}
+        \begin{figure}
+            \centering
+            \includegraphics[scale = 0.7]{MC/twospcies.png}
+        \end{figure}
+    \end{frame}
+
+    \begin{frame}{Symmetrical Condition}
+        We consider the condition where two species are exactly symmetric. The system could be simplified (as well as rescaled) as
+        \begin{equation*}
+            \begin{cases}
+                \partial N_{1} = \nabla^2 N_1 + r N_1(1 - N_1 - a N_2)\\
+                \partial N_{2} = \nabla^2 N_2 + r N_2(1 - N_2 - a N_1)
+            \end{cases}
+        \end{equation*}
+    \end{frame}
+
+    \iffalse
+    \begin{frame}
+        let $u = N_1+N_2$, $v=N_1-N_2$
+        \begin{equation*}
+            \begin{cases}
+                \partial_t u = \nabla^2_x u + r u - \frac{1}{2} r (u^2 + v^2) - \frac{1}{2} r a (u^2-v^2)\\
+                \partial_t v = \nabla^2_x v + r v - r u v = \nabla^2_x v + r v ( 1 - u)
+            \end{cases}
+        \end{equation*}
+        we might assume $\partial_t u = 0$ since the total population size is nearly a constant, and $\nabla^2_x u = 0$ since the space is fully occupied. Thus
+        \begin{equation*}
+            u = \frac{1\pm\sqrt{1+(a^2-1)v^2}}{1+a}
+        \end{equation*}
+        Then,
+        \begin{equation*}
+            \partial v = \nabla^2 v + r v (1 - \frac{1\pm\sqrt{1+(a^2-1)v^2}}{1+a})
+        \end{equation*}
+    \end{frame}
+    \fi
+    \begin{frame}
+        let $u = N_1+N_2$, $v=N_1-N_2$
+        \begin{equation*}
+            \begin{cases}
+                \partial_t u = \nabla^2_x u + r u - \frac{1}{2} r (u^2 + v^2) - \frac{1}{2} r a (u^2-v^2)\\
+                \partial_t v = \nabla^2_x v + r v - r u v = \nabla^2_x v + r v ( 1 - u)
+            \end{cases}
+        \end{equation*}
+        we might assume $\partial_t u = 0$ since the total population size is nearly a constant, and $\nabla^2_x u = 0$ since the space is fully occupied. Thus
+        \begin{equation*}
+            u = \frac{1+\sqrt{1+(a^2-1)v^2}}{1+a}
+        \end{equation*}
+        Then,
+        \begin{equation*}
+            \partial v = \nabla^2 v + r v (1 - \frac{1 + \sqrt{1+(a^2-1)v^2}}{1+a})
+        \end{equation*}
+    \end{frame}
+
+    \begin{frame}
+        \begin{figure}
+            \centering
+            \includegraphics[scale = 0.5]{two_species_rec.png}
+        \end{figure}
+        This form is close to Allen-Cahn equation.
+    \end{frame}
+
+    \begin{frame}
+        \begin{columns}
+            \column{0.55\textwidth}
+            We could approximately set $f(v)\approx r'v(1-v^2)$, where $r' = r\frac{a-1}{a+1}$.
+
+            Thus, the shape of the interaction zone is
+            \begin{equation*}
+                u = \frac{1}{1+e^{\sqrt{\frac{r'}{2}}z}},r' = r\frac{a-1}{a+1}
+            \end{equation*}
+            \column{0.45\textwidth}
+            \begin{figure}
+                \centering
+                \includegraphics[scale = 0.6]{compete_2.png}
+            \end{figure}
+        \end{columns}
+    \end{frame}
+    
+    \begin{frame}
+        \begin{columns}
+            \column{0.5\textwidth}
+            For the asymmetric case, we use numerical simulations to investigate how dispersal and intrinsic growth influence the properties of the stable interface.
+            \column{0.5\textwidth}
+            \begin{figure}
+                \centering
+                \includegraphics[scale = 0.6]{strong_comp.png}
+            \end{figure}
+        \end{columns}
     \end{frame}
 
     \begin{frame}{Simulations}
         \begin{columns}
             \column{0.5\textwidth}
             \begin{equation*}
-            \begin{cases}
-                \partial_t N_1
-                = (1+a) \nabla^2_x N_1 +
-                1 N_1 \left( 1 - N_1 - 1.5N_2 \right)\\
-                \partial_t N_2
-                = 1\nabla^2 N_2 +
-                (1-b) N_2 \left( 1 -  N_2 - 1.5 N_1 \right)
-            \end{cases}
-        \end{equation*}
+                \begin{aligned}
+                    \partial_t N_1
+                    &= (1+a) &\nabla^2_x N_1 &+
+                    & f(N_1,N_2)\\
+                    \partial_t N_2
+                    &= &\nabla^2 N_2 &+
+                    (1-b) & f(N_2,N_1)
+                \end{aligned}
+            \end{equation*}
         \column{0.5\textwidth}
         \begin{figure}
             \centering
-            \includegraphics[scale = 0.5]{../../figure/balance_rD_clear.png}
+            \includegraphics[scale = 0.5]{D-r_rough.png}
         \end{figure}
         \end{columns}
     \end{frame}
 
+        \begin{frame}{Simulations}
+        \begin{columns}
+            \column{0.5\textwidth}
+            \begin{equation*}
+                \begin{aligned}
+                    \partial_t N_1
+                    &= (1+a) &\nabla^2_x N_1 &+
+                    f(N_1,N_2)\\
+                    \partial_t N_2
+                    &= &\nabla^2 N_2 &+
+                    f(N_2,(1-b)N_1)
+                \end{aligned}
+            \end{equation*}
+        \column{0.5\textwidth}
+        \begin{figure}
+            \centering
+            \includegraphics[scale = 0.5]{D-a_high.png}
+        \end{figure}
+        \end{columns}
+    \end{frame}
+
+    \iffalse
     \begin{frame}
         \begin{figure}
             \centering
             \includegraphics[scale = 0.6]{../../figure/balance_rD_clear.png}
         \end{figure}
     \end{frame}
+    \fi
 
+    \iffalse
     \begin{frame}{Simulations}
         \begin{columns}
             \column{0.5\textwidth}
             \begin{equation*}
-            \begin{cases}
-                \partial_t N_1
-                = \nabla^2_x N_1 +
-                1 N_1 \left( 1 - N_1 - (1+a) N_2 \right)\\
-                \partial_t N_2
-                = 1\nabla^2 N_2 +
-                (1-b) N_2 \left( 1 -  N_2 - (1+a) N_1 \right)
-            \end{cases}
+                \begin{aligned}
+                    \partial_t N_1
+                    &= &\nabla^2_x N_1 +
+                    N_1 \left( 1 - N_1 - (1+a) N_2 \right)\\
+                    \partial_t N_2
+                    &= &\nabla^2 N_2 +
+                    (1-b) N_2 \left( 1 -  N_2 - (1+a) N_1 \right)
+                \end{aligned}
         \end{equation*}
         \column{0.5\textwidth}
         \begin{figure}
             \centering
-            \includegraphics[scale = 0.5]{../../figure/balance_rk.png}
+            \includegraphics[scale = 0.5]{balance_rk.png}
         \end{figure}
         \end{columns}
     \end{frame}
+    \fi
+
+\section{Multispecies Bistable Community}
+
+    \iffalse
+    \begin{frame}
+        In this section, we discuss the multispecies case. The spatial dynamics of multispecies interactions are highly complex, especially given that we do not yet fully understand even the two-species case. Here, we focus on the following special setting: we assume that two communities are each globally stable, and that these two communities are known to form a stable interface.
+    \end{frame}
+
+    \begin{frame}
+        Note that our assumptions actually imply that, in the absence of diffusion, the system is bistable. For any given species, suppose its stable states in the two communities are $u_i*$ and $v_i*$. One can then anticipate that the high-dimensional manifold connecting these two stable states resembles the Allen-Cahn structure when projected onto the single-species plane.
+
+        That is,
+        \begin{equation*}
+            \frac{\mathrm{d}^2 u}{\mathrm{d} z^2} + c \frac{\mathrm{d} u}{\mathrm{d} z} + u(1-u)(u-0.5) = 0
+        \end{equation*}
+
+        This approximation could derive from the full model if assume the interactions are symmetric and random.
+    \end{frame}
+    \fi
+
+    \begin{frame}
+        The spatial dynamics of multispecies interactions are highly complex, especially given that we do not yet fully understand even the two-species case.
+        \begin{figure}
+            \centering
+            \includegraphics[scale = 0.8]{MC/more_species.png}
+        \end{figure}
+        Thus, we focus on the boundary of communities, where the global system is assumed to be bistable.
+    \end{frame}
+
+    \begin{frame}{Special Case}
+        \begin{equation*}
+            \begin{aligned}
+                \partial N_{1,i} 
+                & = D_{1,i} \nabla^2 N_{1,i} 
+                + r_{1,i} N_{1,i} 
+                \left( 
+                     1 
+                     - \sum_{k} A_{ik} N_{1,k} 
+                     - \sum_{\ell} A_{i\ell} N_{2,\ell} 
+                \right)\\
+                \partial N_{2,j} 
+                &= D_{2,j}\nabla^2 N_{2,j} 
+                + r_{2,j} N_{2,j} 
+                \left( 
+                    1 
+                    - \underbrace{\sum_{\ell} A_{j\ell} N_{2,\ell}}_{intra-community} 
+                    - \underbrace{\sum_{k} A_{jk} N_{1,k}}_{inter-community} 
+                \right)
+            \end{aligned}
+        \end{equation*}
+        The intra-community interaction ($A_{ik}, A_{j\ell}$) is close to self-regulation ($\approx 1$), but the inter-community interaction ($A_{i\ell}, A_{jk}$) is relatively strong.
+    \end{frame}
+
+    \begin{frame}
+        \begin{equation*}
+            \begin{pmatrix}
+                1       &\dots&\textcolor{blue}{a}      &\textcolor{red}{b}   &\textcolor{red}{\dots}  &\textcolor{red}{b}  \\
+                \dots   &\dots&\dots                    &\textcolor{red}{\dots}  &\textcolor{red}{\dots}  &\textcolor{red}{\dots}  \\
+                \textcolor{blue}{a}&\dots&1             &\textcolor{red}{b}   &\textcolor{red}{\dots}  &\textcolor{red}{b}  \\
+                \textcolor{red}{b}&\textcolor{red}{\dots} &\textcolor{red}{b}  &1    &\dots&\textcolor{blue}{a}  \\
+                \textcolor{red}{\dots}  &\textcolor{red}{\dots}  &\textcolor{red}{\dots}                   &\dots   &\dots &\dots  \\
+                \textcolor{red}{b}&\textcolor{red}{\dots} &\textcolor{red}{b}  &\textcolor{blue}{a}   &\dots&1  \\
+            \end{pmatrix}
+        \end{equation*}
+
+        \begin{equation*}
+            a \approx 1, b \gg 1
+        \end{equation*}
+
+        \begin{equation*}
+            \begin{aligned}
+                \partial N_{1} = \nabla^2 N_1 + r N_1(1 - N_1 - b N_2)\\
+                \partial N_{2} = \nabla^2 N_2 + r N_2(1 - N_2 - b N_1)
+            \end{aligned}
+        \end{equation*}
+        where $N_{1,i}\sim N_{1}$, $N_{2,j}\sim N_2$
+    \end{frame}
+
+    \begin{frame}
+        For example, 
+        \begin{figure}
+            \centering
+            \includegraphics[scale = 0.6]{six_species.png}
+        \end{figure}
+        All six species share identical dispersal rates and intrinsic growth rates. Intra-community interaction strength is set to around $1.05$, while inter-community interaction is $1.5$
+    \end{frame}
+
+    \begin{frame}
+        This also holds when dispersal rate is slightly different:
+        \begin{figure}
+            \centering
+            \includegraphics[scale = 0.6]{six_D.png}
+        \end{figure}
+        $D_3 = D_6 = 1$, $D_2=D_5 =1.2$, $D_1=D_4=1.5$
+    \end{frame}
+
+    \begin{frame}
+        \begin{figure}
+            \centering
+            \includegraphics[scale = 0.5]{fit_dispersal.png}
+        \end{figure}
+    \end{frame}
+
+    \iffalse
+    \begin{frame}
+        \begin{figure}
+            \centering
+            \includegraphics[scale = 0.4]{residue_dispersal.png}
+        \end{figure}
+    \end{frame}
+    \fi
+
+\section{$\beta$ Diversity on the Boundary}
+
+    \iffalse
+    \begin{frame}
+        The previous model provides a null model for species distributions at the boundary between two communities, offering a way to define $\beta$- diversity in a continuous spatial setting. Specifically, for a sequence of observations in which the population of each species changes approximately monotonically, we can first fit a hyperbolic tangent function and then compute the corresponding $\alpha$- and $\gamma$- diversity across the entire one-dimensional space.
+    \end{frame}
+    \fi
+
+    \begin{frame}
+        Normally, at each site, we calculate $\alpha$ from species frequencies $p_i$, and $\gamma$ from the regional frequencies $q_i$.
+        \begin{equation*}
+            \alpha = -\sum p_i \ln(p_i), \gamma = -\sum q_i \ln(q_i), \beta = \frac{\gamma}{\bar{\alpha}}
+        \end{equation*}
+
+        Given the known population distribution pattern, we first fit the abundance distribution for each species, and then use the fitted distributions to estimate site-level and regional diversity components.
+
+        \begin{equation*}
+            p_i(x) = \frac{N_i(x)}{\sum_{j}N_j(x)},
+            q_i = \frac{\bar{N_i}}{\sum_{j}\bar{N_j}},
+            \bar{N_i} = \int_{x} N_i(x)
+        \end{equation*}
+        \begin{equation*}
+            \beta = \frac{\gamma}{\bar{\alpha}} = \frac{\gamma}{\int_{x} \alpha}
+        \end{equation*}
+    \end{frame}
+
+    \begin{frame}{Example}
+        \begin{columns}
+            \column{0.6\textwidth}
+            \begin{figure}
+                \centering
+                \includegraphics[scale = 0.45]{six_D.png}
+            \end{figure}
+            \column{0.4\textwidth}
+            $\alpha$:
+            \begin{figure}
+                \centering
+                \includegraphics[scale = 0.4]{alpha_div.png}
+            \end{figure}
+            \begin{align*}
+                \bar{\alpha} = 1.181\\
+                \gamma = 1.635\\
+                \beta = 1.384
+            \end{align*}
+        \end{columns}
+    \end{frame}
+
+    \begin{frame}
+        If the stable equilibrium abundance of a species in the first community is $K_1$, and in the second is $K_2$,
+        \begin{equation*}
+            N(x) = \frac{K_1 - K_2}{1 + e^{-k(x-x_0)}} + K_2
+        \end{equation*}
+
+        Community diversity is determined by the shape of the population distribution, which is governed by the parameter $k$, driven by the dispersal rate $D$.
+
+        As a result, this model provides a null expectation for beta diversity, capturing the component driven solely by neutral dispersal. Deviations from this baseline reflect the influence of environmental factors on species turnover.
+    \end{frame}
+
+    \maketitle
 
 \end{document}
