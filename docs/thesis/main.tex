@@ -15,6 +15,8 @@
 \usepackage[round, comma]{natbib}
 \setlength{\bibsep}{0pt}
 \usepackage{fancyhdr}
+\usepackage{setspace}
+\onehalfspacing
 
 \newcommand{\changefont}{%
     \fontsize{8}{11}\selectfont
@@ -93,7 +95,7 @@
         \large
         Supervised by Dr. Maria Stockenreiter\\
         
-        Munich, Month Day\textsuperscript{th}, 2026
+        Munich, May 31\textsuperscript{st}, 2026
       
         \vfill
 
@@ -107,6 +109,11 @@
 \end{titlepage}
 
 \begin{abstract}
+
+Spatial species turnover is commonly attributed to environmental heterogeneity, yet dispersal and species interactions alone may also generate stable community boundaries. In this study, we investigate the formation of stable transition interfaces in homogeneous environments using generalized Lotka--Volterra reaction--diffusion models. Focusing on bistable ecological systems, we analyze traveling-wave solutions with zero propagation speed in both two-species and multispecies communities.
+For symmetric competitive systems, analytical approximations and numerical simulations show that the transition interface is well described by a logistic function. By transforming the dynamics into total biomass and species-contrast variables, the system can be reduced to an Allen--Cahn-like equation, yielding an approximate expression for the interface shape. Extending the model to multispecies communities reveals that stable coexistence between alternative local communities can produce persistent transition regions in which all species coexist spatially.
+Parameter scans further identify balance conditions between dispersal, intrinsic growth, and competition. Species with higher dispersal ability require higher growth rates and weaker competitive effects to maintain stable interfaces. Based on the emergent logistic spatial distributions, we propose a continuous formulation of $\beta$-diversity that interprets species turnover as information loss across spatial scales. Simulations suggest that fitting continuous distributions to sampled data improves the estimation of $\beta$-diversity under sufficiently dense spatial sampling.
+Our results demonstrate that stable ecological boundaries and spatial biodiversity patterns can emerge solely from dispersal and species interactions, even in homogeneous environments.
 
 \end{abstract}
 \thispagestyle{empty}
@@ -135,14 +142,13 @@
 
 
 \newpage
-\iffalse
+
 \clearpage
 \phantomsection
 \addcontentsline{toc}{section}{References}
 %\small
 \bibliographystyle{apalike} 
-\bibliography{gene_network.bib}
-\fi
+\bibliography{spatial_coexistence.bib}
 %\newpage
 
 \iffalse
@@ -166,11 +172,11 @@
 \appendix
 \addcontentsline{toc}{section}{Appendices}
 
-%\input{sections/GLV.tex}
+\input{sections/GLV.tex}
 
-%\input{sections/FisherKPP.tex}
+\input{sections/FisherKPP.tex}
 
-%\input{sections/Allen_Cahn.tex}
+\input{sections/Allen_Cahn.tex}
 
 \clearpage
 \phantomsection

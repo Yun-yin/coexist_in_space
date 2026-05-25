@@ -1,12 +1,26 @@
 \section{Discussion}
 
+\subsection{Balance Conditions and Ecological Trade-offs}
+
+In island biogeography \citep{macarthur_theory_2001} and meta-community theory \citep{hubbell_unified_2001, loreau_meta-ecosystems_2003}, trade-offs between dispersal ability and colonization or competitive performance are commonly considered a key mechanism promoting species coexistence. Species with high dispersal ability are generally assumed to be weaker local competitors, allowing inferior competitors to persist through repeated colonization of empty or disturbed patches. The central idea is that species with poor local competitive ability may still survive regionally if they can disperse efficiently among habitats.
+
+However, the continuous spatial model studied here suggests a somewhat different balance condition. Simulations of interface movement under varying diffusion coefficients $D$ and intrinsic growth rates $r$ indicate that species with higher dispersal rates must also possess higher intrinsic growth rates in order to maintain a stable coexistence interface. Similarly, the $D$--$a$ phase diagram shows that faster-dispersing species must exhibit weaker competitive ability to preserve the balance between the two communities. Comparable phenomena have also been reported in invasion models involving competing species expanding into open space \citep{girardin_invasion_2019}.
+
+Mechanistically, during the invasion process, faster-dispersing species initially colonize the opposite spatial domain more rapidly \citep{namba_spatial_1980}. However, if their intrinsic growth rate is insufficient, they may fail to establish stable populations after dispersal and eventually decline, because dispersal simultaneously reduces their abundance within their original domain \citep{dockery_evolution_1998}. Consequently, a dispersal advantage alone is not sufficient for long-term persistence; rapid growth is also required to maintain population density after colonization. In contrast, weaker competitive ability can counterbalance this advantage and prevent rapid competitive exclusion of the slower species.
+
+These results suggest that the ecological concept of ``colonization ability'' may require reinterpretation in continuous spatial systems. Rather than representing dispersal alone, colonization ability may emerge from a combination of dispersal capacity, intrinsic growth, and competitive interactions. In particular, intrinsic growth rate should be viewed as an essential component determining whether a species can not only reach new habitats, but also successfully establish and maintain populations there.
+
+Interestingly, in the present continuous model, lower dispersal rates are often intrinsically advantageous \citep{risler_competition_2017}. In the $D$--$r$ and $D$--$a$ phase diagrams, the region in the left of the balance condition is dominated by species with lower diffusion rates (Figure~\ref{fig:D-r_balance}A,C). This result is consistent with recent theoretical studies showing that, under strong competition, slower dispersers may outcompete faster dispersers even when the species are otherwise symmetric \citep{nakamura_propagation_2025}.
+
+
+
 \subsection{Generalization of Logistic Transition Fronts}
 
-Throughout our analysis, it is evident that logistic functions provide an excellent approximation for the shapes of species-composition transition fronts in the simplified models considered here. For symmetric competitive systems, this result is relatively intuitive, since the dynamics possess two symmetric stable equilibria. Returning to the Allen--Cahn framework, it is therefore reasonable to conjecture that reaction--diffusion systems with simple bistable dynamics and symmetric stable states naturally generate stationary traveling-wave solutions with zero propagation velocity.
+Throughout our analysis, it is evident that logistic functions provide an excellent approximation for the shapes of species-composition transition fronts in the simplified models considered here. For symmetric competitive systems, this result is relatively intuitive, since the dynamics possess two symmetric stable equilibria (Figure~\ref{fig:symmetric_simu}C). Returning to the Allen--Cahn framework, it is therefore reasonable to conjecture that reaction--diffusion systems with simple bistable dynamics and symmetric stable states naturally generate stationary traveling-wave solutions with zero propagation velocity.
 
-In contrast, asymmetric systems generally lead to asymmetric stable equilibria, which often prevents the existence of stationary interfaces. Nevertheless, our simulations reveal that certain parameter combinations can still support stable transition fronts even in asymmetric systems. This phenomenon was unexpected and may potentially be explained from the perspective of effective potential functions or energetic balance between the competing stable states. Further theoretical analysis is required to clarify the underlying mechanism.
+In contrast, asymmetric systems generally lead to asymmetric stable equilibria, which often prevents the existence of stationary interfaces \citep{gardner_existence_1982, hou_traveling_2008}. Nevertheless, our simulations reveal that certain parameter combinations can still support stable transition fronts even in asymmetric systems. This phenomenon was unexpected and may potentially be explained from the perspective of effective potential functions or energetic balance between the competing stable states. Further theoretical analysis is required to clarify the underlying mechanism.
 
-More generally, however, the existence of stable interfaces appears to be highly sensitive to parameter values. In the parameter phase space, stationary fronts are often associated with unstable balance conditions, such that even small perturbations of system parameters may destabilize the interface and lead to directional propagation of the front. Despite this sensitivity, nearly symmetric systems can still maintain long-lived transition regions over ecologically relevant timescales, even if the interface eventually collapses in the long run.
+More generally, however, the existence of stable interfaces appears to be highly sensitive to parameter values \citep{kan-on_parameter_1995}. In the parameter phase space, stationary fronts are often associated with unstable balance conditions, such that even small perturbations of system parameters may destabilize the interface and lead to directional propagation of the front. Despite this sensitivity, nearly symmetric systems can still maintain long-lived transition regions over ecologically relevant timescales, even if the interface eventually collapses in the long run.
 
 Although stable fronts occupy only narrow regions of parameter space in the deterministic models considered here, realistic ecological systems are inevitably influenced by stochastic effects and environmental heterogeneity. Such fluctuations may effectively broaden the range of parameters under which transition fronts can persist, thereby increasing the likelihood of observing stable or quasi-stable coexistence interfaces in natural communities.
 
@@ -14,13 +28,13 @@ Although stable fronts occupy only narrow regions of parameter space in the dete
 
 Another important limitation of the present framework is that the models considered here are based exclusively on competitive interactions. The primary advantage of this assumption is that it allows the construction of highly simplified bistable multispecies systems: bistability can be generated simply by distinguishing between intra-community and inter-community competition strengths. However, more general ecological systems are likely to exhibit substantially richer interaction structures.
 
-On the one hand, ecological interactions are not restricted to competition alone. In this sense, the models analyzed here may be interpreted more specifically as describing dynamics within a single trophic level or functional group, such as competition among tree species in forest communities. Previous studies have already extended simple two-species competition systems by introducing additional trophic interactions, for example through the inclusion of predators in three-species models. A more general and ecologically realistic extension would be to consider bistable random communities with heterogeneous interaction networks.
+On the one hand, ecological interactions are not restricted to competition alone. In this sense, the models analyzed here may be interpreted more specifically as describing dynamics within a single trophic level or functional group, such as competition among tree species in forest communities. Previous studies have already extended simple two-species competition systems by introducing additional trophic interactions, for example through the inclusion of predators in three-species models \citep{xie_cross-diffusion_2012,lv_turing_2013, parshad_turing_2014}. A more general and ecologically realistic extension would be to consider bistable random communities with heterogeneous interaction networks.
 
 One possible approach for constructing such systems is to assemble two locally stable communities and impose sufficiently strong interactions between them. Based on the results obtained here, we conjecture that these systems may also generate logistic-like transition fronts, even when the detailed interaction structure is substantially more complex than the simplified competitive models considered in this work.
 
-On the other hand, the bistability in our model was imposed in a highly explicit and idealized manner. In realistic random ecological communities, bistability may instead emerge spontaneously from the collective interaction structure without requiring artificially separated community modules. In such cases, an important open question concerns the shape and stability of the resulting spatial interface.
+On the other hand, the bistability in our model was imposed in a highly explicit and idealized manner. In realistic random ecological communities, bistability may instead emerge spontaneously from the collective interaction structure without requiring artificially separated community modules \citep{maynard_network_2018,song_will_2018,angulo_coexistence_2021}. In such cases, an important open question concerns the shape and stability of the resulting spatial interface.
 
-From this perspective, it is useful to reconsider why logistic-like profiles emerge in the present models. Logistic functions capture two essential characteristics of the transition front: a sharp but continuous change near the center of the interface, together with monotonic exponential convergence toward stable equilibria on both sides. This observation suggests that logistic-like fronts may arise only when trajectories approach the stable equilibria asymptotically without oscillatory behavior in phase space.
+From this perspective, it is useful to reconsider why logistic-like profiles emerge in the present models. Logistic functions capture two essential characteristics of the transition front: a sharp but continuous change near the center of the interface, together with monotonic exponential convergence toward stable equilibria on both sides. This observation suggests that logistic-like fronts may arise only when trajectories approach the stable equilibria asymptotically without oscillatory behavior in phase space \citep{rosen_effects_1977, hou_traveling_2008}.
 
 Conversely, if the local dynamics near equilibrium contain rotational or oscillatory components, more complicated interface structures may emerge. In particular, the edges of the transition zone may exhibit non-monotonic spatial patterns, oscillatory tails, or even spatially heterogeneous structures that cannot be approximated by simple logistic functions.
 
@@ -30,32 +44,33 @@ In the present study, species dispersal was modeled using the classical diffusio
 
 Specifically, classical diffusion equations formally permit infinitely fast propagation. In other words, a small fraction of individuals or particles may instantaneously disperse arbitrarily far over an arbitrarily short time interval. Such behavior is unrealistic for biological organisms, whose movement is always constrained by finite dispersal velocities and environmental limitations.
 
-One possible approach for resolving this issue is to replace linear diffusion with nonlinear density-dependent dispersal models. For example, the diffusion coefficient may itself depend on local population density,
+One possible approach for resolving this issue is to replace linear diffusion with nonlinear density-dependent dispersal models. For example, the diffusion coefficient may itself depend on local population density \citep{okubo_analysis_1974, namba_density-dependent_1980},
 \begin{equation*}
     \partial_t u
     =
     \nabla\left(
         D(u)\nabla u
     \right),
-\end{equation*}
-with
-\begin{equation*}
+    \qquad
     D(u)
     =
     \frac{u^b}{(1-u)^b}.
 \end{equation*}
+In such models, dispersal becomes strongly dependent on local abundance. In particular, the diffusion coefficient approaches zero as population density approaches zero, preventing isolated individuals from dispersing arbitrarily rapidly into empty regions. Consequently, the propagation speed of the front becomes effectively bounded, leading to more realistic finite-velocity dispersal dynamics. \citep{wang_existence_2024}
 
-In such models, dispersal becomes strongly dependent on local abundance. In particular, the diffusion coefficient approaches zero as population density approaches zero, preventing isolated individuals from dispersing arbitrarily rapidly into empty regions. Consequently, the propagation speed of the front becomes effectively bounded, leading to more realistic finite-velocity dispersal dynamics.
+\begin{figure}[!htbp]
+    \centering
+    \includegraphics[scale = 1]{nonliear.pdf}
+    \caption{A. The nonlinear diffusion from a central narrow initial distribution. Note the solid end. B. Reaction-diffusion model with nonlinear diffusion, there is still a constant speed.}
+\end{figure}
 
 More generally, nonlinear diffusion may substantially alter the geometry and stability of ecological transition fronts. In contrast to classical Fisher--KPP or Allen--Cahn systems, density-dependent diffusion can generate sharper interfaces, compactly supported traveling waves, or front pinning phenomena.
 
-\subsection{Non-random Dispersal and Environmental Gradients}
-
 Another important issue concerns the assumption that dispersal is purely random. In many ecological systems, both the magnitude and direction of dispersal may depend on local ecological conditions rather than following unbiased diffusion alone.
 
-On the one hand, species interactions themselves may influence dispersal behavior. Individuals may preferentially move toward regions with higher growth potential or lower competitive pressure, resulting in directed dispersal rather than purely random movement. Such processes can be incorporated into the present framework using density-dependent or interaction-dependent diffusion terms, similar to the nonlinear diffusion models discussed in the previous section. In general, these mechanisms are expected to generate sharper and more localized transition fronts because dispersal becomes coupled to local ecological fitness.
+On the one hand, species interactions themselves may influence dispersal behavior. Individuals may preferentially move toward regions with higher growth potential or lower competitive pressure, resulting in directed dispersal rather than purely random movement. Such processes can be incorporated into the present framework using density-dependent or interaction-dependent diffusion terms \citep{rodrigo_exact_2001,wang_traveling_2023}, similar to the nonlinear diffusion models discussed in the previous section. In general, these mechanisms are expected to generate sharper and more localized transition fronts because dispersal becomes coupled to local ecological fitness.
 
-On the other hand, environmental gradients --- including variations in temperature, moisture, nutrient availability, or other abiotic resources --- can strongly influence species dispersal, growth, and interaction dynamics. Spatial environmental heterogeneity alone may therefore generate changes in community composition, which forms the basis of most empirical studies of $\beta$-diversity and species turnover.
+On the other hand, environmental gradients, including variations in temperature, moisture, nutrient availability, or other abiotic resources, can strongly influence species dispersal, growth, and interaction dynamics \citep{hadeler_nonhomogeneous_1974, amarasekare_competitive_2003}. Spatial environmental heterogeneity alone may therefore generate changes in community composition, which forms the basis of most empirical studies of $\beta$-diversity and species turnover.
 
 The present work should be viewed as complementary to this traditional perspective. Our results demonstrate that even in the absence of environmental gradients, the combined effects of dispersal and species interactions are sufficient to generate stable or long-lived compositional transition fronts. Consequently, purely endogenous ecological dynamics may contribute substantially to spatial species turnover and therefore to observed $\beta$-diversity patterns.
 
@@ -63,19 +78,73 @@ This observation suggests that measurements of $\beta$-diversity should account 
 
 \subsection{Pattern Formation in Ecology}
 
-Reaction--diffusion models were originally developed to study biological pattern formation during development and were later generalized to a broad range of morphogenetic processes. Classical applications include mammalian coat patterns, self-organized shell pigmentation in mollusks, floral pigmentation patterns in plants, and even the morphogenesis of organs such as the liver, kidney, and limbs. Despite their mathematical simplicity, these models are capable of generating remarkably complex spatial structures through the interaction between local reactions and dispersal processes.
+Reaction--diffusion models were originally developed to study biological pattern formation during development \citep{turing_chemical_1990} and were later generalized to a broad range of morphogenetic processes \citep{kondo_reaction-diffusion_2010}. Classical applications include mammalian coat patterns \citep{sick_wnt_2006,kaelin_specifying_2012,yamaguchi_pattern_2007}, floral pigmentation patterns in plants \citep{liang_taxon-specific_2023}, and even the morphogenesis of organs such as the liver \citep{de_langhe_dickkopf-1_2005}, kidney \citep{menshykau_kidney_2013}, and limbs \citep{raspopovic_digit_2014, onimaru_shift_2015}. Despite their mathematical simplicity, these models are capable of generating remarkably complex spatial structures through the interaction between local reactions and dispersal processes.
 
-More recently, reaction--diffusion frameworks have also been increasingly applied in ecology to explain the emergence of spatial organization in ecological communities. From this perspective, the present work may be interpreted not only as a model of stable boundaries between alternative communities, but also more generally as a mechanism for ecological patch formation at larger spatial scales.
+More recently, reaction--diffusion frameworks have also been increasingly applied in ecology to explain the emergence of spatial organization in ecological communities \citep{parshad_turing_2014, pichon_interplay_2024}. From this perspective, the present work may be interpreted not only as a model of stable boundaries between alternative communities, but also more generally as a mechanism for ecological patch formation at larger spatial scales.
 
-To further explore this possibility, we extended the model to two-dimensional space and simulated the dynamics from completely random initial community compositions. The resulting dynamics exhibit strong similarities to classical Turing-like spatial pattern formation. Although the two competing species in our model were assigned identical diffusion coefficients, causing the system to eventually converge toward relatively simple domains separated by stable interfaces, the transient dynamics nevertheless generate complex self-organized spatial structures.
+To further explore this possibility, we first simulated a larger-scale system consisting of two symmetric competing species (Figure~\ref{fig:1D}). The initial population distributions were generated from random normal fluctuations across space. The system developed alternating spatial domains dominated by different species, and these patterns could persist for a relatively long period, although the less abundant species eventually went extinct.
 
 \begin{figure}[!htbp]
     \centering
-    \includegraphics[scale = 1]{2D_pattern.pdf}
+    \includegraphics[scale = 0.6]{pattern_1D_s.png}
+    \caption{Interaction--dispersal dynamics in larger space with random initial state.}
+    \label{fig:1D}
+\end{figure}
+
+We further extended the model to two-dimensional space and simulated the dynamics from completely random initial community compositions (Figure~\ref{fig:2D}). The resulting dynamics exhibited strong similarities to classical Turing-like pattern formation. Although the two competing species were assigned identical diffusion coefficients, causing the system to eventually converge toward relatively simple domains separated by stable interfaces, the transient dynamics nevertheless generated complex self-organized spatial structures. Moreover, when viewed across different temporal and spatial scales, or under the influence of stochastic fluctuations, the system is capable of producing a wide range of heterogeneous ecological patterns. These results suggest that even simple interaction--dispersal systems may contribute to large-scale spatial organization in ecological communities without requiring explicit environmental heterogeneity.
+
+\begin{figure}[!htbp]
+    \centering
+    \includegraphics[scale = 0.85]{2D_pattern.pdf}
     \caption{Interaction--dispersal dynamics in two-dimensional space. Colors indicate the regions dominated by each species. Simulations were initialized from spatially random community compositions.}
     \label{fig:2D}
 \end{figure}
 
-Moreover, when viewed across different temporal and spatial scales, or under the influence of stochastic fluctuations, the system is capable of producing a wide range of heterogeneous ecological patterns. These results suggest that even simple interaction--dispersal systems may contribute to large-scale spatial organization in ecological communities without requiring explicit environmental heterogeneity.
+\subsection{Measuring $\beta$-diversity as Information Loss}
 
-    
+$\beta$-diversity measures the variation or heterogeneity of species composition across space \citep{whittaker_vegetation_1960,anderson_navigating_2011}, thereby linking local diversity patterns to biodiversity at larger spatial scales. Despite its central importance in community ecology, there is still no universally accepted theoretical framework for quantifying $\beta$-diversity. Numerous measures have been proposed, including Hill-number partitioning \citep{jost_partitioning_2007}, $\beta$-deviation \citep{kraft_disentangling_2011}, turnover--nestedness decomposition \citep{baselga_relationship_2012}, and variance-based approaches derived from community composition matrices \citep{legendre_beta_2013}. However, many of these approaches implicitly underestimate the contribution of novel species combinations. In particular, a metacommunity in which no additional species are introduced, but where species assemble into new local combinations, may still exhibit substantial ecological heterogeneity despite having relatively low conventional $\beta$-diversity values.
+
+Recently, \citet{song_geometric_2025} proposed a geometric interpretation of $\beta$-diversity. In this framework, each community composition is represented as a point in a high-dimensional space defined by species abundances, and $\beta$-diversity is quantified by the relative geometric volume occupied by observed communities. Although this framework was originally introduced to characterize the diversity of community states, it may also be interpreted from the perspective of information theory. Since both $\alpha$- and $\gamma$-diversity can be understood as measures of information associated with species identity, $\beta$-diversity may naturally be interpreted as the information lost when ecological observations are aggregated from local to global scales. Under this interpretation, a novel species combination should contribute to $\beta$-diversity even if no new species are introduced, because such combinations increase local compositional information without changing the regional species pool.
+
+In addition, most existing $\beta$-diversity measures are based on discrete observations and presence--absence data. However, many empirical studies investigate species turnover along continuous spatial gradients. Our framework therefore provides a simple null model for describing continuous species distributions, although currently under relatively restrictive assumptions. Based on this framework, discrete sampling data may be fitted to continuous spatial distributions, thereby reducing sampling bias and stochastic sampling effects. Our results suggest that fitting sampled data to continuous distributions can improve the estimation of species turnover (Figure~\ref{fig:multi_sample}), particularly when spatial sampling is sufficiently dense. In contrast, sparse sampling designs may not provide enough information to reliably estimate the underlying logistic structure.
+
+From this perspective, the continuous $\beta$-diversity measure defined in Equations~\ref{eqn:alpha_gamma_con} and~\ref{eqn:beta_con} can be rewritten as
+\begin{equation*}
+    \beta 
+    = 
+    L 
+    \frac{
+        \sum_i q_i \ln(q_i)
+    }{
+        \int \sum_i p_i(x) \ln\big(p_i(x)\big)\,\mathrm{d}x
+    },
+    \qquad
+    p_i(x) = \frac{n_i(x)}{\sum_{j} n_j(x)},
+    \qquad
+    q_i = \frac{\int n_i(x)\,\mathrm{d}x}{\sum_{j} \int n_j(x)\,\mathrm{d}x}.
+\end{equation*}
+
+When the sampling size is constant across space, namely $\sum_i n_i(x)=n$ for all $x$, we obtain
+\begin{equation*}
+    p_i(x)=\frac{n_i(x)}{n},
+    \qquad
+    q_i=\frac{1}{L}\int p_i(x)\,\mathrm{d}x,
+\end{equation*}
+and therefore
+\begin{equation}
+    \beta
+    =
+    \frac{
+        \sum_i \int p_i(x)\,\mathrm{d}x \, \ln(q_i)
+    }{
+        \int \left(
+            \sum_i p_i(x)\ln\big(p_i(x)\big)
+        \right)\,\mathrm{d}x
+    }.
+\end{equation}
+
+This formulation resembles the structure of the Kullback--Leibler divergence, although expressed as a ratio rather than a difference. Conceptually, it measures the relative contribution of global entropy to local entropy across space.
+
+Moreover, the spatial distribution of local entropy, represented here by $\alpha$-diversity (Figure~\ref{fig:alpha}), reaches its maximum near the center of the transition region. This observation is consistent with the ecological expectation that biodiversity is elevated near the boundary between distinct communities, where species originating from both sub-communities coexist locally. In this sense, the transition front behaves as a ``soft'' ecological boundary rather than a sharp interface. Consequently, a large proportion of the observed $\beta$-diversity originates from the transition region itself. This interpretation further supports the importance of novel species combinations in characterizing spatial biodiversity patterns.
+
+Finally, this framework may provide a basis for improved sampling strategies. Since regions with high local entropy contribute disproportionately to $\beta$-diversity, future approaches could incorporate adaptive or importance-sampling methods based on preliminary estimates of $\alpha$-diversity in space.

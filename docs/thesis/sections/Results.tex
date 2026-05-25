@@ -2,7 +2,7 @@
 
 \subsection{Equilibrium Distribution of Two Symmetric Species}
 
-We first consider the symmetric case of the two-species system, in which $D = 1$, $r = 1$, and $a_{1,2} = a_{2,1} = a$. Under these assumptions, the system can be written in the simplified nondimensional form
+We first consider the symmetric case of the two-species system, in which $D = 1$, $r = 1$, and $a_{1,2} = a_{2,1} = a$. Under these assumptions, the system can be written in the simplified non-dimensional form (Equation~\ref{eqn:symme_2_species}),
 \begin{equation*}
     \begin{cases}
         \partial_t N_{1} = \nabla^2 N_1 + N_1(1 - N_1 - a N_2),\\
@@ -12,28 +12,48 @@ We first consider the symmetric case of the two-species system, in which $D = 1$
 
 We focus on the regime $a > 1$, for which the local dynamics are bistable and the two species cannot coexist in a homogeneous local community. Nevertheless, spatial coexistence may still emerge at the global scale because the two species are dynamically symmetric and neither has an intrinsic advantage. In this sense, the system resembles the Allen--Cahn model, as both exhibit two stable states connected by a transition front. We therefore seek an approximate analytical description of the spatial interface separating the two species. Throughout this section, we assume that species $1$ occupies the left side of the domain, whereas species $2$ dominates the right side.
 
-To simplify the analysis, we introduce the assumption that the total population density remains approximately constant across space. Biologically, this assumption reflects the fact that both species share the same carrying capacity, and competitive interactions suppress growth when the total population approaches that capacity. Define
-\begin{equation*}
-    u = N_1 + N_2,
-    \qquad
-    v = N_1 - N_2.
-\end{equation*}
-The variables $u$ and $v$ represent the total population density and the population contrast between the two species, respectively. Substituting these definitions into the governing equations yields
+\subsubsection*{Approximate solution}
+
+We conjecture that the two stable states can coexist in system~\ref{eqn:symme_2_species}, due to its dynamical similarity to the Allen--Cahn model. Under this assumption, the resulting stable profile should correspond to a transition from species~$1$ to species~$2$, which can equivalently be described by the transition of the population difference $v = N_1 - N_2$
+. Motivated by this observation, we introduce the following linear transformation as equation~\ref{eqn:linear_transform}.
+
+\begin{equation}\label{eqn:linear_transform}
+    \begin{pmatrix}
+        u\\
+        v
+    \end{pmatrix}
+    = \begin{pmatrix}
+        1 & 1 \\
+        1 & -1
+    \end{pmatrix}
+    \cdot
+    \begin{pmatrix}
+        N_1\\
+        N_2
+    \end{pmatrix},
+\end{equation}
+where the variables $u$ and $v$ represent the total population density and the population contrast between the two species, respectively. Substituting these transformation into the governing equations yields
 \begin{equation*}
     \begin{cases}
         \partial_t u = \nabla_x^2 u + u - (N_1^2 + N_2^2) - 2a N_1 N_2,\\
         \partial_t v = \nabla_x^2 v + v - (N_1^2 - N_2^2).
     \end{cases}
 \end{equation*}
-
-Using the identities
+There still remains the second-order term of $N_1$ and $N_2$. To substitute these term, we also consider the combinations of second-order term of $u$ and $v$,
 \begin{equation*}
-    u^2 + v^2 = 2(N_1^2 + N_2^2), \qquad
-    u^2 - v^2 = 4N_1N_2, \qquad
-    uv = N_1^2 - N_2^2,
+    u^2 = N_1^2 + 2N_1N_2 + N_2^2, \qquad
+    v^2 = N_1^2 - 2N_1N_2 + N_2^2, \qquad
+    uv = N_1^2 - N_2^2.
 \end{equation*}
-which follow directly from the linear transformation between $(N_1,N_2)$ and $(u,v)$, the system can be rewritten as
-\begin{equation*}
+Thus, using the identities
+\begin{align*}
+    N_1^2 + N_2^2 &= \frac{u^2 + v^2}{2},\\
+    N_1^2 - N_2^2 &= uv,\\
+    N_1N_2 &= \frac{u^2 - v^2}{4},
+\end{align*}
+which follow directly from the linear transformation between $(N_1,N_2)$ and $(u,v)$, the system can be rewritten as equation~\ref{eqn:symme_transform}.
+\begin{equation}
+    \label{eqn:symme_transform}
     \begin{cases}
         \partial_t u
         = \nabla_x^2 u
@@ -41,15 +61,21 @@ which follow directly from the linear transformation between $(N_1,N_2)$ and $(u
         - \frac{1+a}{2}u^2
         - \frac{1-a}{2}v^2,\\
         \partial_t v
-        = \nabla_x^2 v
-        + v
-        - uv\\
-        \hspace{1.35cm}
+        = \nabla_x^2 v + v(1-u).
+    \end{cases}
+\end{equation}
+
+Since we assume that $v$ describes the main dynamics, we now analyze the dynamics of the total density variable $u$ first. Consider the condition where $a = 1$, two species are identical. The system would be 
+\begin{equation*}
+    \begin{cases}
+        \partial_t u
+        = \nabla_x^2 u
+        + u(1-u),\\
+        \partial_t v
         = \nabla_x^2 v + v(1-u).
     \end{cases}
 \end{equation*}
-
-We now analyze the dynamics of the total density variable $u$. Under the assumption that the total population density varies weakly in space and time, we approximate
+Total population size follows the Fisher-KPP dynamics, thus finally be $1$ anywhere. After that, the dynamics of $v$ is just the random diffusion $\partial_t v = \nabla_x^2 v$, also get to uniform everywhere. In this trivial case, since the inter-specific and intra-specific competitions are identical, the local carrying capacity is always fully occupied. Consequently, the total population size remains constant. When it comes to our case, $a>1$, the total population size can not maintain, because local competition always decrease it. However, considering that competition is only high in the middle where both species is not dominant, we could still assume that $u(x) = 1 - \varphi(x)$, where $\varphi(x)$ is comparable small. That is, biologically, two species nearly occupied all the capacity, or at least have the potential to increase to the capacity. Under the assumption that the total population density varies weakly in space and time, we approximate
 \begin{equation*}
     \partial_t u \approx 0,
     \qquad
@@ -62,16 +88,13 @@ The equation for $u$ then reduces to the algebraic relation
     + \frac{1-a}{2}v^2
     = 0.
 \end{equation*}
-The algebraic relation for $u$ can be solved explicitly in terms of $v$,
-\begin{equation*}
-    u = \frac{1 \pm \sqrt{1 + (a^2-1)v^2}}{1+a}.
-\end{equation*}
-Since $u = N_1 + N_2 \geq 0$, only the positive branch is physically meaningful, yielding
-\begin{equation*}
+The algebraic relation for $u$ can be solved explicitly in terms of $v$, as $u = \frac{1 \pm \sqrt{1 + (a^2-1)v^2}}{1+a}$.
+Since $u = N_1 + N_2 \geq 0$, only the positive branch is biologically meaningful, yielding
+\begin{equation}\label{eqn:u_approx_solution}
     u = \frac{1 + \sqrt{1 + (a^2-1)v^2}}{1+a}.
-\end{equation*}
-Substituting this expression into the equation for $v$ gives
-\begin{equation*}
+\end{equation}
+Substituting expression~\ref{eqn:u_approx_solution} into equation~\ref{eqn:symme_transform} for $v$ gives
+\begin{equation}
     \partial_t v
     =
     \nabla^2 v
@@ -82,23 +105,17 @@ Substituting this expression into the equation for $v$ gives
         -
         \frac{1+\sqrt{1+(a^2-1)v^2}}{1+a}
     \right).
-\end{equation*}
+\end{equation}
 
-The effective reaction term
-\begin{equation*}
-    f(v)
-    =
-    v
-    \left(
-        1
-        -
-        \frac{1+\sqrt{1+(a^2-1)v^2}}{1+a}
-    \right)
-\end{equation*}
-has three equilibria located at $v=0,\pm1$, and is antisymmetric with respect to the origin. The qualitative shape of this function resembles the Allen--Cahn reaction term
-\begin{equation*}
-    g(v)=rv(1-v^2).
-\end{equation*}
+The effective reaction term $ f(v) = v \left( 1 - \frac{1+\sqrt{1+(a^2-1)v^2}}{1+a} \right) $
+has three equilibria located at $v=0,\pm1$, and is antisymmetric with respect to the origin. The qualitative shape of this function resembles the Allen--Cahn reaction term $ g(v)=rv(1-v^2)$.
+
+\begin{figure}[!htbp]
+    \centering
+    \includegraphics[scale = 0.6]{two_species_rec.png}
+    \caption{The graph of $f(v)$ for the simplified two symmetric species model. The curve is similar to what is in the Allen-Cahn model, where there are two stable states in both side and an instable one in the middle.}
+\end{figure}
+
 To derive an effective approximation, we expand $f(v)/v$ around $v=0$:
 \begin{align*}
     \frac{f(v)}{v}
@@ -106,11 +123,6 @@ To derive an effective approximation, we expand $f(v)/v$ around $v=0$:
     1
     -
     \frac{1+\sqrt{1+(a^2-1)v^2}}{1+a}\\
-    &=
-    \frac{a}{1+a}
-    -
-    \frac{1}{1+a}
-    \sqrt{1+(a^2-1)v^2}\\
     &=
     \frac{a}{1+a}
     -
@@ -149,36 +161,35 @@ Evaluating at $v=0$ gives
 \begin{equation*}
     f'(0)=\frac{a-1}{a+1}.
 \end{equation*}
-
-Similarly, for the Allen--Cahn reaction term
-\begin{equation*}
-    g(v)=rv(1-v^2),
-\end{equation*}
+Similarly, for the Allen--Cahn reaction term $g(v)=rv(1-v^2)$,
 we obtain
 \begin{align*}
     g'(v)&=r(1-3v^2),\\
     g'(0)&=r.
 \end{align*}
 Matching the slopes at the origin therefore leads to the approximation
-\begin{equation}
+\begin{equation}\label{eqn:r_approx}
     f(v)\approx rv(1-v^2),
     \qquad
     r=\frac{a-1}{a+1}.
 \end{equation}
-
-Consequently, the interaction front can be approximated by the Allen--Cahn traveling-wave profile,
+Consequently, the interaction front can be approximated by the Allen--Cahn traveling-wave profile (keep $v(-\infty) = -1$, $v(\infty) = 1$),
 \begin{equation}
     v(z)
     \approx
-    \frac{1}{1+e^{\sqrt{2r}\,z}}.
+    \frac{-2}{1+e^{\sqrt{2r}\,z}} + 1,
 \end{equation}
-
-We next performed numerical simulations of the symmetric system with interaction strength $a=1.5$. The initial condition was chosen such that species $1$ fully occupied the left half of the domain ($x\in(-1,0)$), whereas species $2$ occupied the right half ($x\in(0,1)$). Starting from this sharp interface, a transition region formed near the center of the domain and gradually relaxed toward a stationary profile. The spatial distributions of both species exhibited sigmoid-like shapes and remained symmetric with respect to $x=0$ throughout the simulation.
-
-To quantify convergence, we measured the maximum absolute difference between consecutive simulation steps. The error decreased approximately exponentially over time and continued to decay until the system reached equilibrium, indicating the stability of the transition front. The final distribution of $N_1-N_2$ (obtained when the maximum stepwise error was below $10^{-6}$) was fitted to a logistic function with fixed asymptotic values $K_1=1$, $K_2=-1$, and center $x_0=0$. The logistic approximation showed excellent agreement with the simulated profile. The fitted central slope was $k=0.676$ (after rescaling), which is close to the theoretical prediction
+following which, considering $u \approx 1$ we also get,
 \begin{equation*}
-    \hat{k}=\sqrt{2r}=0.632.
+    \begin{cases}
+        N_1 = \frac{u+v}{2} = \frac{1}{1+e^{-\sqrt{2r}\,z}}\\
+        N_1 = \frac{u-v}{2} = \frac{1}{1+e^{\sqrt{2r}\,z}}
+    \end{cases}.
 \end{equation*}
+
+\subsubsection*{Numerical solution}
+
+We next performed numerical simulations of the symmetric system with interaction strength $a=1.5$. The initial condition was chosen such that species $1$ fully occupied the left half of the domain ($x\in(-1,0)$), whereas species $2$ occupied the right half ($x\in(0,1)$). Starting from this sharp interface, a transition region formed near the center of the domain and gradually relaxed toward a stationary profile. The spatial distributions of both species exhibited sigmoid-like shapes and remained symmetric with respect to $x=0$ throughout the simulation (Figure~\ref{fig:symmetric_simu}A).
 
 \begin{figure}[!htbp]
     \centering
@@ -191,44 +202,32 @@ To quantify convergence, we measured the maximum absolute difference between con
     \label{fig:symmetric_simu}
 \end{figure}
 
-To further examine the analytical approximation, we analyzed the transformed variables
+To quantify convergence, we measured the maximum absolute difference between consecutive simulation steps. The loss decreased approximately exponentially over time and continued to decay until the system reached equilibrium, indicating the stability of the transition front (Figure~\ref{fig:symmetric_simu}B). The final distribution of $N_1-N_2$ (obtained when the maximum stepwise error was below $10^{-6}$) was fitted to a logistic function with fixed asymptotic values $K_1=1$, $K_2=-1$, and center $x_0=0$ (Fgure~\ref{fig:symmetric_simu}C). The logistic approximation showed excellent agreement with the simulated profile. The fitted central slope was $k=0.676$ (after rescaling), which is close to the theoretical prediction
 \begin{equation*}
-    u=N_1+N_2,
-    \qquad
-    v=N_1-N_2.
+    \hat{k}=\sqrt{2r}=0.632.
 \end{equation*}
-In the theoretical derivation, the total density $u$ was assumed to remain approximately constant and close to $1$. This assumption is supported by the simulations: away from the interface, where only one species dominates, the total density remained close to the carrying capacity. Near the transition region, however, $u$ was slightly lower than $1$, reflecting the reduction in total population density caused by strong interspecific competition. As the simulation evolved, the deviation of $u$ from unity became increasingly localized around the interface.
 
-In contrast, the difference variable $v$ evolved from the initial step-like profile into a smooth sigmoid-shaped distribution, consistent with the predicted logistic traveling-wave form.
+To further examine the analytical approximation, we analyzed the transformed variables $u=N_1+N_2$, $v=N_1-N_2$.
+In the theoretical derivation, the total density $u$ was assumed to remain approximately constant and close to $1$. This assumption is supported by the simulations: away from the interface, where only one species dominates, the total density remained close to the carrying capacity. Near the transition region, however, $u$ was slightly lower than $1$, reflecting the reduction in total population density caused by strong inter-specific competition (Figure~\ref{fig:symmetric_u-v}B). As the simulation evolved, the deviation of $u$ from unity became increasingly localized around the interface.
 
 \begin{figure}[!htbp]
     \centering
-    \includegraphics[scale = 1]{symmetric_simu_sum_diff.pdf}
+    \includegraphics[scale = 1.1]{symmetric_simu_sum_diff.pdf}
     \caption{
     Spatial distributions of $v=N_1-N_2$ and $u=N_1+N_2$ during the simulation. Curves correspond to simulation steps $0$, $100$, $200$, $500$, $1000$, $2000$, $5000$, and $10000$. At later times, the profiles converge toward stationary distributions and therefore become visually indistinguishable.
     }
     \label{fig:symmetric_u-v}
 \end{figure}
 
+In contrast, the difference variable $v$ evolved from the initial step-like profile into a smooth sigmoid-shaped distribution (Figure~\ref{fig:symmetric_u-v}A), consistent with the predicted logistic traveling-wave form. It kept cross $(0,0)$, indicates that the dynamics is maintained symmetric during the simulation.
+
+\subsubsection*{Transition slope}
+
 To evaluate the validity of the analytical approximation over different interaction strengths, we further simulated the symmetric system for varying values of
 \begin{equation*}
     q=a-1,
 \end{equation*}
-where $a$ denotes the interspecific competition coefficient. As $q$ increased, the fitted central slope $k$ also increased, indicating that stronger competition produces a narrower transition region and therefore weaker spatial coexistence.
-
-The Allen--Cahn approximation provides a good description only when $a$ is close to $1$. For small $q$, the effective coefficient
-\begin{equation*}
-    r=\frac{a-1}{a+1}=\frac{q}{q+2}
-\end{equation*}
-approaches zero, yielding
-\begin{equation*}
-    \hat{k}=\sqrt{2r}\to0,
-\end{equation*}
-which is consistent with the broad transition fronts observed numerically. However, when $a\to\infty$, the interface width should vanish and thus $k\to\infty$, whereas the approximation predicts only
-\begin{equation*}
-    \hat{k}\to\sqrt{2}.
-\end{equation*}
-This discrepancy indicates that the Allen--Cahn reduction is accurate only in the weak-competition regime and breaks down for strong interspecific interactions.
+where $a$ denotes the interspecific competition coefficient. And measured the central slope $k$ to compare with predicting $\hat{k}$. As $q$ increased, the fitted central slope $k$ also increased, indicating that stronger competition produces a narrower transition region and therefore weaker spatial coexistence (Figure~\ref{fig:kq}).
 
 \begin{figure}[!htbp]
     \centering
@@ -239,6 +238,20 @@ This discrepancy indicates that the Allen--Cahn reduction is accurate only in th
     \label{fig:kq}
 \end{figure}
 
+However, the Allen--Cahn approximation provides a good description only when $q$ is around in $(0.2,0.6)$. Substitute $q$ into equation~\ref{eqn:r_approx},
+\begin{equation*}
+    r=\frac{a-1}{a+1}=\frac{q}{q+2}.
+\end{equation*}
+For small $q$, the effective coefficient approaches zero, yielding
+\begin{equation*}
+    \hat{k}|_{q\rightarrow0}=\sqrt{2r}\to0,
+\end{equation*}
+which is consistent with the broad transition fronts observed numerically. However, $k$ is still kept in simulation, with a value between $2$ to $3$, which might because of the initial state still kept. Besides, when $a\to\infty$, that is $q\to \infty$ the interface width should vanish and thus $k\to\infty$, whereas the approximation predicts only
+\begin{equation*}
+    \hat{k}|_{q\to \infty}\to\sqrt{2}.
+\end{equation*}
+This discrepancy indicates that the Allen--Cahn reduction is accurate only in the weak-competition regime and breaks down for strong interspecific interactions.
+
 \subsection{Balance Between Dispersal, Reproduction, and Competition}
 
 In more general parameter regimes, the two-species system does not necessarily converge to a stationary transition front. We first investigated the combined effects of diffusion and intrinsic growth by varying the diffusion coefficient $D$ and intrinsic growth rate $r$ over the interval $(0,2)$. Simulations were performed for $100000$ time steps with temporal step size $1\times10^{-6}$. The direction and speed of the transition front were characterized by the position $x^*$ satisfying
@@ -247,7 +260,13 @@ In more general parameter regimes, the two-species system does not necessarily c
 \end{equation*}
 A balanced coexistence state corresponds to the condition $x^*=0$, indicating that the interface remains stationary throughout the simulation.
 
-The resulting phase diagram reveals a positive relationship between diffusion rate and intrinsic growth rate along the balance condition. Species with higher dispersal ability therefore require correspondingly larger growth rates in order to maintain a stable spatial coexistence front. This behavior differs fundamentally from the classical locally mixed coexistence condition in the generalized Lotka--Volterra model, where coexistence is determined solely by interaction coefficients.
+The resulting phase diagram reveals a positive relationship between diffusion rate and intrinsic growth rate along the balance condition. Species with higher dispersal ability therefore require correspondingly larger growth rates in order to maintain a stable spatial coexistence front (Figure~\ref{fig:D-r_balance}A). Besides the balance condition, larger diffusion rate of species $2$ lead to the dominance of species $1$, while a larger intrinsic growth rate makes the dominance of species $2$. Also, higher the two parameters is, the faster that the coexistence broken. This behavior differs fundamentally from the classical locally mixed coexistence condition in the generalized Lotka--Volterra model, where coexistence is determined solely by interaction coefficients.
+
+To further characterize the balance relation between dispersal and reproduction, we analyzed the phase boundary in logarithmic coordinates. The balance condition appears approximately linear in the $\log D$--$\log r$ plane, with slope close to $2$ (Figure~\ref{fig:D-r_balance}B). This observation suggests the scaling relation
+\begin{equation*}
+    D \sim r^2.
+\end{equation*}
+Therefore, the maintenance of a stationary coexistence front requires diffusion and local population growth to satisfy an approximate quadratic balance relation.
 
 \begin{figure}[!htbp]
     \centering
@@ -262,19 +281,7 @@ The resulting phase diagram reveals a positive relationship between diffusion ra
     \label{fig:D-r_balance}
 \end{figure}
 
-To further characterize the balance relation between dispersal and reproduction, we analyzed the phase boundary in logarithmic coordinates. The balance condition appears approximately linear in the $\log D$--$\log r$ plane, with slope close to $1/2$. This observation suggests the scaling relation
-\begin{equation*}
-    D \sim r^2.
-\end{equation*}
-Therefore, the maintenance of a stationary coexistence front requires diffusion and local population growth to satisfy an approximate quadratic balance relation.
-
-For parameter combinations close to the balance boundary, the two species appear to coexist for long periods of time, although the interface position satisfying $N_1=N_2$ is displaced from the center of the domain. However, long-term simulations reveal that this apparent coexistence is only transient. To illustrate this behavior, we simulated the case $D=1.25$ and $r=0.75$, corresponding to a parameter combination located slightly above the balance line. In this regime, species $1$ eventually invades the entire domain and species $2$ becomes extinct.
-
-The convergence dynamics also differ substantially from those observed in the symmetric case. Initially, the simulation error decreases rapidly as the sharp initial boundary relaxes into a smooth transition front, similar to the balanced symmetric system. After the front is established, however, the error remains approximately constant over an extended period. This plateau corresponds to the slow propagation of the interface across the domain: although the front translates spatially, its shape remains nearly unchanged, resulting in only small differences between consecutive simulation steps.
-
-As the moving front approaches the domain boundary, the population distribution changes rapidly because of the no-flux boundary condition, leading to a temporary increase in the simulation error. Finally, once species $2$ is eliminated, the system converges toward the single-species equilibrium and the error decreases rapidly again.
-
-These dynamics are analogous to those of an asymmetric Allen--Cahn system, in which the two stable states possess unequal potentials and the interface therefore propagates toward the energetically unfavorable state.
+For parameter combinations close to the balance boundary, the two species appear to coexist for long periods of time, although the interface position satisfying $N_1=N_2$ is displaced from the center of the domain. However, long-term simulations reveal that this apparent coexistence is only transient. To illustrate this behavior, we simulated the case $D=1.25$ and $r=0.75$, corresponding to a parameter combination located slightly above the balance line (in figure~\ref{fig:D-r_balance}A). In this regime, species $1$ eventually takes over the entire domain and species $2$ becomes extinct, though taking more than $1500000$ steps (Figure~\ref{fig:insymme_simu}A).
 
 \begin{figure}[!htbp]
     \centering
@@ -289,13 +296,13 @@ These dynamics are analogous to those of an asymmetric Allen--Cahn system, in wh
     \label{fig:insymme_simu}
 \end{figure}
 
-A similar analysis was performed for the balance relation between diffusion rate $D$ and competition strength $a_{1,2}$. In a locally mixed competitive community, species with interspecific competition coefficient smaller than unity are generally excluded by stronger competitors. In contrast, the spatial model reveals that coexistence can still emerge if the weaker competitor disperses sufficiently slowly. Specifically, species with lower competitive ability were able to coexist with a species whose competition coefficient was fixed at $1.5$, provided that their diffusion rate was sufficiently reduced.
+The convergence dynamics also differ substantially from those observed in the symmetric case. Initially, the simulation error decreases rapidly as the sharp initial boundary relaxes into a smooth transition front, similar to the balanced symmetric system. After the front is established, however, the error remains approximately constant over an extended period (Figure~\ref{fig:insymme_simu}B). This plateau corresponds to the slow propagation of the interface across the domain: although the front translates spatially, its shape remains nearly unchanged, resulting in only small differences between consecutive simulation steps. As the moving front approaches the domain boundary, the population distribution changes rapidly because of the no-flux boundary condition, leading to a temporary increase in the simulation error. Finally, once species $2$ is eliminated, the system converges toward the single-species equilibrium and the error decreases rapidly again. These dynamics are analogous to those of an asymmetric Allen--Cahn system, in which the two stable states possess unequal potentials and the interface therefore propagates toward the energetically unfavorable state. 
 
-Moreover, the balance relation between $D$ and $a_{1,2}$ is also positive: stronger competitive interactions require larger dispersal rates to maintain a stationary coexistence front. In logarithmic coordinates, the phase boundary approximately follows a power-law relation with exponent between $3$ and $4$.
+A similar analysis was performed for the balance relation between diffusion rate $D$ and competition strength $a$. In a locally mixed competitive community, species with inter-specific competition coefficient smaller than unity are generally excluded by stronger competitors. In contrast, the spatial model reveals that coexistence can still emerge if the weaker competitor disperses sufficiently slowly. Specifically, species with lower competitive ability were able to coexist with a species whose competition coefficient was fixed at $1.5$, provided that their diffusion rate was sufficiently reduced (Figure~\ref{fig:D-r_balance}C). Moreover, the balance relation between $D$ and $a$ is also positive: stronger competitive interactions require larger dispersal rates to maintain a stationary coexistence front. In logarithmic coordinates, the phase boundary approximately follows a power-law relation with exponent between $3$ and $4$ (Figure~\ref{fig:D-r_balance}D).
 
-\subsection{A Special Case of Multispecies Competitive Communities}
+\subsection{A Special Case of Multi-species Competitive Communities}
 
-For multispecies systems, the dynamics become substantially more complex and require a much larger parameter space to be explored numerically. To obtain a qualitative understanding of transition fronts in multispecies communities, we therefore focus on several simplified cases. Although these assumptions are not fully realistic ecologically, they allow the existence and structure of stable transition fronts to be analyzed more clearly.
+For multi-species systems, the dynamics become substantially more complex and require a much larger parameter space to be explored numerically. To obtain a qualitative understanding of transition fronts in multi-species communities, we therefore focus on several simplified cases. Although these assumptions are not fully realistic ecologically, they allow the existence and structure of stable transition fronts to be analyzed more clearly.
 
 First, we consider communities with purely competitive interactions. Restricting interactions to competition suppresses oscillatory or chaotic dynamics near equilibrium and constrains the total biomass of the system. Second, we assume that all species are identical in their dispersal and intrinsic growth rates, namely
 \begin{equation*}
@@ -303,9 +310,11 @@ First, we consider communities with purely competitive interactions. Restricting
     \qquad
     r_i = 1.
 \end{equation*}
-Under these assumptions, we introduce a minimal toy model of multispecies bistability.
+Under these assumptions, we introduce a minimal toy model of multi-species bistability.
 
-To generate bistable community dynamics at the global scale, we partition the species into two competing subcommunities. Species within the same subcommunity interact with strength $a=1$, whereas species belonging to different subcommunities compete more strongly, with interaction strength $b>1$. The resulting interaction matrix takes the form
+\subsubsection*{Approxmate solution}
+
+To generate bistable community dynamics at the global scale, we partition the species into two competing sub-communities. Species within the same sub-community interact with strength $a=1$, whereas species belonging to different sub-communities compete more strongly, with interaction strength $b>1$. The resulting interaction matrix takes the form
 \begin{equation*}
     \begin{pmatrix}
         1       &\dots&\textcolor{blue}{a}      &\textcolor{red}{b}   &\textcolor{red}{\dots}  &\textcolor{red}{b}  \\
@@ -318,7 +327,7 @@ To generate bistable community dynamics at the global scale, we partition the sp
     \end{pmatrix}.
 \end{equation*}
 
-Within each local subcommunity, the generalized Lotka--Volterra dynamics reduce to
+Within each local sub-community, the generalized Lotka--Volterra dynamics reduce to
 \begin{equation}
     \frac{\mathrm{d}N_i}{\mathrm{d}t}
     =
@@ -331,9 +340,9 @@ At equilibrium, the total biomass satisfies
 \begin{equation*}
     \sum_{j=1}^{S}N_j^*=1,
 \end{equation*}
-whereas the equilibrium abundance of each individual species depends on the initial condition. Biologically, this degeneracy arises because species within the same subcommunity are dynamically equivalent and therefore behave effectively as different components of the same functional group.
+whereas the equilibrium abundance of each individual species depends on the initial condition. Biologically, this degeneracy arises because species within the same sub-community are dynamically equivalent and therefore behave effectively as different components of the same functional group.
 
-Let $N_{1,i}$ denote species belonging to subcommunity $1$, and $N_{2,j}$ species belonging to subcommunity $2$. The corresponding diffusion--reaction system is
+Let $N_{1,i}$ denote species belonging to sub-community $1$, and $N_{2,j}$ species belonging to sub-community $2$. The corresponding diffusion--reaction system is
 \begin{equation*}
     \begin{aligned}
         \frac{\partial N_{1,i}}{\partial t}
@@ -363,7 +372,7 @@ Let $N_{1,i}$ denote species belonging to subcommunity $1$, and $N_{2,j}$ specie
     \end{aligned}
 \end{equation*}
 
-Because all species within the same subcommunity experience identical interaction terms, the system can be reduced to the dynamics of the total subcommunity biomasses,
+Because all species within the same sub-community experience identical interaction terms, the system can be reduced to the dynamics of the total sub-community biomasses,
 \begin{equation*}
     C_n=\sum_i N_{n,i}.
 \end{equation*}
@@ -397,7 +406,7 @@ The governing equations become
     \end{aligned}
 \end{equation*}
 
-This reduced system is mathematically identical to the symmetric two-species model analyzed previously, with the total subcommunity biomasses replacing the species abundances. Consequently, the difference between the two subcommunities is also expected to exhibit an approximately logistic transition profile,
+This reduced system is mathematically identical to the symmetric two-species model analyzed previously, with the total sub-community biomasses replacing the species abundances. Consequently, the difference between the two sub-communities is also expected to exhibit an approximately logistic transition profile,
 \begin{equation}
     C_1(x)-C_2(x)
     \approx
@@ -406,7 +415,15 @@ This reduced system is mathematically identical to the symmetric two-species mod
     }.
 \end{equation}
 
-Since the abundance of each species remains proportional to the total biomass of its subcommunity, the spatial distributions of individual species are likewise expected to follow approximate logistic forms.
+Since the abundance of each species remains proportional to the total biomass of its sub-community, the spatial distributions of individual species are likewise expected to follow approximate logistic forms.
+
+\subsubsection*{Numerical solution}
+
+We applied the IMEX semi-implicit method to simulate a six-species system. The first three species belong to stable community $1$, whereas the remaining three species belong to stable community $2$. The inter-community interaction strength was set to $b = 1.5$, while the intra-community interaction strength was fixed at $a = 1$. The two communities were assumed to be symmetric, with initial relative population sizes of the three species within each community given by $0.5$, $0.3$, and $0.2$, respectively.
+
+A clear and stable transition interface between the two communities was maintained once the population distributions converged (i.e., when the simulation loss decreased below the predefined threshold). All six species coexisted within the transition region (Figure~\ref{fig:multiple_simu}A). In addition, within each community, the equilibrium abundance of each species remained proportional to its initial abundance. 
+
+The contrast between the two communities, measured by $C_1 - C_2$, converged to an approximately logistic distribution (Figure~\ref{fig:multiple_simu}B), exhibiting a pattern similar to that observed in the symmetric two-species system. Likewise, the total biomass, $C_1 + C_2$, showed dynamics comparable to the two-species case: the total abundance remained close to $1$ throughout the spatial domain, but exhibited a stronger deviation near the center of the transition region (Figure~\ref{fig:multiple_simu}C).
 
 \begin{figure}[!htbp]
     \centering
@@ -416,7 +433,7 @@ Since the abundance of each species remains proportional to the total biomass of
     (A) Spatial dynamics of a six-species community with intra-community interaction strength $a=1$, inter-community interaction strength $b=1.5$, and identical dispersal and growth rates for all species. A stable transition front forms, and the final species abundances depend on the initial population distribution.
     (B,C) Spatial distributions of $C_1-C_2$ and $C_1+C_2$ during the simulation, showing dynamics analogous to those of the symmetric two-species system.
     (D) Simulation of a sixteen-species community. The two subcommunities remain interactionally symmetric, with the same values of $a$ and $b$ as in panel (A), but species are assigned different dispersal rates:
-    $r=1,1.05,1.1,1.15,1.2,1.25,1.3,1.35$ for species $1$--$8$ and $9$--$16$, respectively. The final spatial distribution depends strongly on dispersal ability.
+    $D=1,1.05,1.1,1.15,1.2,1.25,1.3,1.35$ for species $1$--$8$ and $9$--$16$, respectively. The final spatial distribution depends strongly on dispersal ability.
     (E,F) Spatial distributions of $C_1-C_2$ and $C_1+C_2$ corresponding to the simulation shown in panel (D).
     }
     \label{fig:multiple_simu}
@@ -424,45 +441,32 @@ Since the abundance of each species remains proportional to the total biomass of
 
 \subsection{Logistic Equilibrium under Strong Inter-Community Competition}
 
-Building upon the simplified toy model described above, we next investigated several perturbed systems that remain close to the symmetric multispecies limit while relaxing some of its assumptions. These simulations were designed to examine the robustness of the logistic transition structure under moderate heterogeneity in interaction strength and dispersal ability.
+Building upon the simplified toy model described above, we next investigated the effects of heterogeneous dispersal rates. This simulation was designed to examine the robustness of the logistic-like transition structure under moderate variation in dispersal ability.
 
-We first considered a system in which the two local subcommunities remained interactionally symmetric, but the intra-community competition strength was slightly reduced from the neutral case. The system consisted of six species in total, with inter-community competition fixed at $b=1.5$ and intra-community competition set to $a=0.95$. Under these conditions, the transition front remained stationary near the center of the spatial domain because the two subcommunities retained overall symmetry in their ecological properties.
+We considered a system in which the two local sub-communities remained interactionally symmetric ($a = 1$, $b = 1.5$). Each community contained eight species, with relative diffusion coefficients assigned as $D_i = 1, 1.05, 1.1, 1.15, 1.2, 1.25, 1.3, 1.35$.
 
-Compared with the case $a=1$, the total equilibrium biomass increased slightly, reflecting the weaker competitive suppression within each subcommunity. Despite this perturbation, logistic regression showed that the equilibrium distributions of all six species were still well approximated by logistic functions. This result suggests that the logistic structure of the coexistence front is robust to moderate deviations from perfectly symmetric competition.
+All species persisted throughout the simulation, at least over the long simulation timescale considered here. The equilibrium abundance of each species within a community was negatively associated with its dispersal ability: species with lower diffusion rates maintained higher equilibrium population sizes (Figure~\ref{fig:multiple_simu}D). 
 
-We next investigated the effects of heterogeneous dispersal rates. Relative diffusion coefficients were assigned as
-\begin{equation*}
-    D_i = 1,\ 1.05,\ 1.1.
-\end{equation*}
-The transition front again remained stable, indicating that moderate dispersal heterogeneity does not destroy the bistable coexistence structure. However, species with lower dispersal rates occupied narrower spatial regions and exhibited reduced equilibrium abundances, implying that dispersal ability influences both the spatial extent and carrying capacity of individual species within the transition zone.
-
-Logistic regression continued to provide an accurate approximation of the equilibrium population distributions, further supporting the hypothesis that logistic-like transition fronts emerge generically in strongly competitive multispecies diffusion--reaction systems.
+In addition, the community contrast, measured by $C_1 - C_2$ (Figure~\ref{fig:multiple_simu}E), as well as the total biomass, $C_1 + C_2$ (Figure~\ref{fig:multiple_simu}F), exhibited spatial patterns similar to those observed in the symmetric identical-species system. These results suggest that moderate heterogeneity in dispersal rates does not qualitatively alter the existence or overall structure of the stable transition interface.
 
 \subsection{Measure of $\beta$-Diversity under Logistic Spatial Distributions}
 
-The simulations described above provide a natural framework for measuring biodiversity using continuous spatial distributions rather than discrete community samples. In particular, for bistable coexistence systems with transition fronts, $\beta$-diversity plays an important role in characterizing spatial species turnover across the interface between alternative community states.
-
-To quantify biodiversity in this setting, we extended the classical definitions of $\alpha$-, $\beta$-, and $\gamma$-diversity to continuous population distributions. Specifically, the average local diversity was defined as the spatial average of $\alpha(x)$, whereas $\gamma$-diversity was calculated from the spatially averaged abundance of each species across the entire domain. Using the multispecies simulation described above as an example, we first evaluated the local diversity profile $\alpha(x)$.
+The simulations described above provide a natural framework for measuring biodiversity using continuous spatial distributions rather than discrete community samples. In particular, the continuous $\beta$-diversity measure can be directly applied to spatial population distributions, such as the multispecies system with heterogeneous dispersal rates shown in Figure~\ref{fig:multiple_simu}D. 
 
 \begin{figure}[!htbp]
     \centering
-    \includegraphics[scale = 0.8]{alpha.png}
-    \caption{Spatial distribution of $\alpha$-diversity across the transition region.}
+    \includegraphics[scale = 0.6]{alpha.png}
+    \caption{Spatial distribution of $\alpha$-diversity across the transition region. It reached a maximum in the middle ($x = 0$), showing a symmetric pattern.}
+    \label{fig:alpha}
 \end{figure}
-
-The results show that $\alpha$-diversity reaches its maximum near the center of the transition zone. This observation is consistent with the ecological expectation that biodiversity is elevated near the boundary between distinct communities, where species originating from both subcommunities coexist locally. In this sense, the transition front acts as a ``soft'' ecological boundary rather than a sharp interface.
-
-The spatially averaged local diversity was calculated as
+First, the spatial distribution of $\alpha$-diversity was calculated across the simulated region (Figure~\ref{fig:alpha}). 
+The $\alpha$-diversity reached its maximum near the center of the transition zone, where species from the two alternative communities overlapped most strongly. By integrating $\alpha(x)$ over the spatial domain, the spatially averaged local diversity was obtained as
 \begin{equation*}
-    \bar{\alpha}=1.181.
+    \bar{\alpha}=1.654.
 \end{equation*}
-The average abundance of each species,
+The average abundance of each species, denoted by $\bar{N}_i$, was then calculated by integrating the population distributions over space. These values were subsequently used to compute the global diversity,
 \begin{equation*}
-    \bar{N}_i,
-\end{equation*}
-was then obtained by integrating the population distributions over space and used to compute the global diversity,
-\begin{equation*}
-    \gamma=1.635.
+    \gamma=2.115.
 \end{equation*}
 Consequently, the resulting $\beta$-diversity was
 \begin{equation*}
@@ -470,7 +474,30 @@ Consequently, the resulting $\beta$-diversity was
     =
     \frac{\gamma}{\bar{\alpha}}
     =
-    1.384.
+    1.279,
 \end{equation*}
+which represents the theoretical $\beta$-diversity calculated directly from the continuous equilibrium distributions.
 
-Based on this framework, we propose a continuous-distribution approach for measuring $\beta$-diversity in spatial ecological systems. Given a set of spatial abundance data, the species distributions can first be approximated by logistic functions, after which biodiversity indices can be evaluated analytically from the corresponding continuous distributions. This approach provides a bridge between spatial reaction--diffusion models and classical biodiversity theory, and may be particularly useful for characterizing gradual community transitions and ecological clines.
+\subsubsection*{Comparison of $\beta$-diversity measures}
+
+To evaluate the performance of the proposed continuous $\beta$-diversity measure, we generated discrete observational samples from the simulated spatial distributions. An example of a sampled dataset is shown in Figure~\ref{fig:multi_sample}, where $k = 10$ sampling locations and $n = 100$ individuals per location were used.
+
+\begin{figure}[!htbp]
+    \centering
+    \includegraphics[scale = 0.6]{sample.png}
+    \caption{An example sample generated from the multi-species system with heterogeneous dispersal rates, using $k = 10$ sampling locations and $n = 100$ individuals per location.}
+    \label{fig:multi_sample}
+\end{figure}
+
+Both the discrete and continuous $\beta$-diversity measures were calculated from these sampled data. Simulations were conducted for sampling strategies with $k = 5, 10$ and $n = 20, 50, 100$. For each parameter combination, $50$ independent samples were generated (Figure~\ref{fig:beta_measure_compare}).
+
+The mean values obtained from the two methods differed significantly in all sampling strategies ($p < 0.05$). The continuous measure generally produced estimates closer to the theoretical $\beta$ value, particularly for the low-sampling condition ($k = 5$, $n = 20$) and for all cases with $k = 10$. However, the variances of the two methods were not significantly different in most cases (except for $k = 10$, $n = 50$), indicating that the continuous approach did not consistently reduce estimation variability.
+
+\begin{figure}[!htbp]
+    \centering
+    \includegraphics[scale = 0.5]{beta_compare_MSE.png}
+    \caption{Comparison between discrete and continuous $\beta$-diversity measures under different sampling strategies. The number of sampling locations was set to $k = 5$ or $10$, and the sample size per location was $n = 20, 50,$ or $100$. Each strategy was replicated $50$ times. The dashed blue line shows the theoretical value from the simulation. The continuous method generally produced more accurate estimates, particularly when the number of sampling locations was large. Both methods improved with increasing sampling effort.}
+    \label{fig:beta_measure_compare}
+\end{figure}
+
+The mean squared error (MSE) of both methods decreased with increasing sampling effort, including both the number of sampling locations and the number of individuals sampled per location. Notably, the continuous measure consistently achieved lower MSE values when $k = 10$, suggesting that incorporating the fitted spatial distribution improves estimation accuracy when sufficient spatial information is available.

@@ -2,33 +2,33 @@
 
 \subsection{Generalized Lotka--Volterra Model}
 
-    To model the dynamics of ecological communities shaped by inter-specific interactions, systems of ordinary differential equations (ODEs) are commonly employed. In such frameworks, each equation describes the temporal change in the population size of a given species. A widely used formulation is the generalized Lotka--Volterra (GLV) model (Eqn.~\ref{eqn:L-V_equation}), which can be written as
+    To model the dynamics of ecological communities shaped by inter-specific interactions, systems of ordinary differential equations (ODEs) are commonly employed. In such frameworks, each equation describes the temporal change in the population size of a given species. A widely used formulation is the generalized Lotka--Volterra (GLV) model (Equation~\ref{eqn:L-V_equation}), which can be written as
     \begin{equation}\label{eqn:L-V_equation}
         \frac{\mathrm{d} N_i}{\mathrm{d} t} = N_i \left( r_i + \sum_{j=1}^{S} A_{ij} N_j \right),
     \end{equation}
-    where $S$ denotes the total number of species, $N_i$ is the population size of the $i$th species, $r_i$ represents its intrinsic growth rate, and $A_{ij}$ quantifies the effect of species $j$ on species $i$. The interaction coefficients $A_{ij}$ are real-valued and can encode competitive, mutualistic, or antagonistic relationships.
+    where $S$ denotes the total number of species, $N_i$ is the population size of the $i$th species, $r_i$ represents its intrinsic growth rate, and $A_{ij}$ quantifies the effect of species $j$ on species $i$ \citep{case_illustrated_2000}. The interaction coefficients $A_{ij}$ are real-valued and can encode competitive, mutualistic, or antagonistic relationships.
 
-    More elaborate models may incorporate additional ecological processes, such as environmental stochasticity or nonlinear functional responses. However, the GLV model captures key features of community dynamics—namely, intrinsic growth, effective carrying capacity, and pairwise species interactions—while remaining analytically tractable. In particular, the per-capita growth rate depends linearly on species abundances, which yields a simple form for the Jacobian matrix evaluated at equilibrium points.
+    More elaborate models may incorporate additional ecological processes, such as environmental stochasticity or nonlinear functional responses. However, the GLV model captures key features of community dynamics, namely, intrinsic growth, effective carrying capacity, and pairwise species interactions, while remaining analytically tractable. In particular, the per-capita growth rate depends linearly on species abundances, which yields a simple form for the Jacobian matrix evaluated at equilibrium points.
 
     Under this model, the existence and stability of a coexistence equilibrium are determined by two main conditions. First, the feasibility condition
     \begin{equation}
         \boldsymbol{N}^* = -\boldsymbol{A}^{-1}\boldsymbol{r} > 0
     \end{equation}
-    ensures the existence of a fixed point at which all species have positive abundances. Second, the local stability condition
+    ensures the existence of a fixed point at which all species have positive abundances \citep{pastur_spectrum_1972, allesina_stability_2012,rohr_structural_2014,song_will_2018}. Second, the local stability condition
     \begin{equation}
         \max_i \operatorname{Re} \left[ \lambda_i(\boldsymbol{M}) \right] < 0,
     \end{equation}
-    where $\lambda_i(\boldsymbol{M})$ are the eigenvalues of the Jacobian matrix $\boldsymbol{M}$ evaluated at $\boldsymbol{N}^*$, guarantees that the equilibrium is locally asymptotically stable. Only parameter combinations that satisfy both conditions are considered to correspond to stable ecological communities.
+    where $\lambda_i(\boldsymbol{M})$ are the eigenvalues of the Jacobian matrix $\boldsymbol{M}$ evaluated at $\boldsymbol{N}^*$, guarantees that the equilibrium is locally asymptotically stable \citep{tao_random_2010, allesina_stability_2012}. Only parameter combinations that satisfy both conditions are considered to correspond to stable ecological communities.
 
 \subsection{Diffusion-Reaction Model}
 
-    In addition to species interactions, spatial community dynamics must account for the dispersal of individuals. Dispersal is commonly modeled using spatial derivatives of population density, which leads naturally to partial differential equation (PDE) formulations. A widely used approach is the diffusion model, in which dispersal is represented by a second-order spatial derivative. This formulation assumes that individuals move randomly and symmetrically in space. While such an assumption may allow for unrealistically rapid spread in some cases, it provides a tractable baseline description.
+    In addition to species interactions, spatial community dynamics must account for the dispersal of individuals. Dispersal is commonly modeled using spatial derivatives of population density, which leads naturally to partial differential equation (PDE) formulations. A widely used approach is the diffusion model, in which dispersal is represented by a second-order spatial derivative \citep{kallen_simple_1985}. This formulation assumes that individuals move randomly and symmetrically in space. While such an assumption may allow for unrealistically rapid spread in some cases, it provides a tractable baseline description.
 
     In reality, dispersal is influenced by multiple factors, including species interactions, environmental heterogeneity, and stochastic effects. Nevertheless, the diffusion approximation is often adopted as a null model, under the assumption that individuals disperse independently and isotropically. Alternative dispersal formulations will be discussed in subsequent sections.
 
-    Based on these considerations, reaction--diffusion models are employed to describe the spatiotemporal dynamics of biological systems. In this framework, the diffusion term represents random movement of individuals (or molecules), while the reaction term captures local growth and interactions. In developmental and cellular biology, periodic boundary conditions are often imposed, corresponding to domains that are topologically equivalent to a circle or higher-dimensional analogues. In contrast, for community ecology, we consider a finite habitat and impose no-flux (Neumann) boundary conditions, such that the net flux across the domain boundaries is zero.
+    Based on these considerations, reaction--diffusion models are employed to describe the spatiotemporal dynamics of biological systems. In this framework, the diffusion term represents random movement of individuals (or molecules), while the reaction term captures local growth and interactions. In developmental and cellular biology, periodic boundary conditions are often imposed, corresponding to domains that are topologically equivalent to a circle or higher-dimensional analogues \citep{turing_chemical_1990}. In contrast, for community ecology, we consider a finite habitat and impose no-flux (Neumann) boundary conditions \citep{kondo_reaction-diffusion_2010,simpson_fisherkpp-type_2024}, such that the net flux across the domain boundaries is zero.
 
-    A general form of the reaction--diffusion model is given by
+    A general form of the reaction--diffusion model is given by equation~\ref{eqn:D-R model}
     \begin{equation}\label{eqn:D-R model}
         \begin{aligned}
             \frac{\partial N_i}{\partial t}
@@ -38,34 +38,23 @@
     \end{equation}
     where $N_i$ denotes the population density of the $i$th species, $D_i$ is the diffusion coefficient characterizing its dispersal rate, and $f(N_j)$ represents the local reaction term as a function of all species abundances.
 
-    In this study, the generalized Lotka--Volterra model is adopted as the reaction term. The spatial domain is defined as $[-1,1]$. We analyze in detail the cases of one- and two-species systems, and further consider a representative multi-species scenario to illustrate more complex dynamical behaviors.
+    In this study, the generalized Lotka--Volterra model is adopted as the reaction term. The spatial domain is defined as $[-1,1]$. The initial state is defined as two parts, where left part $[-1,0)$ is occupied by one stable state (for example, a stable community), and right part i occupied by the other. We analyze in detail the cases of one- and two-species systems, and further consider a representative multi-species scenario to illustrate more complex dynamical behaviors. Especially, we focus on the condition where two stale states form a stationary transition region and the property of such a transition.
 
     \subsubsection{One Species Invading Process}
 
-        For a single species, the reaction--diffusion system reduces to a single partial differential equation,
+        For the condition of a single species, the reaction--diffusion system reduces to a single partial differential equation,
         \begin{equation}\label{eqn:single_species}
             \frac{\partial u}{\partial t} = D \frac{\partial^2 u}{\partial x^2} + f(u),
         \end{equation}
-        where $u(x,t)$ denotes the population density. We impose a step-like initial condition,
+        where $u(x,t)$ denotes the population density defined in the domain $[0,1]$. The local population growth rate thus satisfy the condition that $f(0) = f(1) = 0$, $f(u)\geq 0$. To illustrate the evolution as well as dynamics of the front between two states, we impose a step-like initial condition,
         \begin{equation*}
             u(x,0) =
             \begin{cases}
-                1, & x < 0, \\
-                0, & x > 0,
+                1, & x < x_0, \\
+                0, & x > x_0,
             \end{cases}
         \end{equation*}
         which represents an initially occupied region on the left invading an empty region on the right.
-
-        When $f(u) = u(1-u)$, the model corresponds to the Fisher--KPP equation. The reaction term has two equilibria, $u=0$ and $u=1$. Linear stability analysis shows that $u=0$ is an unstable steady state, whereas $u=1$ is stable. Consequently, the interface (or invasion front) connecting the populated state ($u=1$) and the empty state ($u=0$) propagates toward the unstable state.
-
-        Assuming a traveling wave solution of the form $u(x,t) = u(z)$ with $z = x - ct$, the governing equation reduces to the second-order ordinary differential equation
-        \begin{equation*}
-            \frac{\mathrm{d}^2 u}{\mathrm{d} z^2} + c \frac{\mathrm{d} u}{\mathrm{d} z} + u(1-u) = 0.
-        \end{equation*}
-        The existence of traveling wave solutions requires that the wave speed satisfies $c \geq 2$. Although closed-form solutions are generally not available, the leading-order approximation can be expressed as a logistic function,
-        \begin{equation}
-            u(z) = \frac{1}{1 + e^{z/c}} + \mathcal{O}(c^{-2}).
-        \end{equation}
 
         \begin{figure}[!htbp]
             \centering
@@ -74,28 +63,38 @@
             \label{fig:fisher_allen}
         \end{figure}
 
-        To obtain a stationary front, the system must admit two stable equilibria. A representative example is the Allen--Cahn model with reaction term $f(u) = u(1-u)(u-a)$. The additional $(u-a)$ factor can be interpreted as an Allee effect, reflecting the dependence of growth on population density. This system has two stable steady states, $u=0$ and $u=1$, and one unstable state $u=a$.
+        When $f(u) = u(1-u)$, the model corresponds to the Fisher--KPP equation \citep{fisher_wave_1937,simpson_fisherkpp-type_2024}. The reaction term has two equilibria, $u=0$ and $u=1$ (Figure~\ref{fig:fisher_allen}A). Linear stability analysis shows that $u=0$ is an unstable steady state, whereas $u=1$ is stable. As a result, local population tend to converge to the environment capacity, once it deviated from the empty state. Consequently, the interface (or invasion front) connecting the populated state ($u=1$) and the empty state ($u=0$) propagates toward the unstable state.
 
-        The direction and speed of front propagation are determined by the associated potential function $W(u)$, defined via $\frac{\mathrm{d} W}{\mathrm{d} u} = f(u)$. Evaluating the potential yields $W(0)=0$ and $W(1)=\frac{1}{12} - \frac{a}{6}$, from which the wave speed can be expressed as $c = \sqrt{2}\left(a - \frac{1}{2}\right)$. In this formulation, the propagation dynamics are fully determined by the parameter $a$, and the front becomes stationary when $a = \frac{1}{2}$.
-
-        In this case, the traveling wave solution admits an explicit form,
+        Assuming a traveling wave solution of the form $u(x,t) = u(z)$ with $z = x - ct$ \citep{fife_approach_1977}, which indicate that the interface kept the shape and move toward the empty region, the governing equation reduces to the second-order ordinary differential equation
+        \begin{equation*}
+            \frac{\mathrm{d}^2 u}{\mathrm{d} z^2} + c \frac{\mathrm{d} u}{\mathrm{d} z} + u(1-u) = 0.
+        \end{equation*}
+        The existence of traveling wave solutions requires that the wave speed satisfies $c \geq 2$ \citep{fisher_wave_1937,breuer_fluctuation_1994}, that is, a stationary interface is impossible in Fisher-KPP model. Although closed-form solutions are generally not available (but in certain speed $c$, \citet{ablowitz_explicit_1979}), the leading-order approximation can be expressed as a logistic function (Figure~\ref{fig:fisher_allen}C),
         \begin{equation}
-            u(z) = \frac{1}{1 + e^{z/c}},
+            u(z) = \frac{1}{1 + e^{z/c}} + \mathcal{O}(c^{-2}),
         \end{equation}
-        which corresponds exactly to a logistic profile.
+        where $\mathcal{O}(c^{-2})$ is higher-order Infinitesimal. The logistic form approximation is already very close to the numerical solution.
+
+        To obtain a stationary front, the system must admit two (symmetrical) stable equilibria. A representative example is the Allen--Cahn model \citep{cahn_free_1958} with reaction term $f(u) = u(1-u)(u-a)$ \citep{simpson_fisherkpp-type_2024}. The additional $(u-a)$ factor can be interpreted as an Allee effect, reflecting the dependence of growth on population density. This system has two stable steady states, $u=0$ and $u=1$, and one unstable state $u=a$ (Figure~\ref{fig:fisher_allen}B). Population smaller than $a$ cannot increase but go extinct.
+
+        The direction and speed of front propagation are determined by the associated potential function $W(u)$ of both stable states, defined via $\frac{\mathrm{d} W}{\mathrm{d} u} = f(u)$. Evaluating the potential yields $W(0)=0$ and $W(1)=\frac{1}{12} - \frac{a}{6}$, from which the wave speed can be expressed as $c = \sqrt{2}\left(a - \frac{1}{2}\right)$. In this formulation, the propagation dynamics are fully determined by the parameter $a$, and the front becomes stationary when $a = \frac{1}{2}$. In this case, the traveling wave solution admits an explicit form,
+        \begin{equation}
+            u(z) = \frac{1}{1 + e^{z/\sqrt{2}}},
+        \end{equation}
+        which corresponds exactly to a logistic profile (Figure~\ref{fig:fisher_allen}D). As a result, a symmetrical bistable reaction term will lead to a stationary interface between two stable states, making the exclusive stable state coexist.
 
     \subsubsection{Two Species Interaction--Dispersal Community}
 
-        When interspecific interactions are considered, a two-species system provides the simplest framework to capture their effects. A reaction--diffusion model with a generalized Lotka--Volterra (GLV) reaction term can be written as
+        When inter-specific interactions are considered, a two-species system provides the simplest framework to capture their effects. A reaction--diffusion model with a generalized Lotka--Volterra (GLV) reaction term can be written as
         \begin{equation}\label{eqn:two_species}
             \begin{aligned}
                 \frac{\partial N_1}{\partial t} &= D_{1}\frac{\partial^2 N_1}{\partial x^2} + N_1 \left( r_1 - \alpha_{1,1} N_1 - \alpha_{1,2} N_2 \right),\\ 
                 \frac{\partial N_2}{\partial t} &= D_{2}\frac{\partial^2 N_2}{\partial x^2} + N_2 \left( r_2 - \alpha_{2,2} N_2 - \alpha_{2,1} N_1 \right).
             \end{aligned}
         \end{equation}
-        To illustrate competitive exclusion and spatial invasion dynamics, we focus on a parameter regime in which the system is locally bistable. Specifically, the intrinsic growth rates are taken to be positive, and interspecific competition is sufficiently strong to prevent local coexistence.
+        where $D_i$ denotes the diffusion coefficient of species $i$, $r_i$ is the intrinsic growth rate, and $\alpha_{i,j}$ represents the interaction strength of species $j$ on species $i$.
 
-        The system can be nondimensionalized as
+        The system \ref{eqn:two_species} can be nondimensionalized as
         \begin{equation}
             \begin{aligned}
                 \frac{\partial u}{\partial \tau} 
@@ -117,25 +116,37 @@
             a_{1,2} = \frac{r_2 \alpha_{1,2}}{r_1 \alpha_{2,2}}, \quad
             a_{2,1} = \frac{r_1 \alpha_{2,1}}{r_2 \alpha_{1,1}}.
         \end{align*}
+        The nondimensional system is characterized by four key parameters: $D$, $r$, $a_{1,2}$, and $a_{2,1}$, quantifying the relative dispersal ability, relative growth rate, as well as interaction strength comparable to self-regulation.
+        
+        To illustrate competitive exclusion and spatial invasion dynamics, we focus on a parameter regime in which the system is locally bistable. Specifically, the intrinsic growth rates are taken to be positive, and inter-specific competition is sufficiently strong to prevent local coexistence. We first consider a symmetric case with $D = 1$, $r = 1$, and $a_{1,2} = a_{2,1}$, for which approximate analytical insights can be obtained under suitable assumptions on total population density,
+        
+        \begin{equation}
+            \label{eqn:symme_2_species}
+            \begin{cases}
+                \partial_t N_{1} = \nabla^2 N_1 + N_1(1 - N_1 - a N_2)\\
+                \partial_t N_{2} = \nabla^2 N_2 + N_2(1 - N_2 - a N_1)
+            \end{cases}.
+        \end{equation}
 
-        The nondimensional system is characterized by four key parameters: $D$, $r$, $a_{1,2}$, and $a_{2,1}$. We first consider a symmetric case with $D = 1$, $r = 1$, and $a_{1,2} = a_{2,1}$, for which approximate analytical insights can be obtained under suitable assumptions on total population density. For the general case, numerical simulations are performed across a range of parameter combinations.
-
-        Specifically, we explore the effects of dispersal and growth asymmetry by varying the diffusion ratio $D \in (0,2)$ and the relative growth rate $r \in (0,2)$, using the model
+        For the general case, numerical simulations are performed across a range of parameter combinations. Specifically, we explore the effects of dispersal and growth asymmetry by varying the diffusion ratio $D \in (0,2)$ and the relative growth rate $r \in (0,2)$, with interval $0.02$, using the model
         \begin{equation*}\label{eqn:balance_D-r}
             \begin{aligned}
-                \partial_t N_1 &= D \, \nabla^2 N_1 + N_1(1 - N_1 - 1.5 N_2),\\
-                \partial_t N_2 &= \nabla^2 N_2 + N_2(1 - N_2 - 1.5 N_1).
-            \end{aligned}
+                \partial_t N_1 &= D \nabla^2 N_1 + r N_1(1 - N_1 - 1.5 N_2)\\
+                \partial_t N_2 &= \nabla^2 N_2 + N_2(1 - N_2 - 1.5 N_1)
+            \end{aligned},
         \end{equation*}
-        In addition, we investigate the influence of interspecific competition by varying $D \in (0,2)$ and $a_{1,2} \in (0,2)$, with the system
+        to illustrate the effect and balance between dispersal and growth in maintain the stable transition interface.
+        In addition, we investigate the influence of interspecific competition by varying $D \in (0,2)$ and $a_{1,2} \in (0,2)$, interval $0.02$, with the system
         \begin{equation*}\label{eqn:balance_D-a}
             \begin{aligned}
-                \partial_t N_1 &= D \, \nabla^2 N_1 + N_1(1 - N_1 - a_{1,2} N_2),\\
-                \partial_t N_2 &= \nabla^2 N_2 + N_2(1 - N_2 - 1.5 N_1).
-            \end{aligned}
+                \partial_t N_1 &= D \, \nabla^2 N_1 + N_1(1 - N_1 - a_{1,2} N_2)\\
+                \partial_t N_2 &= \nabla^2 N_2 + N_2(1 - N_2 - 1.5 N_1)
+            \end{aligned}.
         \end{equation*}
 
-        The effects of intrinsic growth rates and competition strength are analyzed separately, as these parameters primarily govern local dynamics and stability properties of the GLV system. To quantify invasion outcomes, we measure the interface position $x^*$ defined by $u(x^*) = v(x^*)$ at the final simulation time, which serves as an indicator of propagation speed and coexistence behavior under different parameter regimes.
+        The effects of intrinsic growth rates and competition strength are analyzed separately, as these parameters primarily govern local dynamics and stability properties of the GLV system. 
+
+        To quantify the stability of transition interface as well as invasion outcomes, we define the center of the interface position $x^*$ by $u(x^*) = v(x^*)$. $x^*$ is initially $0$ since both species control one side of th original point. It is recorded at the final simulation time for each parameter combinations, which serves as an indicator of propagation speed and coexistence behavior under different parameter regimes. The transition interface is viewed as stable if $x^*$ kept $0$ during the simulation.
 
     \subsubsection{Competing Multispecies Community}
 
@@ -149,7 +160,15 @@
         \end{equation}
         where $D_i$ denotes the diffusion coefficient of species $i$, $r_i$ is its intrinsic growth rate, and $A_{i,j}$ quantifies the effect of species $j$ on species $i$.
 
-        We focus on bistable community configurations, in which the full system does not admit a stable coexistence of all species, but instead supports two alternative stable community states. These states correspond to two subsets of species, denoted as community $1$ and community $2$, each of which is internally stable. The dynamics can be reformulated by partitioning species into these two groups:
+        We focus on bistable community configurations, in which the full system does not admit a stable coexistence of all species, but instead supports two alternative stable community states. These states correspond to two subsets of species, denoted as community $1$ ($C1$) and community $2$ ($C2$), each of which is internally stable. As a result, the interaction between species could be divided into intra-community interactions and inter-community interactions,        
+        \begin{equation*}
+            \mathbf{A} = \begin{pmatrix}
+                \text{Intra-}C1 & \text{Inter}_{1,2}\\
+                \text{Inter}_{2,1} & \text{Intra-}C2
+            \end{pmatrix}.
+        \end{equation*}
+
+        The dynamics can then be reformulated by partitioning species into these two groups:
         \begin{equation*}
             \begin{aligned}
                 \frac{\partial N_{1,i}}{\partial t}
@@ -200,10 +219,12 @@
         \end{equation}
         where $\mathbf{u}_{k,\ell} = (u_{k,\ell}^1, \dots, u_{k,\ell}^S)$ is the vector of species abundances at grid point $k$ and time step $\ell$. This explicit scheme is computationally efficient and is therefore used for coarse simulations and parameter scans, although it is subject to stability constraints on $\Delta t$.
 
+        The transition interface center of two species case with varying parameters is done by the explicit finite difference method. With each parameter set, space $x \in [ -1, 1 ] $ is discretized into $1000$ grids, while time step size is set to $\Delta t = 1 \times 10^{-6}$, total simulation steps is $100000$.
+
     \subsubsection{IMEX Semi-Implicit Method}
 
         The explicit method may become unstable when diffusion is strong or when the system exhibits stiff dynamics. To improve numerical stability and accuracy, we employ an implicit--explicit (IMEX) scheme, in which the diffusion term is treated implicitly while the reaction term is treated explicitly. The discretized equation takes the form
-        \begin{equation}
+        \begin{equation}\label{eqn:IMEX}
             \frac{u_{k,\ell+1}^i - u_{k,\ell}^i}{\Delta t}
             = D_i \nabla^2 u_{k,\ell+1}^i + f_i(\mathbf{u}_{k,\ell}).
         \end{equation}
@@ -214,16 +235,26 @@
             \approx
             \frac{-u_{k+2,\ell}^i + 16 u_{k+1,\ell}^i - 30 u_{k,\ell}^i + 16 u_{k-1,\ell}^i - u_{k-2,\ell}^i}{12(\Delta x)^2}.
         \end{equation*}
-        Substituting this into the IMEX formulation yields a linear system for $\mathbf{u}_{\ell+1}$ at each time step. The resulting system can be written in matrix form and solved efficiently using sparse linear algebra techniques.
+        Substituting this into the IMEX formulation (Equation~\ref{eqn:IMEX}) yields a linear system for $\mathbf{u}_{\ell+1}$ at each time step,
+        
+        \begin{equation}
+            u_{k,\ell}^i + \Delta t f_i(\mathbf{u}_{k,\ell}) = u_{k,\ell+1}^i 
+            - \Delta t \left[
+                \frac{-u_{k+2,\ell+1}^i + 16 u_{k+1,\ell+1}^i - 30 u_{k,\ell+1}^i + 16 u_{k-1,\ell+1}^i - u_{k-2,\ell+1}^i}{12(\Delta x)^2}
+            \right].
+        \end{equation}
+        In each step $\ell$, the left part can be calculated. The right part is in the form of a linear combination of values in near grids in next step. The resulting system can be written in matrix form and solved efficiently using sparse linear algebra techniques.
 
-        Compared to the explicit scheme, the IMEX method requires solving a linear system at each time step and is therefore computationally more expensive. Consequently, it is applied only to selected cases where higher numerical stability and accuracy are required.
+        To get a higher accuracy, we computed the error or loss of simulation steps. Change of population size at each space grid is calculated between steps, the largest of which is defined as the maxima loss. Simulation stops if maxima loss of the step is lower than a set threshold, or the number of steps reach the upper limit. Threshold of the loss is set to $1 \times 10^{-6}$ for models with an approximately stable solution, and $1 \times 10^{-8}$ for others. The upper limit of simulation steps is set to $1 \times 10^{7}$
+
+        Compared to the explicit scheme, the IMEX method requires solving a linear system at each time step and is therefore computationally more expensive. Consequently, it is applied only to selected cases where higher numerical stability and accuracy are required. Specifically, we simulated the symmetrical two species model where $a = 1.5$, asymmetric two species morel where $D = 1.25$ and $r=0.75$, as well as multi-specific models by the IMEX semi-implicit method.
 
 \subsection{Logistic Test for Equilibrium Distribution}
 
     The simulated spatial population profiles exhibit sigmoid-like shapes. Moreover, in the Allen--Cahn model, the traveling front admits a logistic profile under certain conditions. Motivated by this observation, we assess how well a logistic function can approximate the equilibrium population distributions, particularly in bistable communities where spatial coexistence may arise.
 
     For a given species with asymptotic equilibrium abundances $K_1$ and $K_2$ in two alternative community states, we consider the logistic function
-    \begin{equation}
+    \begin{equation}\label{eqn:logistic_full}
         N_L(x) = \frac{K_1 - K_2}{1 + e^{-k(x - x_0)}} + K_2,
     \end{equation}
     where $x_0$ denotes the location of the interface (center of the front), and $k$ characterizes the steepness of the spatial gradient (cline). This formulation ensures that $N_L(x) \to K_2$ as $x \to -\infty$ and $N_L(x) \to K_1$ as $x \to +\infty$.
@@ -241,32 +272,59 @@
 
 \subsection{Measure of $\beta$-Diversity}
 
+    \subsubsection*{Calculate $\beta$-diversity with discrete sample and continuous distribution}
+
     Quantifying biodiversity is essential for understanding the stability and spatial organization of ecological communities. $\alpha$-diversity characterizes biodiversity within a local (well-mixed or nearly homogeneous) community, whereas $\gamma$-diversity describes biodiversity at the scale of the entire system (global community). These measures depend on both species richness and relative abundances.
 
     In this study, we employ the Shannon--Weaver index, an information-theoretic measure that quantifies the uncertainty associated with randomly sampling a species. For discrete samples, the $\alpha$- and $\gamma$-diversity are defined as
-    \begin{align*}\label{eqn:alpha_gamma_dis}
-        \alpha_k &= -\sum_i p_{k,i} \ln(p_{k,i}), 
-        \qquad p_{k,i} = \frac{N_{k,i}}{\sum_{j} N_{k,j}},\\
-        \gamma &= -\sum_i q_i \ln(q_i),
-        \qquad q_i = \frac{\sum_{k} N_{k,i}}{\sum_{j}\sum_{k} N_{k,j}}.
-    \end{align*}
+    \begin{equation}\label{eqn:alpha_gamma_dis}
+        \begin{aligned}
+            \alpha_k &= -\sum_i p_{k,i} \ln(p_{k,i}), 
+            \qquad p_{k,i} = \frac{N_{k,i}}{\sum_{j} N_{k,j}},\\
+            \gamma &= -\sum_i q_i \ln(q_i),
+            \qquad q_i = \frac{\sum_{k} N_{k,i}}{\sum_{j}\sum_{k} N_{k,j}}.
+        \end{aligned}
+    \end{equation}
 
     In addition, $\beta$-diversity measures the variation in community composition across space and is often interpreted as a measure of species turnover. A common definition expresses $\beta$-diversity as the ratio between $\gamma$-diversity and the average $\alpha$-diversity,
-    \begin{equation*}\label{eqn:beta_dis}
+    \begin{equation}\label{eqn:beta_dis}
         \beta = \frac{\gamma}{\frac{1}{n} \sum_{k} \alpha_k}.
-    \end{equation*}
+    \end{equation}
 
     When continuous spatial distributions $N_i(x)$ are available (rather than discrete samples $N_{k,i}$), these definitions can be extended accordingly. The local diversity at position $x$ is defined as
-    \begin{align*}\label{eqn:alpha_gamma_con}
-        \alpha(x) &= -\sum_i p_i(x) \ln\big(p_i(x)\big), 
-        \qquad p_i(x) = \frac{N_i(x)}{\sum_{j} N_j(x)},\\
-        \gamma &= -\sum_i q_i \ln(q_i),
-        \qquad q_i = \frac{\int N_i(x)\,\mathrm{d}x}{\sum_{j} \int N_j(x)\,\mathrm{d}x}.
-    \end{align*}
+    \begin{equation}\label{eqn:alpha_gamma_con}
+        \begin{aligned}
+            \alpha(x) &= -\sum_i p_i(x) \ln\big(p_i(x)\big), 
+            \qquad p_i(x) = \frac{N_i(x)}{\sum_{j} N_j(x)},\\
+            \gamma &= -\sum_i q_i \ln(q_i),
+            \qquad q_i = \frac{\int N_i(x)\,\mathrm{d}x}{\sum_{j} \int N_j(x)\,\mathrm{d}x}.
+        \end{aligned}
+    \end{equation}
     Accordingly, the continuous analogue of $\beta$-diversity is given by
-    \begin{equation*}\label{eqn:beta_con}
+    \begin{equation}\label{eqn:beta_con}
         \beta = \frac{\gamma}{\frac{1}{L} \int \alpha(x)\,\mathrm{d}x},
-    \end{equation*}
-    where $L$ denotes the length of the spatial domain.
+    \end{equation}
+    where $L$ denotes the length of the spatial domain. For simulated distribution in this work, we calculate $\beta$-diversity by equation~\ref{eqn:alpha_gamma_con} and equation~\ref{eqn:beta_con} as the theoretical value.
 
-    We apply these measures to the simulated population distributions to obtain quantitative estimates of $\beta$-diversity. In addition, analytical expressions are derived under the assumption that species distributions follow logistic profiles.
+    Based on this framework, we propose a continuous-distribution approach for measuring $\beta$-diversity in spatial ecological systems. Given a set of spatial abundance data, the species distributions can first be approximated by logistic functions, after which biodiversity indices can be evaluated analytically from the corresponding continuous distributions.
+
+
+    \subsubsection*{Sampling Discrete Data from Continuous Distributions}
+
+    To evaluate the proposed diversity measures under realistic sampling conditions, we generated discrete community samples from the simulated continuous population distributions. These sampled datasets were then used to estimate $\beta$-diversity and compared with the theoretical values calculated directly from the simulated distributions.
+
+    First, a set of random sampling locations ($k = 5, 10$) was selected within the simulated spatial domain $[-1,1]$. At each sampling location $x$, the probability of observing an individual from species $i$ was assumed to be proportional to its local population abundance,
+    \begin{equation*}
+        p_i(x) = \frac{N_i(x)}{\sum_j N_j(x)}.
+    \end{equation*}
+    We then sampled $n = 20, 50, 100$ individuals independently at each location according to the probability distribution $\{p_i(x)\}$. Consequently, the sampled abundances of the species, denoted by $n_i(x)$, followed a multinomial distribution,
+    \begin{equation*}
+        \mathrm{P}\left(n_1(x), n_2(x), \dots, n_S(x)\right) 
+        = \frac{n!}{n_1(x)! \cdots n_S(x)!} 
+        \prod_{i=1}^{S} p_i(x)^{n_i(x)},
+        \qquad
+        \sum_{i=1}^{S} n_i(x) = n.
+    \end{equation*}
+    For each sampled dataset, we first calculated $\beta$-diversity directly using Equations~\ref{eqn:alpha_gamma_dis} and \ref{eqn:beta_dis}, referred to here as the discrete $\beta$ estimate. We then fitted the sampled abundance distributions of each species to the logistic function (Equation~\ref{eqn:logistic_full}) and applied Equations~\ref{eqn:alpha_gamma_con} and \ref{eqn:beta_con} to obtain a continuous $\beta$ estimate based on the reconstructed spatial distributions.
+
+    For each parameter combination of $k$ and $n$, we generated $50$ independent replicate samples. Both the discrete and continuous estimates of $\beta$-diversity were treated as samples drawn from their respective sampling distributions. The mean values obtained from the two methods were then compared with the theoretical $\beta$-diversity calculated directly from the simulated continuous distributions. Variances and mean squared errors (MSEs) were subsequently computed to evaluate and compare the accuracy of the two estimation methods.
