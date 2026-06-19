@@ -1,159 +1,247 @@
 \section{Fisher-KPP Equation}
 
+Here we do some basic analysis on the Fisher-KPP model \citep{fisher_wave_1937}. The Fisher-KPP model is written as,
 \begin{equation*}
-        \frac{\partial u}{\partial t} = D \frac{\partial ^2 u} {\partial x^2} + r u (1-au)
-    \end{equation*}
-
-    let $u' = au$, $\tau=r a t$, $z = a \sqrt{\frac{r}{D}}x$,
-
-    \begin{equation*}
-        \frac{\partial u'}{\partial \tau} = \frac{\partial ^2 u'} {\partial z^2} +  u' (1-u')
-    \end{equation*}
-
-Now we focus on
-
+    \frac{\partial u}{\partial t}
+    =
+    D \frac{\partial^2 u}{\partial x^2}
+    +
+    r u (1-au)
+\end{equation*}
+Introduce the nondimensional variables
+\begin{align*}
+    u' = au,\qquad  \tau = rt,  \qquad  z = \sqrt{\frac{r}{D}}\,x.
+\end{align*}
+Then the equation becomes
 \begin{equation*}
-\frac{\partial u}{\partial t} = \frac{\partial ^2 u} {\partial x^2} +  u (1-u)
+    \frac{\partial u'}{\partial \tau}
+    =
+    \frac{\partial^2 u'}{\partial z^2}
+    +
+    u'(1-u').
+\end{equation*}
+Therefore, it is sufficient to study the normalized Fisher equation
+\begin{equation*}
+    \frac{\partial u}{\partial t}
+    =
+    \frac{\partial^2 u}{\partial x^2}
+    +
+    u(1-u).
 \end{equation*}
 
-Assume a traveling wave solution, where the shape of $u(x,t)$ do not
-change. let $z = x-ct$,
-
+We look for travelling wave solutions whose profile remains unchanged during propagation. Let
 \begin{equation*}
-\frac{\mathrm{d}^2 u}{\mathrm{d} z^2} + c \frac{\mathrm{d} u}{\mathrm{d} z} + u(1-u) = 0
+    z = x-ct,
+\end{equation*}
+where $c$ is the wave speed. Substituting $u(x,t)=u(z)$ into the PDE yields
+\begin{equation*}
+    \frac{\mathrm{d}^2u}{\mathrm{d}z^2}
+    +
+    c\frac{\mathrm{d}u}{\mathrm{d}z}
+    +
+    u(1-u)
+    =
+    0.
+\end{equation*}
+The nonlinear term
+\begin{equation*}
+    f(u)=u(1-u)
+\end{equation*}
+has two equilibria, $u=0$ and $u=1$ (Figure~\ref{fig:fisher_allen}A). The travelling wave solution connects these two states. Near $u=0$, we linearize the equation by assuming
+\begin{equation*}
+    u(z)\sim e^{\lambda z}.
+\end{equation*}
+Substitution gives the characteristic equation
+\begin{equation*}
+    \lambda^2 + c\lambda + 1 = 0.
+\end{equation*}
+Hence,
+\begin{equation*}
+    \lambda
+=
+\frac{-c \pm \sqrt{c^2-4}}{2}.
+\end{equation*}
+To ensure decay as $z\to+\infty$, we require $\lambda<0$, which implies
+\begin{equation*}
+    c \ge 2.
 \end{equation*}
 
-$u = 0,1$ are two equilibrium of $f(u) = u (1-u)$.The solution will
-connect this two state. When $u \rightarrow 0$, assume the
-approximated solution around here is $u \approx e^{\lambda z}$, thus,
+\begin{figure}[!htbp]
+    \centering
+    \includegraphics[scale = 1]{fisher_allen.pdf}
+    \caption{
+    Illustration of the interaction functions and travelling wave solutions in the Fisher and Allen--Cahn models.
+    A. Interaction function in the Fisher model. The equilibrium $(0,0)$ is unstable, while $(1,0)$ is stable.
+    B. Interaction function in the Allen--Cahn model, where $(0,0)$ and $(1,0)$ are stable equilibria and $(1/2,0)$ is unstable.
+    C. Numerical travelling wave solution of the Fisher model. Starting from a square-wave initial condition, the profile evolves into a logistic-like front propagating to the right with approximately constant speed.
+    D. Travelling wave solution of the Allen--Cahn model. When $a=1/2$, the wave speed satisfies $c=0$, corresponding to a stationary solitary profile.
+    }
+    \label{fig:fisher_allen}
+\end{figure}
 
+We now study the travelling wave equation on the phase plane. Define
 \begin{equation*}
-\lambda ^2 + c \lambda + 1 =0
+    p=\frac{\mathrm{d}u}{\mathrm{d}z}.
+\end{equation*}
+Then the second-order ODE can be rewritten as
+\begin{equation*}
+    \begin{cases}
+    \dot{u} = p,\\
+    \dot{p} = -cp-u(1-u),
+    \end{cases}
+\end{equation*}
+where the dot denotes differentiation with respect to $z$.
+The equilibria are
+\begin{equation*}
+    (u^*,p^*)=(0,0),\qquad (1,0).
 \end{equation*}
 
-$\lambda = \frac{- c \pm \sqrt{c^2 - 4}}{2}$. $u \rightarrow 0$
-needs $\lambda <0$, which calls $c \geq 2$.
-
-\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
-
-\textbf{Fisher\textquotesingle s method}
-
-let $p = \frac{\mathrm{d} u}{\mathrm{d} z}$,
-
+The Jacobian matrix is
 \begin{equation*}
-\frac{\mathrm{d}p} {\mathrm{d}u} = -c - \frac{u(1-u)}{p}
+\mathbf{J}
+=
+\begin{pmatrix}
+0 & 1\\
+2u-1 & -c
+\end{pmatrix}.
+\end{equation*}
+At $(0,0)$,
+\begin{equation*}
+\mathbf{J}|_{(0,0)}
+=
+\begin{pmatrix}
+0 & 1\\
+-1 & -c
+\end{pmatrix},
+\end{equation*}
+whose characteristic equation is
+\begin{equation*}
+\lambda^2 + c\lambda + 1 = 0.
+\end{equation*}
+For $c\ge2$, both eigenvalues are real and negative, so $(0,0)$ is a stable node.
+At $(1,0)$,
+\begin{equation*}
+\mathbf{J}|_{(1,0)}
+=
+\begin{pmatrix}
+0 & 1\\
+1 & -c
+\end{pmatrix},
+\end{equation*}
+whose characteristic equation is
+\begin{equation*}
+\lambda^2 + c\lambda - 1 = 0.
+\end{equation*}
+The eigenvalues are
+\begin{equation*}
+\lambda
+=
+\frac{-c \pm \sqrt{c^2+4}}{2},
+\end{equation*}
+which have opposite signs. Therefore, $(1,0)$ is a saddle point.
+
+The travelling wave corresponds to a heteroclinic trajectory connecting $(1,0)$ to $(0,0)$ in the phase plane (Figure~\ref{fig:trajectory}). Let this trajectory be written as
+\begin{equation*}
+p=\varphi(u).
+\end{equation*}
+Since
+\begin{equation*}
+\frac{\mathrm{d}u}{\mathrm{d}z}=\varphi(u),
+\end{equation*}
+we obtain
+\begin{equation*}
+    z-z_0
+    =
+    \int_{u_0}^{u}
+    \frac{1}{\varphi(u)}
+    \,\mathrm{d}u.
 \end{equation*}
 
-assume
+Thus the travelling wave profile $u(z)$ can be reconstructed from the phase trajectory.
 
+\begin{figure}[!htbp]
+    \centering
+    \includegraphics[scale = 1]{trajectory.pdf}
+    \caption{Phase-plane trajectory corresponding to the travelling wave solution.  A. The heteroclinic orbit connects the saddle point $(1,0)$ to the stable node $(0,0)$. B. The heteroclinic orbit connects stable point $(1,0)$ to $(0,0)$, forming a loop.}
+    \label{fig:trajectory}
+\end{figure}
+
+Consequently, the travelling wave solution satisfies the boundary conditions
 \begin{equation*}
-\frac{p}{u}|_{u\rightarrow0} = m
+\lim_{z\to-\infty}u(z)=1,
+\qquad
+\lim_{z\to+\infty}u(z)=0.
 \end{equation*}
 
-then
-
+To approximate the wave profile, we consider the large-speed limit $c\to\infty$. Introduce the stretched coordinate
 \begin{equation*}
-m = \frac{\mathrm{d}p} {\mathrm{d}u} = -c - \frac{u(1-u)}{p} \approx -c - \frac{1}{m}\\
-m^2+cm+1 = 0
+\xi = \frac{z}{c}.
 \end{equation*}
-
-has real roots only if $c^2\geq4$, thus $c \geq 2$.
-
-\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
-
-Then we show the dynamics of $p\sim u$ on the phase plane,
-
-$$
-\begin{cases}
-\dot{u} = p\\
-\dot{p} = -cp - u(1-u)
-\end{cases}
-$$
-
-equilibrium are $(p^*,u^*) = (0,0), (0,1)$.
-
+The travelling wave equation becomes
 \begin{equation*}
-\mathbf{J} = \begin{pmatrix}
--c & 2u-1\\
-1 & 0
-\end{pmatrix}
+\frac{1}{c^2}\frac{\mathrm{d}^2u}{\mathrm{d}\xi^2}
++
+\frac{\mathrm{d}u}{\mathrm{d}\xi}
++
+u(1-u)
+=
+0.
 \end{equation*}
-
+Assume an asymptotic expansion of the form
 \begin{equation*}
-\mathbf{J}|_{(0,0)} = \begin{pmatrix}
--c & -1\\
-1 & 0
-\end{pmatrix}, 
-\mathbf{J}|_{(0,1)} = \begin{pmatrix}
--c & 1\\
-1 & 0
-\end{pmatrix}
+u(\xi)
+=
+u_0(\xi)
++
+\frac{1}{c^2}u_1(\xi)
++
+\mathcal{O}\!\left(\frac{1}{c^4}\right).
 \end{equation*}
-
-For $(0,0)$
-
+Collecting terms of equal order in $c^{-1}$ gives
 \begin{equation*}
-\lambda ^ 2 -(-c) \lambda + 1 = 0
+\frac{\mathrm{d}u_0}{\mathrm{d}\xi}
++
+u_0(1-u_0)
+=
+0,
 \end{equation*}
-
-$\Delta = c^2 - 4 \geq 0$,
-$\lambda = \frac{-c \pm \sqrt{c^2 - 4}}{2} > 0$ , is a stable node
-
-For $(0,1)$
-
+and
 \begin{equation*}
-\lambda ^ 2 - (-c) \lambda - 1 = 0
+\frac{\mathrm{d}^2u_0}{\mathrm{d}\xi^2}
++
+\frac{\mathrm{d}u_1}{\mathrm{d}\xi}
++
+u_1(1-2u_0)
+=
+0.
 \end{equation*}
-
-$\Delta = c^2 + 4 \geq 0$,
-$\lambda = \frac{-c \pm \sqrt{c^2 + 4}}{2}$ , is a saddle.
-
-There is a trajectory connecting these two equilibrium, from (0,0) to
-(0,1). Let this curve be $p = \varphi (u)$, then
-$\frac{\mathrm{d} u}{\mathrm{d} z}= \varphi (u)$, or
-$\frac{\mathrm{d} u}{\mathrm{d} x} = \varphi(u)$. Thus,
-
+Imposing the symmetry condition
 \begin{equation*}
-x - x_{0} = \int_{u_{0}}^{u} \frac{1}{\varphi(u)} \mathrm{d}u
+u(0)=\frac12,
 \end{equation*}
-
-and we will finally get $u(z)$.
-
-As a result, the travelling wave solution for the PDE is the solution of
-the ODE with boundary condition
-
+we obtain
 \begin{equation*}
-\lim_{z \rightarrow +\infty} u(z) = 0, \lim_{z \rightarrow -\infty} u(z) = 1
+u_0(z)
+=
+\frac{1}{1+e^{z/c}},
 \end{equation*}
-
-To explore the shape, we may use small perturbation method. Assume
-$c \rightarrow \infty$, and let $\xi = z/c$,
-
+and
 \begin{equation*}
-\frac{1}{c^2} \frac{\mathrm{d}^2 u}{\mathrm{d} \xi^2} + \frac{\mathrm{d} u}{\mathrm{d} \xi} + u(1-u) = 0
+u_1(z)
+=
+\frac{e^{z/c}}
+{\left(1+e^{z/c}\right)^2}
+\ln\left(
+\frac{4e^{z/c}}
+{\left(1+e^{z/c}\right)^2}
+\right).
 \end{equation*}
-
-We may assume the solution is in a form of series,
-
+Therefore,
 \begin{equation*}
-u(\xi) = u_{0}(\xi) + \frac{1}{c^2}u_{1}(\xi) + \mathcal{O}(\frac{1}{c^4})
+u(z)
+\approx
+u_0(z)
++
+\frac{1}{c^2}u_1(z).
 \end{equation*}
-
-then by the power of $c$,
-
-\begin{equation*}
-\frac{\mathrm{d} u_{0}}{\mathrm{d} \xi} + u_{0}(1-u_{0}) = 0\\
-\frac{\mathrm{d}^2 u_{0}}{\mathrm{d} \xi^2} + \frac{\mathrm{d} u_{1}}{\mathrm{d} \xi} + u_{1}( 1 - 2 u_{0} ) = 0
-\end{equation*}
-
-If we assume $u(0) = 1/2$, then we also have $u_{0} = 1/2$,
-$u_{1} = 0$. Then we could solve them,
-
-\begin{equation*}
-u_{0} = \frac{1}{1 + e^{z/c}}\\
-u_{1} = \frac{e^{z/c}}{\left( 1+ e^{z/c} \right)^2}\ln\left( \frac{4 e^{z/c}}{\left( 1+ e^{z/c} \right)^2} \right)
-\end{equation*}
-
-$u \approx u_{0} + c^{-2} u_{1}$
-
-This approximation fits well even $c = 2$.
+This approximation remains accurate even for the minimal wave speed $c=2$.

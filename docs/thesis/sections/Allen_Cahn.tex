@@ -1,245 +1,440 @@
-\section{Allen-Cahn Equation}
+\section{Allen--Cahn Equation}
 
+Here we consider the Allen--Cahn equation \citep{allen_coherent_1975}
 \begin{equation*}
-\frac{\partial u}{\partial t} = \frac{\partial ^2 u} {\partial x^2} +  u (1-u) (u-a)
+    \frac{\partial u}{\partial t}
+    =
+    \frac{\partial^2 u}{\partial x^2}
+    +
+    u(1-u)(u-a).
 \end{equation*}
-
+Assuming a travelling wave solution
 \begin{equation*}
-\frac{\mathrm{d}^2 u}{\mathrm{d} z^2} + c \frac{\mathrm{d} u}{\mathrm{d} z} + u(1-u)(u-a) = 0
+u(x,t)=u(z),
+\qquad
+z=x-ct,
 \end{equation*}
-
-$$
+we obtain the ordinary differential equation
+\begin{equation*}
+    \frac{\mathrm{d}^2u}{\mathrm{d}z^2}
+    +
+    c\frac{\mathrm{d}u}{\mathrm{d}z}
+    +
+    u(1-u)(u-a)
+    =
+    0.
+\end{equation*}
+Introducing
+\begin{equation*}
+p=\frac{\mathrm{d}u}{\mathrm{d}z},
+\end{equation*}
+the equation can be rewritten as the first-order system
+\begin{equation*}
 \begin{cases}
-\dot{u} = p\\
-\dot{p} = -cp - u(1-u)(u-a)
+\dot{u}=p,\\
+\dot{p}=-cp-u(1-u)(u-a),
 \end{cases}
-$$
+\end{equation*}
+where the dot denotes differentiation with respect to $z$.
 
+The Jacobian matrix is
 \begin{equation*}
-\mathbf{J} = \begin{pmatrix}
--c & 3u^2 - 2(1+a)u +a \\
-1 & 0 
-\end{pmatrix}
+\mathbf{J}
+=
+\begin{pmatrix}
+0 & 1\\
+3u^2-2(1+a)u+a & -c
+\end{pmatrix}.
 \end{equation*}
 
+The equilibria (Figure~\ref{fig:fisher_allen}B) are
 \begin{equation*}
-\mathbf{J}|_{(0,0)} = \begin{pmatrix}
--c & a\\
-1 & 0 
-\end{pmatrix}, 
-\mathbf{J}|_{(0,1)} = \begin{pmatrix}
--c & 1-a\\
-1 & 0 
-\end{pmatrix}
-\mathbf{J}|_{(0,a)} = \begin{pmatrix}
--c & a(a - 1) \\
-1 & 0 
-\end{pmatrix}
+(u^*,p^*)=(0,0),\qquad (1,0),\qquad (a,0).
 \end{equation*}
 
-At $(0,0)$, $\mathrm{tr}(\mathbf{J})=-c<0$,
-$\det(\mathbf{J}) = -a<0$ , this node is a saddle.
-$\Delta = c^2 + 4a >0$
+At $(0,0)$,
+\begin{equation*}
+\mathbf{J}|_{(0,0)}
+=
+\begin{pmatrix}
+0 & 1\\
+a & -c
+\end{pmatrix}.
+\end{equation*}
+Since
+\begin{equation*}
+\mathrm{tr}(\mathbf{J})=-c<0,
+\qquad
+\det(\mathbf{J})=-a<0,
+\end{equation*}
+the equilibrium $(0,0)$ is a saddle point.
 
-At $(1,0)$, $\mathrm{tr}(\mathbf{J})=-c<0$,
-$\det(\mathbf{J}) = -(1-a)<0$ , this node is a saddle.
-$\Delta = c^2 + 4(1-a)>0$
+At $(1,0)$,
+\begin{equation*}
+\mathbf{J}|_{(1,0)}
+=
+\begin{pmatrix}
+0 & 1\\
+1-a & -c
+\end{pmatrix}.
+\end{equation*}
+Similarly,
+\begin{equation*}
+\mathrm{tr}(\mathbf{J})=-c<0,
+\qquad
+\det(\mathbf{J})=-(1-a)<0,
+\end{equation*}
+so $(1,0)$ is also a saddle point.
 
-At $(a,0)$, $\mathrm{tr}(\mathbf{J})=-c<0$,
-$\det(\mathbf{J}) = -a(a-1) = a(1-a)>0$ , this node is stable.
-$\Delta = c^2 - 4a(1-a)$,
-$\lambda = \frac{-c \pm \sqrt{c^2 - 4a(1-a)}}{2}$, could be stable
-node or spiral sink, depends on the value of $\Delta$.
+At $(a,0)$,
+\begin{equation*}
+\mathbf{J}|_{(a,0)}
+=
+\begin{pmatrix}
+0 & 1\\
+a(a-1) & -c
+\end{pmatrix}.
+\end{equation*}
+In this case,
+\begin{equation*}
+\mathrm{tr}(\mathbf{J})=-c<0,
+\qquad
+\det(\mathbf{J})=a(1-a)>0.
+\end{equation*}
+Therefore, $(a,0)$ is stable. Its characteristic equation is
+\begin{equation*}
+\lambda^2+c\lambda+a(1-a)=0,
+\end{equation*}
+with eigenvalues
+\begin{equation*}
+\lambda
+=
+\frac{-c\pm\sqrt{c^2-4a(1-a)}}{2}.
+\end{equation*}
+Depending on the sign of
+\begin{equation*}
+\Delta=c^2-4a(1-a),
+\end{equation*}
+the equilibrium may be either a stable node or a spiral sink.
 
-As a result, the travelling wave solution only exist when a certain
-speed $c$ makes a trajectory connecting $(0,0)$ and $(1,0)$.
+The travelling wave solution corresponds to a heteroclinic trajectory connecting the two saddle points $(1,0)$ and $(0,0)$ (Figure~\ref{fig:trajectory}). Such a connection only exists for a particular wave speed $c$.
 
-Considering the symmetry of $(0,0)$ and $(0,1)$ , we take the
-condition where $a= 1/2$. In order to have a trajectory connecting two
-states, $c=0$.
+\subsection*{Symmetric Case: $a=\frac12$}
 
-Then we solve the equation
+When
+\begin{equation*}
+a=\frac12,
+\end{equation*}
+the system becomes symmetric with respect to the two stable states $u=0$ and $u=1$. In this case, the travelling wave speed satisfies
+\begin{equation*}
+c=0,
+\end{equation*}
+and the travelling wave becomes a stationary interface.
 
+The equation reduces to
+\begin{equation*}
+\frac{\mathrm{d}^2u}{\mathrm{d}z^2}
+=
+u(1-u)\left(\frac12-u\right).
+\end{equation*}
+Multiplying both sides by $\frac{\mathrm{d}u}{\mathrm{d}z}$ gives
 \begin{align*}
-    \frac{\mathrm{d}^2 u}{\mathrm{d} z^2} = u(1-u)(a-u)\\
-    \frac{\mathrm{d}^2 u}{\mathrm{d} z^2} = u^3 -(1+a)u^2 + au\\
-    \frac{1}{2}\left(\frac{\mathrm{d} u}{\mathrm{d} z}\right)^2 
-    = \frac{1}{4}u^4 - \frac{1+a}{3}u^3 + \frac{a}{2}u^2\\
-    2\left(\frac{\mathrm{d} u}{\mathrm{d} z}\right)^2 
-    = u^2(1-u)^2
+\frac{\mathrm{d}^2u}{\mathrm{d}z^2}
+\frac{\mathrm{d}u}{\mathrm{d}z}
+&=
+u(1-u)\left(\frac12-u\right)
+\frac{\mathrm{d}u}{\mathrm{d}z},
+\\
+\frac12
+\frac{\mathrm{d}}{\mathrm{d}z}
+\left(
+\frac{\mathrm{d}u}{\mathrm{d}z}
+\right)^2
+&=
+u(1-u)\left(\frac12-u\right)
+\frac{\mathrm{d}u}{\mathrm{d}z}.
 \end{align*}
-
+Integrating with respect to $z$ yields
+\begin{equation*}
+\frac12
+\left(
+\frac{\mathrm{d}u}{\mathrm{d}z}
+\right)^2
+=
+\frac14u^2(1-u)^2.
+\end{equation*}
+Hence,
+\begin{equation*}
+\frac{\mathrm{d}u}{\mathrm{d}z}
+=
+\frac{\sqrt{2}}{2}u(1-u).
+\end{equation*}
+Separating variables,
 \begin{align*}
-    \frac{\mathrm{d} u}{\mathrm{d} z} = \frac{\sqrt{2}}{2} u(1-u) \\
-    \frac{1}{u(1-u)}\mathrm{d} u = \frac{\sqrt{2}}{2}\mathrm{d} z\\
-    \left(\frac{1}{u} + \frac{1}{1-u}\right)\mathrm{d} u = \frac{\sqrt{2}}{2}\mathrm{d} z\\
-    \ln{u} - \ln(1-u) = \frac{z}{\sqrt{2}}+C\\
-    \frac{u}{1-u} = e^{\frac{z}{\sqrt{2}}+C}\\
-    u = \frac{1}{1+e^{\frac{z}{\sqrt{2}}+C}}\\
-    u_{0} = 1/2 \Rightarrow C = 0\\
-    u = \frac{1}{1+e^{\frac{z}{\sqrt{2}}}}
+\frac{1}{u(1-u)}\,\mathrm{d}u
+&=
+\frac{\sqrt{2}}{2}\,\mathrm{d}z,
+\\
+\left(
+\frac{1}{u}+\frac{1}{1-u}
+\right)\mathrm{d}u
+&=
+\frac{\sqrt{2}}{2}\,\mathrm{d}z.
 \end{align*}
-
+After integration,
 \begin{equation*}
-\frac{\mathrm{d}p} {\mathrm{d}u} = -c - \frac{u(1-u)(u-a)}{p}\\
+\ln u - \ln(1-u)
+=
+\frac{z}{\sqrt{2}}+C.
+\end{equation*}
+Therefore,
+\begin{equation*}
+u(z)
+=
+\frac{1}{1+e^{z/\sqrt{2}+C}}.
 \end{equation*}
 
-A general way to considering this kind of equation is considering the
-potential energy.
-
-We start from the ODE
-
+Choosing the interface center such that
 \begin{equation*}
-\frac{\mathrm{d}^2 u}{\mathrm{d} z^2} + c \frac{\mathrm{d} u}{\mathrm{d} z} + u(1-u)(u-a) = 0
+u(0)=\frac12,
+\end{equation*}
+we obtain $C=0$, and thus (Figure~\ref{fig:fisher_allen}D)
+\begin{equation*}
+u(z)
+=
+\frac{1}{1+e^{z/\sqrt{2}}}.
 \end{equation*}
 
-We hope to define such a function $E(u)$ as the energy of certain
-density $u$, such that
+\subsection*{Energy Interpretation}
 
+The travelling wave equation can also be studied using an energy method. Consider
 \begin{equation*}
-\frac{\mathrm{d}E(u)}{\mathrm{d}t} \leq 0
+\frac{\mathrm{d}^2u}{\mathrm{d}z^2}
++
+c\frac{\mathrm{d}u}{\mathrm{d}z}
++
+u(1-u)(u-a)
+=
+0.
 \end{equation*}
-
-That is, $E(u)$ always decline to a lower value. Note here $t$ is
-just a assumed time for the evolution of $E$, not the time in the
-former PDE. Here, for example, we could assume $z$ in the equation is
-$t$. As a result, we try to find a
-$\frac{\mathrm{d}E}{\mathrm{d}z}$.
-
-Note the following relation holds:
-
-\begin{equation*}
-\frac{\mathrm{d}^2 u}{\mathrm{d} z^2} \cdot \frac{\mathrm{d} u}{\mathrm{d} z} = \frac{1}{2}\cdot\frac{\mathrm{d}\left( \frac{\mathrm{d} u}{\mathrm{d} z} \right)^2}{\mathrm{d}z}
-\end{equation*}
-
-Thus, we multiply the derivative to the ODE:
-
+Multiplying both sides by $\frac{\mathrm{d}u}{\mathrm{d}z}$ gives
 \begin{align*}
-    \left( \frac{\mathrm{d}^2 u}{\mathrm{d} z^2} + c \frac{\mathrm{d} u}{\mathrm{d} z} + u(1-u)(u-a) \right) \cdot \frac{\mathrm{d} u}{\mathrm{d} z}= 0\\
-    \frac{1}{2}\frac{\mathrm{d}}{\mathrm{d}z}\left( \frac{\mathrm{d} u}{\mathrm{d} z} \right)^2 + c \left( \frac{\mathrm{d} u}{\mathrm{d} z} \right)^2 + u(1-u)(u-a) \cdot \frac{\mathrm{d} u}{\mathrm{d} z} = 0
+&
+\left(
+\frac{\mathrm{d}^2u}{\mathrm{d}z^2}
++
+c\frac{\mathrm{d}u}{\mathrm{d}z}
++
+u(1-u)(u-a)
+\right)
+\frac{\mathrm{d}u}{\mathrm{d}z}
+=0,
+\\
+&
+\frac12
+\frac{\mathrm{d}}{\mathrm{d}z}
+\left(
+\frac{\mathrm{d}u}{\mathrm{d}z}
+\right)^2
++
+c
+\left(
+\frac{\mathrm{d}u}{\mathrm{d}z}
+\right)^2
++
+u(1-u)(u-a)
+\frac{\mathrm{d}u}{\mathrm{d}z}
+=
+0.
 \end{align*}
-
-let
-
+Define the potential function $W(u)$ by
 \begin{equation*}
-f(u) = u(1-u)(u-a) = \frac{\mathrm{d}W}{\mathrm{d}u}
+\frac{\mathrm{d}W}{\mathrm{d}u}
+=
+u(1-u)(u-a).
 \end{equation*}
-
+Integrating,
 \begin{equation*}
-W(u) = \int u(1-u)(u-a) \mathrm{u} = - \frac{1}{4}u^4 + \frac{1+a}{3} u^3 - \frac{a}{2}u^2
+W(u)
+=
+-\frac14u^4
++
+\frac{1+a}{3}u^3
+-
+\frac{a}{2}u^2,
 \end{equation*}
-
-where $W(0) = 0$. $W(1) = \frac{1}{12} - \frac{a}{6}$
-
-then
-
-\begin{align*}
-    \frac{1}{2}\frac{\mathrm{d}}{\mathrm{d}z}\left( \frac{\mathrm{d} u}{\mathrm{d} z} \right)^2 + c \left( \frac{\mathrm{d} u}{\mathrm{d} z} \right)^2 + u(1-u)(u-a) \frac{\mathrm{d} u}{\mathrm{d} z} = 0\\
-    \frac{1}{2}\frac{\mathrm{d}}{\mathrm{d}z}\left( \frac{\mathrm{d} u}{\mathrm{d} z} \right)^2 + c \left( \frac{\mathrm{d} u}{\mathrm{d} z} \right)^2 + \frac{\mathrm{d}W}{\mathrm{d}u} \cdot \frac{\mathrm{d} u}{\mathrm{d} z} = 0\\
-    \frac{1}{2}\frac{\mathrm{d}}{\mathrm{d}z}\left( \frac{\mathrm{d} u}{\mathrm{d} z} \right)^2 + c \left( \frac{\mathrm{d} u}{\mathrm{d} z} \right)^2 + \frac{\mathrm{d}W}{\mathrm{d} z} = 0
-\end{align*}
-
-\begin{equation*}
-\frac{\mathrm{d}}{\mathrm{d}z} \left( \frac{1}{2}\left( \frac{\mathrm{d} u}{\mathrm{d} z} \right)^2  + W \right) = - c \left( \frac{\mathrm{d} u}{\mathrm{d} z} \right)^2 \leq 0
-\end{equation*}
-
-We define
-
-\begin{equation*}
-E(u) = \frac{1}{2}\left( \frac{\mathrm{d} u}{\mathrm{d} z} \right)^2  + W(u)
-\end{equation*}
-
-integral both side of the former equation
-
-\begin{equation*}
-\int_{-\infty}^{+\infty} \frac{\mathrm{d}}{\mathrm{d}z} \left( \frac{1}{2}\left( \frac{\mathrm{d} u}{\mathrm{d} z} \right)^2  + W \right) \mathrm{d}z = 
-\int_{-\infty}^{+\infty} - c \left( \frac{\mathrm{d} u}{\mathrm{d} z} \right)^2 \mathrm{d}z
-\end{equation*}
-\begin{equation*}
-  \left.\left( \frac{1}{2}\left( \frac{\mathrm{d} u}{\mathrm{d} z} \right)^2  + W \right)\right|_{-\infty}^{+\infty} = 
-- c \int_{-\infty}^{+\infty} \left( \frac{\mathrm{d} u}{\mathrm{d} z} \right)^2 \mathrm{d}z
-\end{equation*}
-
-the boundary condition is
-$\lim_{z \rightarrow +\infty} u(z) = 0$, $\lim_{z \rightarrow -\infty} u(z) = 1$
-, we also assume
-$\lim_{z \rightarrow +\infty} u'(z) = 0$, $\lim_{z \rightarrow -\infty} u'(z) = 0$
-
-\begin{align*}
-W(u(+\infty))-W(u(-\infty)) =- c \int_{-\infty}^{+\infty} \left( \frac{\mathrm{d} u}{\mathrm{d} z} \right)^2 \mathrm{d}z\\
-W(1)-W(0) =- c \int_{-\infty}^{+\infty} \left( \frac{\mathrm{d} u}{\mathrm{d} z} \right)^2 \mathrm{d}z\\
-\end{align*}
-
-\begin{equation*}
-c = \frac{W(0)-W(1)}{\int_{-\infty}^{+\infty} \left( \frac{\mathrm{d} u}{\mathrm{d} z} \right)^2 \mathrm{d}z}
-\end{equation*}
-
-When $a = \frac{1}{2}$, $W(0)=W(1)$, thus $c=0$. As a result,
-
-\begin{equation*}
-\frac{\mathrm{d}^2 u}{\mathrm{d} z^2} = u(1-u)(0.5-u)
-\end{equation*}
-
-\begin{equation*}
-u = \frac{1}{1+e^{\frac{z}{\sqrt{2}}}}
-\end{equation*}
-
-Also,
-
-\begin{equation*}
-\frac{\mathrm{d}}{\mathrm{d}z} \left( \frac{1}{2}\left( \frac{\mathrm{d} u}{\mathrm{d} z} \right)^2  + W \right) = 0
-\end{equation*}
-
-And
-
-\begin{equation*}
-\frac{1}{2}\left( \frac{\mathrm{d} u}{\mathrm{d} z} \right)^2  + W = 0\\
-\frac{\mathrm{d} u}{\mathrm{d} z} = \sqrt{2W(u)} = \frac{\sqrt{2}}{2}u(1-u)
-\end{equation*}
-
-Now for other $a\neq1/2$, we assume the shape of $u(z)$ might be the
-same. thus
-$\frac{\mathrm{d} u}{\mathrm{d} z} = \frac{\sqrt{2}}{2}u(1-u)$. put
-back to $c$,
-
-\begin{equation*}
-c = \frac{W(0)-W(1)}{\int_{-\infty}^{+\infty} \left( \frac{\mathrm{d} u}{\mathrm{d} z} \right)^2 \mathrm{d}z} 
-=\frac{W(0)-W(1)}{\int_{1}^{0} \left( \frac{\mathrm{d} u}{\mathrm{d} z} \right) \mathrm{d}u} 
-=(\frac{a}{6} - \frac{1}{12})\sqrt{2} \frac{1}{\int_{1}^{0} u(1-u) \mathrm{d}z} = \sqrt{2}(\frac{1}{2} - a)
-\end{equation*}
-
-Assume:
-
-\begin{align*}
-\dot{u} = ku(1-u)\\
-\ddot{u} = k(1-2u)\cdot \dot{u} = k^2u(1-u)(1-2u)
-\end{align*}
-
-\begin{equation*}
-\ddot{u} + c \dot{u} + u(1-u)(u-a) = 0
-\end{equation*}
-
-\begin{align*}
-k^2u(1-u)(1-2u) + c ku(1-u) + u(1-u)(u-a) = 0\\
-k^2 (u-3u^2+2u^3) + ck (u-u^2) -au + (1+a)u^2 -u^3 = 0\\
-(2k^2-1)u^3 + (1+a-3k^2-ck)u^2 + (k^2+ck-a)u = 0
-\end{align*}
-
-we have
-
-\begin{align*}
-2k^2+1 = 0\\
-1+a-3k^2-ck =0\\
-k^2+ck-a = 0
-\end{align*}
-
-thus $k = \frac{\sqrt{2}}{2}$, nothing to do with $a$.
-
+where we choose $W(0)=0$.
 Then
-
 \begin{equation*}
-a-\frac{1}{2}-\frac{\sqrt{2}}{2}c = 0\\
-\Rightarrow c = \sqrt{2}(a - \frac{1}{2})
+\frac{\mathrm{d}W}{\mathrm{d}z}
+=
+\frac{\mathrm{d}W}{\mathrm{d}u}
+\frac{\mathrm{d}u}{\mathrm{d}z}.
+\end{equation*}
+Substituting into the previous equation yields
+\begin{equation*}
+\frac{\mathrm{d}}{\mathrm{d}z}
+\left[
+\frac12
+\left(
+\frac{\mathrm{d}u}{\mathrm{d}z}
+\right)^2
++
+W(u)
+\right]
+=
+-c
+\left(
+\frac{\mathrm{d}u}{\mathrm{d}z}
+\right)^2
+\le0.
+\end{equation*}
+Therefore, the quantity
+\begin{equation*}
+E(u)
+=
+\frac12
+\left(
+\frac{\mathrm{d}u}{\mathrm{d}z}
+\right)^2
++
+W(u)
+\end{equation*}
+acts as a decreasing energy functional.
+Integrating over the entire domain gives
+\begin{equation*}
+\left.
+\left[
+\frac12
+\left(
+\frac{\mathrm{d}u}{\mathrm{d}z}
+\right)^2
++
+W(u)
+\right]
+\right|_{-\infty}^{+\infty}
+=
+-c
+\int_{-\infty}^{+\infty}
+\left(
+\frac{\mathrm{d}u}{\mathrm{d}z}
+\right)^2
+\mathrm{d}z.
 \end{equation*}
 
-holds for any $a$.
+Using the boundary conditions
+\begin{equation*}
+\lim_{z\to-\infty}u(z)=1,
+\qquad
+\lim_{z\to+\infty}u(z)=0,
+\end{equation*}
+and assuming
+\begin{equation*}
+u'(z)\to0
+\qquad
+(z\to\pm\infty),
+\end{equation*}
+we obtain
+\begin{equation*}
+W(1)-W(0)
+=
+-c
+\int_{-\infty}^{+\infty}
+\left(
+\frac{\mathrm{d}u}{\mathrm{d}z}
+\right)^2
+\mathrm{d}z.
+\end{equation*}
+Hence the wave speed is
+\begin{equation*}
+c
+=
+\frac{W(0)-W(1)}
+{\displaystyle
+\int_{-\infty}^{+\infty}
+\left(
+\frac{\mathrm{d}u}{\mathrm{d}z}
+\right)^2
+\mathrm{d}z }.
+\end{equation*}
+
+For
+\begin{equation*}
+a=\frac12,
+\end{equation*}
+we have
+\begin{equation*}
+W(0)=W(1),
+\end{equation*}
+which immediately implies
+\begin{equation*}
+c=0.
+\end{equation*}
+
+\subsection*{General Wave Speed}
+
+Motivated by the stationary solution, assume the travelling wave profile satisfies
+\begin{equation*}
+\frac{\mathrm{d}u}{\mathrm{d}z}
+=
+ku(1-u),
+\end{equation*}
+for some constant $k$.
+Then
+\begin{align*}
+\frac{\mathrm{d}^2u}{\mathrm{d}z^2}
+&=
+k(1-2u)\frac{\mathrm{d}u}{\mathrm{d}z},
+\\
+&=
+k^2u(1-u)(1-2u).
+\end{align*}
+Substituting into the travelling wave equation gives
+\begin{align*}
+&
+k^2u(1-u)(1-2u)
++
+cku(1-u)
++
+u(1-u)(u-a)
+=
+0.
+\end{align*}
+Factoring out $u(1-u)$,
+\begin{equation*}
+u(1-u)
+\left[
+k^2(1-2u)+ck+u-a
+\right]
+=
+0.
+\end{equation*}
+Matching coefficients of $u$ and constants yields
+\begin{equation*}
+2k^2=1,
+\qquad
+k^2+ck-a=0.
+\end{equation*}
+Thus,
+\begin{equation*}
+k=\frac{\sqrt{2}}{2},
+\end{equation*}
+and
+\begin{equation*}
+c
+=
+\sqrt{2}
+\left(
+a-\frac12
+\right).
+\end{equation*}
+Therefore, the Allen--Cahn equation admits an exact travelling wave solution with speed
+\begin{equation*}
+c=\sqrt{2}\left(a-\frac12\right),
+\end{equation*}
+while the wave profile retains the logistic form
+\begin{equation*}
+u(z)
+=
+\frac{1}{1+e^{z/\sqrt{2}}}.
+\end{equation*}

@@ -148,6 +148,13 @@
     \end{equation*}
     \fi
 
+    \begin{figure}[!htbp]
+        \centering
+        \includegraphics[scale = 0.5]{competing_bistable.png}
+        \caption{For cases of two competing species. $a_1$ and $a_2$ represent $\alpha_{,2}$ and $\alpha_{2,1}$. $\alpha_{i,i}$ is set to $1$. The first three condition have a stable equilibrium, while the last one do not have a coexist equilibrium.}
+        \label{fig:L_V_2}
+    \end{figure}
+
     Another special case is two competing species $N_1$ and $N_2$. Competing will decrease the growth rate proportional to the competing species,
     \begin{equation}
         \begin{aligned}
@@ -164,7 +171,7 @@
             \frac{\mathrm{d} N_2}{\mathrm{d}t} = r_2 N_2 ( 1 + \alpha_{2,2} N_2 + \alpha_{2,1} N_1)
         \end{aligned},
     \end{equation}
-    which include both inter- and intra- specific competition.
+    which include both inter- and intra- specific competition (Figure~\ref{fig:L_V_2}).
 
     \subsection{Generalized Lotka-Volterra Model, and the Instability}
 
@@ -220,3 +227,22 @@
         \max_i \operatorname{Re} \left[ \lambda_i(\boldsymbol{M}) \right] < 0,
     \end{equation*}
     where $\lambda_i(\boldsymbol{M})$ is the eigenvalue of $\boldsymbol{M}$. The same stable condition can also be deductive from Jacobian matrix $\boldsymbol{J}(\boldsymbol{N})$, by defining $\boldsymbol{M} = \boldsymbol{J}(\boldsymbol{N}^*)$.
+
+    \begin{figure}[!htbp]
+        \centering
+        \includegraphics[scale = 0.8]{spectrum.png}
+        \caption{The spectrum of normal distributed matrix.}
+        \label{fig:spectrum}
+    \end{figure}
+
+    Now we consider the stability of a random community. Ignoring the feasibility, we focus on the stability which related to the eigenvalues of Jacobian matrix. Now, if we assume that matrix $\mathbf{M}$ is totally random, where all the elements besides the diagonal follow a certain symmetric distribution, and the diagonal elements are $-k$. $\mathbf{M}$ can be divided as $\mathbf{M}_1 - k \cdot \mathbf{I}$. The eigenvalues of a random real-valued matrix are also solutions of a large linear function, as a result, they are complex numbers. The distribution of the eigenvalues of a matrix is the so called **Spectrum** of the mtrix. And here is a circular law of random matrix: if the elements of a $n$ by $n$ random matrix follow the same symmetrical distribution with mean 0 and variance 1, with the increase of $n$, the distribution of eigenvalues $\lambda_i$ divided by $\sqrt{n}$ converge to a uniform distribution in the united circle. That is, the radius of the spectrum converge to $\sqrt{n}$ (Figure~\ref{fig:spectrum}).
+    \begin{equation}
+        \lim_{n \rightarrow \infty} r = \sqrt{n}.
+    \end{equation}
+
+    The spectral radius is actually related to the mean strength (the value of elements). As a result, the radius will change if we change the mean strength, by decrease the variance, or decrease the elements density.If the variance of elements is $\mathbf{E} M^2_{ij} = \sigma^2$, the radius will follows: $\lim_{n \rightarrow \infty} r = \sigma \cdot \sqrt{n}$. Beside, if we set the density of non-zero elements in a matrix is $C$ (which means the connectedness of the network), the radius will follow: $\lim_{n \rightarrow \infty} r = \sqrt{C \cdot n}$. The general condition is
+    \begin{equation}
+        \lim_{n \rightarrow \infty} r = \sigma \cdot \sqrt{C \cdot n}.
+    \end{equation}
+
+    As a result, matrix $\mathbf{M}$ is stable if the spectrum radius is smaller than $k$. However, the radius is increasing with the species number. Thus, a larger random community is less possible to be stable, as argued by \citet{may_will_1972}.

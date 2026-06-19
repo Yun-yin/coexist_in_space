@@ -12,7 +12,7 @@ We first consider the symmetric case of the two-species system, in which $D = 1$
 
 We focus on the regime $a > 1$, for which the local dynamics are bistable and the two species cannot coexist in a homogeneous local community. Nevertheless, spatial coexistence may still emerge at the global scale because the two species are dynamically symmetric and neither has an intrinsic advantage. In this sense, the system resembles the Allen--Cahn model, as both exhibit two stable states connected by a transition front. We therefore seek an approximate analytical description of the spatial interface separating the two species. Throughout this section, we assume that species $1$ occupies the left side of the domain, whereas species $2$ dominates the right side.
 
-\subsubsection*{Approximate solution}
+\subsubsection{Approximate solution}
 
 We conjecture that the two stable states can coexist in system~\ref{eqn:symme_2_species}, due to its dynamical similarity to the Allen--Cahn model. Under this assumption, the resulting stable profile should correspond to a transition from species~$1$ to species~$2$, which can equivalently be described by the transition of the population difference $v = N_1 - N_2$
 . Motivated by this observation, we introduce the following linear transformation as equation~\ref{eqn:linear_transform}.
@@ -164,8 +164,8 @@ Evaluating at $v=0$ gives
 Similarly, for the Allen--Cahn reaction term $g(v)=rv(1-v^2)$,
 we obtain
 \begin{align*}
-    g'(v)&=r(1-3v^2),\\
-    g'(0)&=r.
+    g'(v)=r(1-3v^2), \qquad
+    g'(0)=r.
 \end{align*}
 Matching the slopes at the origin therefore leads to the approximation
 \begin{equation}\label{eqn:r_approx}
@@ -187,7 +187,7 @@ following which, considering $u \approx 1$ we also get,
     \end{cases}.
 \end{equation*}
 
-\subsubsection*{Numerical solution}
+\subsubsection{Numerical solution}
 
 We next performed numerical simulations of the symmetric system with interaction strength $a=1.5$. The initial condition was chosen such that species $1$ fully occupied the left half of the domain ($x\in(-1,0)$), whereas species $2$ occupied the right half ($x\in(0,1)$). Starting from this sharp interface, a transition region formed near the center of the domain and gradually relaxed toward a stationary profile. The spatial distributions of both species exhibited sigmoid-like shapes and remained symmetric with respect to $x=0$ throughout the simulation (Figure~\ref{fig:symmetric_simu}A).
 
@@ -221,7 +221,7 @@ In the theoretical derivation, the total density $u$ was assumed to remain appro
 
 In contrast, the difference variable $v$ evolved from the initial step-like profile into a smooth sigmoid-shaped distribution (Figure~\ref{fig:symmetric_u-v}A), consistent with the predicted logistic traveling-wave form. It kept cross $(0,0)$, indicates that the dynamics is maintained symmetric during the simulation.
 
-\subsubsection*{Transition slope}
+\subsubsection{Transition slope}
 
 To evaluate the validity of the analytical approximation over different interaction strengths, we further simulated the symmetric system for varying values of
 \begin{equation*}
@@ -268,6 +268,8 @@ To further characterize the balance relation between dispersal and reproduction,
 \end{equation*}
 Therefore, the maintenance of a stationary coexistence front requires diffusion and local population growth to satisfy an approximate quadratic balance relation.
 
+\newpage
+
 \begin{figure}[!htbp]
     \centering
     \includegraphics[scale = 1]{scan_param.pdf}
@@ -283,6 +285,8 @@ Therefore, the maintenance of a stationary coexistence front requires diffusion 
 
 For parameter combinations close to the balance boundary, the two species appear to coexist for long periods of time, although the interface position satisfying $N_1=N_2$ is displaced from the center of the domain. However, long-term simulations reveal that this apparent coexistence is only transient. To illustrate this behavior, we simulated the case $D=1.25$ and $r=0.75$, corresponding to a parameter combination located slightly above the balance line (in figure~\ref{fig:D-r_balance}A). In this regime, species $1$ eventually takes over the entire domain and species $2$ becomes extinct, though taking more than $1500000$ steps (Figure~\ref{fig:insymme_simu}A).
 
+\newpage
+
 \begin{figure}[!htbp]
     \centering
     \includegraphics[scale = 1]{insymme.pdf}
@@ -295,6 +299,8 @@ For parameter combinations close to the balance boundary, the two species appear
     }
     \label{fig:insymme_simu}
 \end{figure}
+
+\vspace{1 cm}
 
 The convergence dynamics also differ substantially from those observed in the symmetric case. Initially, the simulation error decreases rapidly as the sharp initial boundary relaxes into a smooth transition front, similar to the balanced symmetric system. After the front is established, however, the error remains approximately constant over an extended period (Figure~\ref{fig:insymme_simu}B). This plateau corresponds to the slow propagation of the interface across the domain: although the front translates spatially, its shape remains nearly unchanged, resulting in only small differences between consecutive simulation steps. As the moving front approaches the domain boundary, the population distribution changes rapidly because of the no-flux boundary condition, leading to a temporary increase in the simulation error. Finally, once species $2$ is eliminated, the system converges toward the single-species equilibrium and the error decreases rapidly again. These dynamics are analogous to those of an asymmetric Allen--Cahn system, in which the two stable states possess unequal potentials and the interface therefore propagates toward the energetically unfavorable state. 
 
@@ -312,7 +318,7 @@ First, we consider communities with purely competitive interactions. Restricting
 \end{equation*}
 Under these assumptions, we introduce a minimal toy model of multi-species bistability.
 
-\subsubsection*{Approxmate solution}
+\subsubsection{Approxmate solution}
 
 To generate bistable community dynamics at the global scale, we partition the species into two competing sub-communities. Species within the same sub-community interact with strength $a=1$, whereas species belonging to different sub-communities compete more strongly, with interaction strength $b>1$. The resulting interaction matrix takes the form
 \begin{equation*}
@@ -373,6 +379,7 @@ Let $N_{1,i}$ denote species belonging to sub-community $1$, and $N_{2,j}$ speci
 \end{equation*}
 
 Because all species within the same sub-community experience identical interaction terms, the system can be reduced to the dynamics of the total sub-community biomasses,
+
 \begin{equation*}
     C_n=\sum_i N_{n,i}.
 \end{equation*}
@@ -417,7 +424,7 @@ This reduced system is mathematically identical to the symmetric two-species mod
 
 Since the abundance of each species remains proportional to the total biomass of its sub-community, the spatial distributions of individual species are likewise expected to follow approximate logistic forms.
 
-\subsubsection*{Numerical solution}
+\subsubsection{Numerical solution}
 
 We applied the IMEX semi-implicit method to simulate a six-species system. The first three species belong to stable community $1$, whereas the remaining three species belong to stable community $2$. The inter-community interaction strength was set to $b = 1.5$, while the intra-community interaction strength was fixed at $a = 1$. The two communities were assumed to be symmetric, with initial relative population sizes of the three species within each community given by $0.5$, $0.3$, and $0.2$, respectively.
 
@@ -478,7 +485,7 @@ Consequently, the resulting $\beta$-diversity was
 \end{equation*}
 which represents the theoretical $\beta$-diversity calculated directly from the continuous equilibrium distributions.
 
-\subsubsection*{Comparison of $\beta$-diversity measures}
+\subsubsection{Comparison of $\beta$-diversity measures}
 
 To evaluate the performance of the proposed continuous $\beta$-diversity measure, we generated discrete observational samples from the simulated spatial distributions. An example of a sampled dataset is shown in Figure~\ref{fig:multi_sample}, where $k = 10$ sampling locations and $n = 100$ individuals per location were used.
 

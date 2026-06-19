@@ -40,6 +40,19 @@
     font=small
 }
 
+\newenvironment{deabstract}
+{
+\clearpage
+\thispagestyle{plain}
+%\null\vfill
+\begin{center}
+\bfseries Zusammenfassung
+\end{center}
+}
+{
+\vfill\null
+}
+
 \graphicspath{{../../figure/}}
 
 \iffalse
@@ -85,7 +98,7 @@
         
         \Large
         \textbf{
-            Chang, Longxiao
+            Longxiao Chang
         }
 
         Matrikelnummer 12657845
@@ -95,7 +108,7 @@
         \large
         Supervised by Dr. Maria Stockenreiter\\
         
-        Munich, May 31\textsuperscript{st}, 2026
+        Munich, May, 2026
       
         \vfill
 
@@ -116,7 +129,21 @@ Parameter scans further identify balance conditions between dispersal, intrinsic
 Our results demonstrate that stable ecological boundaries and spatial biodiversity patterns can emerge solely from dispersal and species interactions, even in homogeneous environments.
 
 \end{abstract}
+
 \thispagestyle{empty}
+
+\newpage
+
+\begin{deabstract}
+Räumlicher Artenwechsel wird häufig auf Umweltheterogenität
+zurückgeführt; jedoch können auch allein Ausbreitung und
+Wechselwirkungen zwischen Arten stabile emeinschaftsgrenzen erzeugen. In dieser Studie untersuchen wir die Bildung stabiler Übergangsgrenzflächen in homogenen Umgebungen mithilfe verallgemeinerter Lotka--Volterra -- Reaktions--Diffusions--Modelle. Mit Fokus auf bistabile ökologische Systeme analysieren wir Lösungen wandernder Wellen mit null Ausbreitungsgeschwindigkeit sowohl in Zwei--Arten -- als auch in Gemeinschaften mit höherer Artanzahl. Für symmetrische Konkurrenzsysteme
+zeigen analytische Nähe--rungen und numerische Simulationen, dass die Übergangsgrenzfläche gut durch eine logistische Funktion beschrieben werden kann. Durch die Transformation der Dynamik in Variablen für Gesamtbiomasse und Artenkontrast lässt sich das System auf eine
+Allen--Cahn -- ähnliche Gleichung reduzieren, wodurch ein Näherungsausdruck für die Form der Grenzfläche gewonnen wird. Die Erweiterung des Modells auf Gemeinschaften mit höherer Artanzahl zeigt, dass stabile Koexistenz zwischen alternativen lokalen Gemeinschaften persistente Übergangsregionen erzeugen kann, in denen alle Arten räumlich koexistieren. Parameterscans identifizieren zudem
+Gleichgewichtsbedingungen zwischen Ausbreitung, intrinsischem Wachstum und Konkurrenz. Arten mit höherer Ausbreitungsfähigkeit benötigen höhere Wachstumsraten und schwächere Konkurrenzwirkungen, um stabile
+Grenzflächen aufrechtzuerhalten. Basierend auf den emergenten logistischen räumlichen Verteilungen schlagen wir eine kontinuierliche Formulierung der $\beta$-Diversität vor, die Artenwechsel als Informationsverlust über räumliche Skalen hinweg interpretiert. Simulationen legen nahe, dass die Anpassung kontinuierlicher Verteilungen an Stichprobendaten die Schätzung der $\beta$-Diversität bei hinreichend dichter räumlicher Beprobung verbessert. Unsere Ergebnisse zeigen, dass stabile ökologische Grenzen und räumliche Biodiversitätsmuster allein durch Ausbreitung und Wechselwirkungen zwischen Arten entstehen können -- selbst in homogenen Umgebungen.
+
+\end{deabstract}
 
 \newpage
 \tableofcontents
@@ -151,26 +178,23 @@ Our results demonstrate that stable ecological boundaries and spatial biodiversi
 \bibliography{spatial_coexistence.bib}
 %\newpage
 
-\iffalse
-\section*{Statement on the Use of Artificial Intelligence Tools}
+%\iffalse
+
+\section*{Code availability}
 \phantomsection
-\addcontentsline{toc}{section}{Statement on the Use of Artificial Intelligence Tools}
+\addcontentsline{toc}{section}{Code availability}
+Codes for generating the result in this thesis are available in Github (\href{https://github.com/Yun-yin/coexist_in_space}{coexist\_in\_space}).
 
-    During the preparation of this manuscript, artificial intelligence (AI) tools were used exclusively for language-related assistance, including the optimization, translation, and correction of spelling and grammar in text originally written by the author. AI tools were also utilized to assist in organizing, formatting, and annotating algorithms and code developed by the author.
 
-    No AI tools were employed in the generation of research ideas, study design, data collection, data analysis, interpretation of results, or the formulation of conclusions. The author assumes full responsibility for the accuracy, integrity, and originality of the content presented in this work.
-
-\section*{Supplement Information}\label{supple_info}
-\phantomsection
-\addcontentsline{toc}{section}{Supplement Information}
-
-    Supplementary figures are contained by supplement document \texttt{IRT2\_report\_suppl}.
-
-    The code used in this research could be found in repository \texttt{network\_noise\_irt/Project}. All the \texttt{C++} documents are in file \texttt{./src}.
-\fi
+\newpage
 
 \appendix
 \addcontentsline{toc}{section}{Appendices}
+\clearpage
+\setcounter{page}{1}
+\renewcommand{\thepage}{A-\arabic{page}}
+\renewcommand{\thefigure}{S.\arabic{figure}}
+\setcounter{figure}{0}
 
 \input{sections/GLV.tex}
 
@@ -178,9 +202,13 @@ Our results demonstrate that stable ecological boundaries and spatial biodiversi
 
 \input{sections/Allen_Cahn.tex}
 
+\input{sections/supplements_figure.tex}
+
 \clearpage
 \phantomsection
 \addcontentsline{toc}{section}{Statement of originality}
 \includepdf{last-page-ma-affidavit.pdf}
+
+%\fi
 
 \end{document}

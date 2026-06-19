@@ -16,7 +16,7 @@ Interestingly, in the present continuous model, lower dispersal rates are often 
 
 \subsection{Generalization of Logistic Transition Fronts}
 
-Throughout our analysis, it is evident that logistic functions provide an excellent approximation for the shapes of species-composition transition fronts in the simplified models considered here. For symmetric competitive systems, this result is relatively intuitive, since the dynamics possess two symmetric stable equilibria (Figure~\ref{fig:symmetric_simu}C). Returning to the Allen--Cahn framework, it is therefore reasonable to conjecture that reaction--diffusion systems with simple bistable dynamics and symmetric stable states naturally generate stationary traveling-wave solutions with zero propagation velocity.
+Throughout our analysis, it is evident that logistic functions provide an excellent approximation for the shapes of species-composition transition fronts in the simplified models considered here. For symmetric competitive systems, this result is relatively intuitive, since the dynamics possess two symmetric stable equilibria (Figure~\ref{fig:symmetric_simu}C). Returning to the Allen--Cahn framework \citep{allen_coherent_1975}, it is therefore reasonable to conjecture that reaction--diffusion systems with simple bistable dynamics and symmetric stable states naturally generate stationary traveling-wave solutions with zero propagation velocity.
 
 In contrast, asymmetric systems generally lead to asymmetric stable equilibria, which often prevents the existence of stationary interfaces \citep{gardner_existence_1982, hou_traveling_2008}. Nevertheless, our simulations reveal that certain parameter combinations can still support stable transition fronts even in asymmetric systems. This phenomenon was unexpected and may potentially be explained from the perspective of effective potential functions or energetic balance between the competing stable states. Further theoretical analysis is required to clarify the underlying mechanism.
 
@@ -40,7 +40,7 @@ Conversely, if the local dynamics near equilibrium contain rotational or oscilla
 
 \subsection{Limited Dispersal}
 
-In the present study, species dispersal was modeled using the classical diffusion operator, represented by the second spatial derivative. This formulation implicitly assumes Fickian diffusion, in which the dispersal flux is proportional to the local population gradient. Although this approximation is mathematically convenient and widely used in reaction--diffusion ecology, it also introduces an important physical and ecological limitation.
+In the present study, species dispersal was modeled using the classical diffusion operator, represented by the second spatial derivative. This formulation implicitly assumes random diffusion, in which the dispersal flux is proportional to the local population gradient. Although this approximation is mathematically convenient and widely used in reaction--diffusion ecology, it also introduces an important physical and ecological limitation.
 
 Specifically, classical diffusion equations formally permit infinitely fast propagation. In other words, a small fraction of individuals or particles may instantaneously disperse arbitrarily far over an arbitrarily short time interval. Such behavior is unrealistic for biological organisms, whose movement is always constrained by finite dispersal velocities and environmental limitations.
 
@@ -56,12 +56,13 @@ One possible approach for resolving this issue is to replace linear diffusion wi
     =
     \frac{u^b}{(1-u)^b}.
 \end{equation*}
-In such models, dispersal becomes strongly dependent on local abundance. In particular, the diffusion coefficient approaches zero as population density approaches zero, preventing isolated individuals from dispersing arbitrarily rapidly into empty regions. Consequently, the propagation speed of the front becomes effectively bounded, leading to more realistic finite-velocity dispersal dynamics. \citep{wang_existence_2024}
+In such models, dispersal becomes strongly dependent on local abundance. In particular, the diffusion coefficient approaches zero as population density approaches zero, preventing isolated individuals from dispersing arbitrarily rapidly into empty regions (Figure~\ref{fig:nonlinear}A). Consequently, the propagation speed of the front becomes effectively bounded, leading to more realistic finite-velocity dispersal dynamics \citep{wang_existence_2024} (Figure~\ref{fig:nonlinear}A).
 
 \begin{figure}[!htbp]
     \centering
     \includegraphics[scale = 1]{nonliear.pdf}
     \caption{A. The nonlinear diffusion from a central narrow initial distribution. Note the solid end. B. Reaction-diffusion model with nonlinear diffusion, there is still a constant speed.}
+    \label{fig:nonlinear}
 \end{figure}
 
 More generally, nonlinear diffusion may substantially alter the geometry and stability of ecological transition fronts. In contrast to classical Fisher--KPP or Allen--Cahn systems, density-dependent diffusion can generate sharper interfaces, compactly supported traveling waves, or front pinning phenomena.
@@ -86,7 +87,7 @@ To further explore this possibility, we first simulated a larger-scale system co
 
 \begin{figure}[!htbp]
     \centering
-    \includegraphics[scale = 0.6]{pattern_1D_s.png}
+    \includegraphics[scale = 0.75]{pattern_1D.png}
     \caption{Interaction--dispersal dynamics in larger space with random initial state.}
     \label{fig:1D}
 \end{figure}
@@ -143,7 +144,7 @@ and therefore
     }.
 \end{equation}
 
-This formulation resembles the structure of the Kullback--Leibler divergence, although expressed as a ratio rather than a difference. Conceptually, it measures the relative contribution of global entropy to local entropy across space.
+This formulation resembles the structure of the Kullback--Leibler divergence \citep{kullback_information_1951}, although expressed as a ratio rather than a difference. Conceptually, it measures the relative contribution of global entropy to local entropy across space.
 
 Moreover, the spatial distribution of local entropy, represented here by $\alpha$-diversity (Figure~\ref{fig:alpha}), reaches its maximum near the center of the transition region. This observation is consistent with the ecological expectation that biodiversity is elevated near the boundary between distinct communities, where species originating from both sub-communities coexist locally. In this sense, the transition front behaves as a ``soft'' ecological boundary rather than a sharp interface. Consequently, a large proportion of the observed $\beta$-diversity originates from the transition region itself. This interpretation further supports the importance of novel species combinations in characterizing spatial biodiversity patterns.
 

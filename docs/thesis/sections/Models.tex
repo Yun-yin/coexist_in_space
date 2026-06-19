@@ -56,13 +56,6 @@
         \end{equation*}
         which represents an initially occupied region on the left invading an empty region on the right.
 
-        \begin{figure}[!htbp]
-            \centering
-            \includegraphics[scale = 1]{fisher_allen.pdf}
-            \caption{Illustration of interaction function and traveling wave solutions in Fisher model and Allen-Cahn model. A. The curve of interaction function in Fisher model. Red node $(0,0)$ represents unstable equilibrium, while green $(1,0)$ represents stable one. The color of background and the arrow shows moving direction at given $u$ values. B. The curve of interaction function in Allen-Cahn model, where there are two stable nodes $(0,0)$ and $(1,0)$, and a instable node $(1/2,0)$. C. Simulation of the moving wave solution of Fisher model. The simulation started from a square wave at $x = -0.9$. The logistic-like distribution first constructed and then moving to the right side with a nearly constant speed. D. Moving wave solution of Allen-Cahn model. When $a = 1/2$, there is a solitary solution, which is a moving wave solution when speed $c=0$, indicate the potential of both sides kept balanced.}
-            \label{fig:fisher_allen}
-        \end{figure}
-
         When $f(u) = u(1-u)$, the model corresponds to the Fisher--KPP equation \citep{fisher_wave_1937,simpson_fisherkpp-type_2024}. The reaction term has two equilibria, $u=0$ and $u=1$ (Figure~\ref{fig:fisher_allen}A). Linear stability analysis shows that $u=0$ is an unstable steady state, whereas $u=1$ is stable. As a result, local population tend to converge to the environment capacity, once it deviated from the empty state. Consequently, the interface (or invasion front) connecting the populated state ($u=1$) and the empty state ($u=0$) propagates toward the unstable state.
 
         Assuming a traveling wave solution of the form $u(x,t) = u(z)$ with $z = x - ct$ \citep{fife_approach_1977}, which indicate that the interface kept the shape and move toward the empty region, the governing equation reduces to the second-order ordinary differential equation
